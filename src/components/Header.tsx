@@ -25,7 +25,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-8 lg:h-12 w-auto"
+              className="h-12 lg:h-16 w-auto"
             />
           </div>
 
