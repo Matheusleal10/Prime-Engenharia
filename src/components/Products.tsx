@@ -72,7 +72,7 @@ const Products = () => {
 
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                src="/lovable-uploads/d4ca7e0c-6a7c-473b-b733-44282b4c965e.png" 
                 alt="Tijolos Ecológicos PRIME ENGENHARIA"
                 className="w-full h-80 object-cover rounded-2xl shadow-lg"
               />
