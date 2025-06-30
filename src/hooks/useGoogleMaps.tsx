@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
@@ -12,8 +11,8 @@ export const useGoogleMaps = () => {
 
   useEffect(() => {
     setIsClient(true);
-    // Usar a chave da API fornecida pelo usuário
-    const userApiKey = 'AIzaSyDryjl7sTNyKK2z584Ell327DlwC4H2WWM';
+    // Usar a nova chave da API fornecida pelo usuário
+    const userApiKey = 'AIzaSyDLTuhGIDHV7vjpKVsLf3qRgI-4baOWGkA';
     setApiKey(userApiKey);
     localStorage.setItem('google-maps-api-key', userApiKey);
   }, []);
@@ -36,7 +35,7 @@ export const useGoogleMaps = () => {
 
         await loader.load();
 
-        // Coordenadas corrigidas para MA 203 - Estr. da Raposa, 79 - Alto do Farol, Raposa - MA
+        // Coordenadas para MA 203 - Estr. da Raposa, 79 - Alto do Farol, Raposa - MA
         const position = { lat: -2.4205, lng: -44.0856 };
 
         map = new google.maps.Map(mapRef.current!, {
