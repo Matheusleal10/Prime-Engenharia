@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { useGoogleMaps } from '../hooks/useGoogleMaps';
-import ApiKeyInput from './ApiKeyInput';
-import MapError from './MapError';
-import MapLoading from './MapLoading';
+import { useMapbox } from '../hooks/useMapbox';
+import MapboxApiKeyInput from './MapboxApiKeyInput';
+import MapboxError from './MapboxError';
+import MapboxLoading from './MapboxLoading';
 
 const Map = () => {
   const {
@@ -15,7 +15,7 @@ const Map = () => {
     isLoading,
     handleApiKeySubmit,
     handleResetApiKey
-  } = useGoogleMaps();
+  } = useMapbox();
 
   if (!isClient) {
     return (
@@ -26,15 +26,15 @@ const Map = () => {
   }
 
   if (!apiKey || showApiInput) {
-    return <ApiKeyInput onApiKeySubmit={handleApiKeySubmit} />;
+    return <MapboxApiKeyInput onApiKeySubmit={handleApiKeySubmit} />;
   }
 
   if (isLoading) {
-    return <MapLoading />;
+    return <MapboxLoading />;
   }
 
   if (mapError) {
-    return <MapError onResetApiKey={handleResetApiKey} />;
+    return <MapboxError onResetApiKey={handleResetApiKey} />;
   }
 
   return (
@@ -42,11 +42,14 @@ const Map = () => {
       <div ref={mapRef} className="w-full h-full" />
       <button
         onClick={handleResetApiKey}
-        className="absolute top-2 right-2 bg-white/90 hover:bg-white text-gray-600 p-1 rounded text-xs shadow-md transition-all"
-        title="Alterar API Key"
+        className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-700 p-2 rounded-lg text-sm shadow-lg transition-all transform hover:scale-105 backdrop-blur-sm"
+        title="Alterar API Key do Mapbox"
       >
         ⚙️
       </button>
+      <div className="absolute bottom-3 left-3 bg-gradient-to-r from-blue-500/90 to-green-500/90 text-white px-3 py-1 rounded-lg text-xs font-medium backdrop-blur-sm">
+        🌍 Mapbox Professional
+      </div>
     </div>
   );
 };
