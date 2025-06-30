@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
@@ -18,27 +19,58 @@ export const useGoogleMaps = () => {
   }, []);
 
   useEffect(() => {
-    if (!isClient || !mapRef.current || !apiKey) return;
+    if (!isClient || !apiKey) return;
 
     let map: google.maps.Map | null = null;
+    let retryCount = 0;
+    const maxRetries = 3;
+
+    const waitForElement = (selector: HTMLElement | null, maxWait = 5000): Promise<HTMLElement> => {
+      return new Promise((resolve, reject) => {
+        if (selector) {
+          resolve(selector);
+          return;
+        }
+
+        const startTime = Date.now();
+        const checkElement = () => {
+          if (mapRef.current) {
+            console.log('Elemento do mapa encontrado após aguardar');
+            resolve(mapRef.current);
+          } else if (Date.now() - startTime > maxWait) {
+            reject(new Error('Timeout: elemento do mapa não encontrado'));
+          } else {
+            setTimeout(checkElement, 100);
+          }
+        };
+        checkElement();
+      });
+    };
 
     const initializeGoogleMap = async () => {
       setIsLoading(true);
       setMapError(false);
       
       try {
+        console.log(`Tentativa ${retryCount + 1} de inicialização do Google Maps`);
+        
+        // Aguardar elemento DOM estar disponível
+        const mapElement = await waitForElement(mapRef.current);
+        console.log('Elemento do mapa confirmado:', mapElement);
+
         const loader = new Loader({
           apiKey: apiKey,
           version: 'weekly',
-          libraries: ['places']
+          libraries: ['places', 'marker']
         });
 
-        await loader.load();
+        const google = await loader.load();
+        console.log('Google Maps API carregada com sucesso');
 
         // Coordenadas para MA 203 - Estr. da Raposa, 79 - Alto do Farol, Raposa - MA
         const position = { lat: -2.4205, lng: -44.0856 };
 
-        map = new google.maps.Map(mapRef.current!, {
+        map = new google.maps.Map(mapElement, {
           zoom: 16,
           center: position,
           mapTypeId: google.maps.MapTypeId.HYBRID,
@@ -47,6 +79,7 @@ export const useGoogleMaps = () => {
           fullscreenControl: true,
           zoomControl: true,
           scrollwheel: false,
+          mapId: 'DEMO_MAP_ID', // Necessário para AdvancedMarkerElement
           styles: [
             {
               featureType: 'poi',
@@ -56,12 +89,18 @@ export const useGoogleMaps = () => {
           ]
         });
 
-        const marker = new google.maps.Marker({
-          position: position,
+        console.log('Mapa criado, criando marcador...');
+
+        // Usar a nova AdvancedMarkerElement em vez do Marker depreciado
+        const { AdvancedMarkerElement } = await google.maps.importLibrary('marker') as google.maps.MarkerLibrary;
+        
+        const marker = new AdvancedMarkerElement({
           map: map,
-          title: 'PRIME ENGENHARIA',
-          animation: google.maps.Animation.DROP
+          position: position,
+          title: 'PRIME ENGENHARIA'
         });
+
+        console.log('Marcador criado com sucesso');
 
         const infoWindow = new google.maps.InfoWindow({
           content: `
@@ -86,13 +125,23 @@ export const useGoogleMaps = () => {
           infoWindow.open(map, marker);
         });
 
+        // Abrir InfoWindow automaticamente
         infoWindow.open(map, marker);
 
         console.log('Google Map inicializado com sucesso');
         localStorage.setItem('google-maps-api-key', apiKey);
 
       } catch (error) {
-        console.error('Erro ao inicializar Google Map:', error);
+        console.error(`Erro na tentativa ${retryCount + 1}:`, error);
+        
+        if (retryCount < maxRetries) {
+          retryCount++;
+          console.log(`Tentando novamente em 2 segundos... (${retryCount}/${maxRetries})`);
+          setTimeout(initializeGoogleMap, 2000);
+          return;
+        }
+        
+        console.error('Erro final ao inicializar Google Map:', error);
         setMapError(true);
         localStorage.removeItem('google-maps-api-key');
       } finally {
@@ -100,9 +149,11 @@ export const useGoogleMaps = () => {
       }
     };
 
-    initializeGoogleMap();
+    // Aguardar um pouco antes de inicializar para garantir que o DOM está pronto
+    const timeoutId = setTimeout(initializeGoogleMap, 100);
 
     return () => {
+      clearTimeout(timeoutId);
       if (map) {
         map = null;
       }
