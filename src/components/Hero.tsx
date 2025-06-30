@@ -14,6 +14,15 @@ const Hero = () => {
             <span className="text-prime-orange-light">Sustentabilidade</span>
           </h1>
           
+          {/* Imagem de Demonstração */}
+          <div className="my-8 opacity-80 animate-fade-in">
+            <img 
+              src="/lovable-uploads/deabd89e-d11d-49f4-8a2c-25dbb92f42bc.png" 
+              alt="Tijolos Ecológicos PRIME ENGENHARIA em construção real" 
+              className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-2xl shadow-2xl mx-auto"
+            />
+          </div>
+          
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
             Tijolos Ecológicos de Alta Performance para sua Obra. Pioneiros em São Luís - MA com qualidade comprovada e compromisso ambiental.
           </p>
