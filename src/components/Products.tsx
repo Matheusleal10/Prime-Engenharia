@@ -4,32 +4,38 @@ const Products = () => {
     { 
       name: "Blocos de concreto", 
       icon: "🧱",
-      description: "Blocos estruturais de alta resistência para construções sólidas e duráveis."
+      description: "Blocos estruturais de alta resistência para construções sólidas e duráveis.",
+      details: "Ideais para alvenaria estrutural, oferecendo resistência mecânica superior e durabilidade comprovada."
     },
     { 
       name: "Pisos intertravados", 
       icon: "🔲",
-      description: "Pisos drenantes e antiderrapantes, ideais para calçadas e estacionamentos."
+      description: "Pisos drenantes e antiderrapantes, ideais para calçadas e estacionamentos.",
+      details: "Sistema de pavimentação sustentável com alta resistência ao tráfego e fácil manutenção."
     },
     { 
       name: "Meio-fio", 
       icon: "🛤️",
-      description: "Peças padronizadas para delimitação de vias e organização urbana."
+      description: "Peças padronizadas para delimitação de vias e organização urbana.",
+      details: "Produzidos conforme normas ABNT, garantindo qualidade e padronização em projetos urbanos."
     },
     { 
       name: "Lajes e vigotas", 
       icon: "🏗️",
-      description: "Sistema de lajes pré-moldadas para construções ágeis e econômicas."
+      description: "Sistema de lajes pré-moldadas para construções ágeis e econômicas.",
+      details: "Solução completa para coberturas e entre-pisos com rapidez na execução e economia de materiais."
     },
     { 
       name: "Anéis", 
       icon: "⭕",
-      description: "Anéis de concreto para poços, fossas e sistemas de drenagem."
+      description: "Anéis de concreto para poços, fossas e sistemas de drenagem.",
+      details: "Peças circulares pré-moldadas com encaixe perfeito para sistemas de saneamento e drenagem."
     },
     { 
       name: "Pré-moldados", 
       icon: "🏭",
-      description: "Diversas peças pré-moldadas sob medida para seu projeto específico."
+      description: "Diversas peças pré-moldadas sob medida para seu projeto específico.",
+      details: "Soluções personalizadas em concreto pré-moldado para atender às necessidades específicas de cada projeto."
     }
   ];
 
@@ -146,12 +152,15 @@ const Products = () => {
                 <h4 className="text-lg font-semibold text-prime-concrete-dark mb-3 text-center">
                   {product.name}
                 </h4>
-                <p className="text-sm text-prime-concrete text-center mb-4">
+                <p className="text-sm text-prime-concrete text-center mb-3">
                   {product.description}
+                </p>
+                <p className="text-xs text-prime-concrete/80 text-center mb-4">
+                  {product.details}
                 </p>
                 <div className="text-center">
                   <a 
-                    href="https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre " + product.name.toLowerCase()
+                    href={`https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre ${product.name.toLowerCase()}.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center"
