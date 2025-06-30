@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
@@ -35,7 +36,8 @@ export const useGoogleMaps = () => {
 
         await loader.load();
 
-        const position = { lat: -2.4252, lng: -44.0934 };
+        // Coordenadas corrigidas para MA 203 - Estr. da Raposa, 79 - Alto do Farol, Raposa - MA
+        const position = { lat: -2.4205, lng: -44.0856 };
 
         map = new google.maps.Map(mapRef.current!, {
           zoom: 16,
@@ -70,9 +72,9 @@ export const useGoogleMaps = () => {
               </h3>
               <p style="margin: 4px 0; color: #374151; font-size: 14px;">
                 <strong>📍 Endereço:</strong><br/>
-                Estrada da Raposa, 2002<br/>
-                Raposa - MA, 65138-000<br/>
-                Brasil
+                MA 203 - Estr. da Raposa, 79<br/>
+                Alto do Farol, Raposa - MA<br/>
+                65138-000, Brasil
               </p>
               <p style="margin: 8px 0 0 0; font-size: 12px; color: #6B7280;">
                 <strong>📞 Contato:</strong> (98) 99999-9999
