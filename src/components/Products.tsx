@@ -1,12 +1,36 @@
 
 const Products = () => {
   const otherProducts = [
-    { name: "Blocos de concreto", icon: "🧱" },
-    { name: "Pisos intertravados", icon: "🔲" },
-    { name: "Meio-fio", icon: "🛤️" },
-    { name: "Lajes e vigotas", icon: "🏗️" },
-    { name: "Anéis", icon: "⭕" },
-    { name: "Pré-moldados", icon: "🏭" }
+    { 
+      name: "Blocos de concreto", 
+      icon: "🧱",
+      description: "Blocos estruturais de alta resistência para construções sólidas e duráveis."
+    },
+    { 
+      name: "Pisos intertravados", 
+      icon: "🔲",
+      description: "Pisos drenantes e antiderrapantes, ideais para calçadas e estacionamentos."
+    },
+    { 
+      name: "Meio-fio", 
+      icon: "🛤️",
+      description: "Peças padronizadas para delimitação de vias e organização urbana."
+    },
+    { 
+      name: "Lajes e vigotas", 
+      icon: "🏗️",
+      description: "Sistema de lajes pré-moldadas para construções ágeis e econômicas."
+    },
+    { 
+      name: "Anéis", 
+      icon: "⭕",
+      description: "Anéis de concreto para poços, fossas e sistemas de drenagem."
+    },
+    { 
+      name: "Pré-moldados", 
+      icon: "🏭",
+      description: "Diversas peças pré-moldadas sob medida para seu projeto específico."
+    }
   ];
 
   return (
@@ -17,7 +41,7 @@ const Products = () => {
             Nossos <span className="text-prime-green">Produtos</span>
           </h2>
           <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
-            Soluções completas em pré-moldados para sua construção
+            Soluções completas em pré-moldados sustentáveis para sua construção
           </p>
         </div>
 
@@ -33,41 +57,63 @@ const Products = () => {
                 Tijolo Ecológico
               </h3>
 
+              <p className="text-lg text-prime-concrete mb-6">
+                Nossos tijolos ecológicos são produzidos com materiais sustentáveis e tecnologia avançada, oferecendo resistência superior e impacto ambiental reduzido.
+              </p>
+
               <div className="space-y-4 mb-8">
-                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Benefícios:</h4>
+                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Principais Benefícios:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Encaixe perfeito</span>
+                    <span className="text-prime-concrete">Encaixe perfeito e preciso</span>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Menor uso de cimento</span>
+                    <span className="text-prime-concrete">Economia de até 30% no cimento</span>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Maior resistência</span>
+                    <span className="text-prime-concrete">Resistência superior a 6 MPa</span>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Menor custo final</span>
+                    <span className="text-prime-concrete">Redução de 50% no custo final</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                    <span className="text-prime-concrete">Isolamento térmico e acústico</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                    <span className="text-prime-concrete">100% sustentável e reciclável</span>
                   </div>
                 </div>
               </div>
 
               <div className="mb-8">
-                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Aplicações:</h4>
+                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Aplicações Ideais:</h4>
                 <p className="text-prime-concrete">
-                  Muros, casas, fachadas e projetos sustentáveis.
+                  Construção de casas, muros, fachadas, divisórias internas e projetos sustentáveis de todos os portes.
                 </p>
               </div>
 
-              <a 
-                href="#contato"
-                className="inline-flex items-center bg-prime-green hover:bg-prime-green-light text-white px-6 py-3 rounded-full font-medium transition-colors"
-              >
-                Solicitar orçamento
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a 
+                  href="#contato"
+                  className="inline-flex items-center justify-center bg-prime-green hover:bg-prime-green-light text-white px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Solicitar Orçamento
+                </a>
+                <a 
+                  href="https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre os tijolos ecológicos."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center border-2 border-prime-green text-prime-green hover:bg-prime-green hover:text-white px-6 py-3 rounded-full font-medium transition-colors"
+                >
+                  Saiba Mais no WhatsApp
+                </a>
+              </div>
             </div>
 
             <div className="relative">
@@ -86,18 +132,36 @@ const Products = () => {
         {/* Outros Produtos */}
         <div>
           <h3 className="text-2xl font-bold text-center text-prime-concrete-dark mb-8">
-            Outros Produtos
+            Outros Produtos Disponíveis
           </h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherProducts.map((product, index) => (
               <div 
                 key={index}
-                className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow text-center animate-slide-up"
+                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-3xl mb-2">{product.icon}</div>
-                <p className="text-sm font-medium text-prime-concrete-dark">{product.name}</p>
+                <div className="text-4xl mb-4 text-center">{product.icon}</div>
+                <h4 className="text-lg font-semibold text-prime-concrete-dark mb-3 text-center">
+                  {product.name}
+                </h4>
+                <p className="text-sm text-prime-concrete text-center mb-4">
+                  {product.description}
+                </p>
+                <div className="text-center">
+                  <a 
+                    href="https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre " + product.name.toLowerCase()
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center"
+                  >
+                    Saiba Mais
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
