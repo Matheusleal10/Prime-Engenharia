@@ -8,9 +8,17 @@ const Map = () => {
   const [mapError, setMapError] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [showApiInput, setShowApiInput] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
+    // Verificar se já existe uma API key salva no localStorage
+    const savedApiKey = localStorage.getItem('google-maps-api-key');
+    if (savedApiKey) {
+      setApiKey(savedApiKey);
+    } else {
+      setShowApiInput(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -19,6 +27,9 @@ const Map = () => {
     let map: google.maps.Map | null = null;
 
     const initializeGoogleMap = async () => {
+      setIsLoading(true);
+      setMapError(false);
+      
       try {
         const loader = new Loader({
           apiKey: apiKey,
@@ -26,21 +37,21 @@ const Map = () => {
           libraries: ['places']
         });
 
-        const google = await loader.load();
+        await loader.load();
 
-        // Coordinates for Estrada da Raposa, 2002 - Raposa - MA
+        // Coordenadas para Estrada da Raposa, 2002 - Raposa - MA
         const position = { lat: -2.4252, lng: -44.0934 };
 
-        // Initialize Google Map with hybrid view (realistic satellite + roads)
+        // Inicializar Google Map com vista híbrida (satélite realístico + ruas)
         map = new google.maps.Map(mapRef.current!, {
           zoom: 16,
           center: position,
-          mapTypeId: google.maps.MapTypeId.HYBRID, // Realistic satellite view
+          mapTypeId: google.maps.MapTypeId.HYBRID, // Vista satélite realística
           mapTypeControl: true,
           streetViewControl: true,
           fullscreenControl: true,
           zoomControl: true,
-          scrollwheel: false, // Disable scroll wheel zoom for better UX
+          scrollwheel: false, // Desabilitar zoom com scroll para melhor UX
           styles: [
             {
               featureType: 'poi',
@@ -50,7 +61,7 @@ const Map = () => {
           ]
         });
 
-        // Create custom marker with company info
+        // Criar marcador personalizado com informações da empresa
         const marker = new google.maps.Marker({
           position: position,
           map: map,
@@ -58,7 +69,7 @@ const Map = () => {
           animation: google.maps.Animation.DROP
         });
 
-        // Create info window with company details
+        // Criar janela de informações com detalhes da empresa
         const infoWindow = new google.maps.InfoWindow({
           content: `
             <div style="text-align: center; font-family: 'Montserrat', sans-serif; padding: 10px; max-width: 250px;">
@@ -78,19 +89,26 @@ const Map = () => {
           `
         });
 
-        // Open info window when marker is clicked
+        // Abrir janela de informações quando o marcador for clicado
         marker.addListener('click', () => {
           infoWindow.open(map, marker);
         });
 
-        // Auto-open info window on load
+        // Auto-abrir janela de informações no carregamento
         infoWindow.open(map, marker);
 
         console.log('Google Map inicializado com sucesso');
+        
+        // Salvar API key válida no localStorage
+        localStorage.setItem('google-maps-api-key', apiKey);
 
       } catch (error) {
         console.error('Erro ao inicializar Google Map:', error);
         setMapError(true);
+        // Remover API key inválida do localStorage
+        localStorage.removeItem('google-maps-api-key');
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -99,7 +117,6 @@ const Map = () => {
     // Cleanup
     return () => {
       if (map) {
-        // Google Maps cleanup is handled automatically
         map = null;
       }
     };
@@ -110,6 +127,13 @@ const Map = () => {
     if (apiKey.trim()) {
       setShowApiInput(false);
     }
+  };
+
+  const handleResetApiKey = () => {
+    localStorage.removeItem('google-maps-api-key');
+    setApiKey('');
+    setShowApiInput(true);
+    setMapError(false);
   };
 
   if (!isClient) {
@@ -125,11 +149,12 @@ const Map = () => {
       <div className="w-full h-64 rounded-2xl overflow-hidden shadow-lg bg-gray-100 flex flex-col items-center justify-center p-6">
         <div className="text-center mb-4">
           <div className="text-2xl mb-2">🗺️</div>
-          <h3 className="text-lg font-bold text-gray-700 mb-2">Google Maps</h3>
+          <h3 className="text-lg font-bold text-gray-700 mb-2">Google Maps Realístico</h3>
           <p className="text-sm text-gray-600 mb-4">
-            Para exibir o mapa realístico, insira sua chave da API do Google Maps
+            Para exibir o mapa com imagens de satélite reais, insira sua chave da API do Google Maps
           </p>
         </div>
+        
         <form onSubmit={handleApiKeySubmit} className="w-full max-w-md">
           <input
             type="text"
@@ -140,21 +165,41 @@ const Map = () => {
           />
           <button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+            disabled={!apiKey.trim()}
+            className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
           >
-            Carregar Mapa
+            Carregar Mapa Realístico
           </button>
         </form>
+        
         <div className="mt-4 text-xs text-gray-500 text-center">
-          <p>Para obter sua chave gratuita:</p>
+          <p className="mb-2"><strong>📋 Como obter sua chave gratuita:</strong></p>
+          <ol className="text-left space-y-1 mb-3">
+            <li>1. Acesse o <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Google Cloud Console</a></li>
+            <li>2. Crie um novo projeto ou selecione um existente</li>
+            <li>3. Ative a <strong>Maps JavaScript API</strong></li>
+            <li>4. Vá em "Credenciais" e crie uma nova API Key</li>
+            <li>5. Configure as restrições para seu domínio</li>
+          </ol>
           <a 
-            href="https://console.cloud.google.com/google/maps-apis" 
+            href="https://developers.google.com/maps/documentation/javascript/get-api-key" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
+            className="text-blue-500 hover:underline text-xs"
           >
-            Google Cloud Console → Maps API
+            📖 Guia completo da documentação
           </a>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-64 rounded-2xl overflow-hidden shadow-lg bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto mb-2"></div>
+          <div className="text-gray-500 text-sm">Carregando mapa realístico...</div>
         </div>
       </div>
     );
@@ -166,15 +211,15 @@ const Map = () => {
         <div className="text-red-500 text-2xl mb-2">⚠️</div>
         <div className="text-sm text-gray-600 mb-4">
           <strong>Erro ao carregar o mapa</strong><br/>
-          Verifique se sua API Key está correta
+          Verifique se sua API Key está correta e se a Maps JavaScript API está ativada
         </div>
         <button
-          onClick={() => setShowApiInput(true)}
-          className="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg text-sm"
+          onClick={handleResetApiKey}
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm mb-4"
         >
-          Tentar Novamente
+          Configurar Nova API Key
         </button>
-        <div className="mt-4 text-xs text-gray-600">
+        <div className="mt-2 text-xs text-gray-600">
           <strong>PRIME ENGENHARIA</strong><br/>
           Estrada da Raposa, 2002<br/>
           Raposa - MA, 65138-000
@@ -187,7 +232,7 @@ const Map = () => {
     <div className="w-full h-64 rounded-2xl overflow-hidden shadow-lg relative">
       <div ref={mapRef} className="w-full h-full" />
       <button
-        onClick={() => setShowApiInput(true)}
+        onClick={handleResetApiKey}
         className="absolute top-2 right-2 bg-white/90 hover:bg-white text-gray-600 p-1 rounded text-xs shadow-md transition-all"
         title="Alterar API Key"
       >
