@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 
@@ -12,12 +11,10 @@ export const useGoogleMaps = () => {
 
   useEffect(() => {
     setIsClient(true);
-    const savedApiKey = localStorage.getItem('google-maps-api-key');
-    if (savedApiKey) {
-      setApiKey(savedApiKey);
-    } else {
-      setShowApiInput(true);
-    }
+    // Usar a chave da API fornecida pelo usuário
+    const userApiKey = 'AIzaSyDryjl7sTNyKK2z584Ell327DlwC4H2WWM';
+    setApiKey(userApiKey);
+    localStorage.setItem('google-maps-api-key', userApiKey);
   }, []);
 
   useEffect(() => {
