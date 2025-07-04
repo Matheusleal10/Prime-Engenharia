@@ -1,4 +1,3 @@
-
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-prime-green to-prime-green-light">
@@ -9,7 +8,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto animate-fade-in">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-prime-green mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Construa com Inovação e{' '}
             <span className="text-prime-orange-light">Sustentabilidade</span>
           </h1>
