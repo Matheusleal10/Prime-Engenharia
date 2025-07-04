@@ -1,4 +1,5 @@
 
+
 const About = () => {
   return (
     <section id="sobre" className="py-16 lg:py-24 bg-white">
@@ -34,19 +35,12 @@ const About = () => {
           </div>
 
           <div className="animate-slide-up">
-            <div className="relative">
+            <div className="relative flex items-center justify-center bg-gray-50 rounded-2xl shadow-2xl p-12">
               <img 
-                src="/lovable-uploads/baa55910-9e15-4c81-9d3c-a4a309711581.png" 
-                alt="Escritório PRIME ENGENHARIA"
-                className="w-full h-96 object-cover rounded-2xl shadow-2xl"
+                src="/lovable-uploads/df9db288-7bd8-4312-8e86-26edcecc6876.png" 
+                alt="PRIME ENGENHARIA Logo"
+                className="w-full max-w-md h-auto"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-prime-green/20 to-transparent rounded-2xl flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
-                  alt="PRIME ENGENHARIA Logo"
-                  className="h-24 w-auto opacity-90"
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -56,3 +50,4 @@ const About = () => {
 };
 
 export default About;
+
