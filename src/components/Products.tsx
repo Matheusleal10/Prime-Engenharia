@@ -1,4 +1,3 @@
-
 const Products = () => {
   const otherProducts = [
     { 
@@ -43,8 +42,8 @@ const Products = () => {
     <section id="produtos" className="py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-concrete-dark mb-4">
-            Nossos <span className="text-prime-green">Produtos</span>
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+            Nossos Produtos
           </h2>
           <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
             Soluções completas em pré-moldados sustentáveis para sua construção
@@ -59,7 +58,7 @@ const Products = () => {
                 🌱 Produto Principal
               </div>
               
-              <h3 className="text-3xl lg:text-4xl font-bold text-prime-concrete-dark mb-6">
+              <h3 className="text-3xl lg:text-4xl font-bold text-prime-green mb-6">
                 Tijolo Ecológico
               </h3>
 
@@ -137,7 +136,7 @@ const Products = () => {
 
         {/* Outros Produtos */}
         <div>
-          <h3 className="text-2xl font-bold text-center text-prime-concrete-dark mb-8">
+          <h3 className="text-2xl font-bold text-center text-prime-green mb-8">
             Outros Produtos Disponíveis
           </h3>
           

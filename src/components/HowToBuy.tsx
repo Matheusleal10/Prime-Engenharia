@@ -1,4 +1,3 @@
-
 const HowToBuy = () => {
   const steps = [
     {
@@ -22,7 +21,7 @@ const HowToBuy = () => {
     <section id="como-comprar" className="py-16 lg:py-24 bg-gradient-to-br from-prime-green to-prime-green-light">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
             Como Comprar
           </h2>
           <p className="text-lg text-white/90 max-w-2xl mx-auto">

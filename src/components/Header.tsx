@@ -16,16 +16,16 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-white/90 backdrop-blur-sm'
+      isScrolled ? 'bg-white shadow-lg' : 'bg-white'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-24 lg:h-32">
           {/* Logo */}
           <div className="flex items-center">
             <img 
               src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-16 lg:h-20 w-auto"
+              className="h-32 lg:h-40 w-auto"
             />
           </div>
 

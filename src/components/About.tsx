@@ -1,14 +1,19 @@
-
 const About = () => {
   return (
     <section id="sobre" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-up">
-            <h2 className="text-3xl lg:text-5xl font-bold text-prime-concrete-dark mb-6">
-              Sobre a{' '}
-              <span className="text-prime-green">PRIME ENGENHARIA</span>
-            </h2>
+            <div className="flex items-center mb-6">
+              <img 
+                src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
+                alt="PRIME ENGENHARIA Logo"
+                className="h-16 w-auto mr-4"
+              />
+              <h2 className="text-3xl lg:text-5xl font-bold text-prime-green">
+                Sobre a PRIME ENGENHARIA
+              </h2>
+            </div>
             
             <p className="text-lg text-prime-concrete leading-relaxed mb-6">
               Com anos de experiência no mercado de pré-moldados, a PRIME ENGENHARIA oferece 

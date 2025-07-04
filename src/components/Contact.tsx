@@ -4,8 +4,8 @@ const Contact = () => {
     <section id="contato" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-concrete-dark mb-4">
-            Entre em <span className="text-prime-green">Contato</span>
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+            Entre em Contato
           </h2>
           <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
             Entre em contato com nossa equipe pelo WhatsApp e tire todas as suas dúvidas!
@@ -80,8 +80,8 @@ const Contact = () => {
                 ⏰ Horário de Funcionamento
               </h3>
               <p className="text-prime-concrete">
-                Segunda a Sexta: 7h às 17h<br />
-                Sábado: 7h às 12h<br />
+                Segunda a Sexta: 8h às 18h<br />
+                Sábado: 8h às 12h<br />
                 Domingo: Fechado
               </p>
             </div>

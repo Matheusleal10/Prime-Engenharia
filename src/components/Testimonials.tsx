@@ -1,4 +1,3 @@
-
 const Testimonials = () => {
   const testimonials = [
     {
@@ -35,8 +34,8 @@ const Testimonials = () => {
     <section id="depoimentos" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-concrete-dark mb-4">
-            O que nossos <span className="text-prime-green">Clientes</span> dizem
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+            O que nossos Clientes dizem
           </h2>
           <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
             Confira os depoimentos de quem já construiu com qualidade e sustentabilidade
