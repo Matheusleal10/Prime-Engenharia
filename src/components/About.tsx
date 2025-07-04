@@ -1,5 +1,4 @@
 
-
 const About = () => {
   return (
     <section id="sobre" className="py-16 lg:py-24 bg-white">
@@ -35,11 +34,11 @@ const About = () => {
           </div>
 
           <div className="animate-slide-up">
-            <div className="relative flex items-center justify-center bg-gray-50 rounded-2xl shadow-2xl p-8">
+            <div className="relative bg-gray-50 rounded-2xl shadow-2xl h-96 overflow-hidden">
               <img 
                 src="/lovable-uploads/df9db288-7bd8-4312-8e86-26edcecc6876.png" 
                 alt="PRIME ENGENHARIA Logo"
-                className="w-full h-auto"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -50,4 +49,3 @@ const About = () => {
 };
 
 export default About;
-
