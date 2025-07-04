@@ -3,12 +3,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import emailjs from '@emailjs/browser';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
@@ -40,48 +40,30 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Format WhatsApp message for the email
-      const whatsappMessage = `🏗️ *NOVO LEAD - PRIME ENGENHARIA*
+      // Salvar lead no Supabase
+      const { error } = await supabase
+        .from('leads')
+        .insert({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          project_type: data.projectType,
+          quantity: data.quantity,
+          message: data.message
+        });
 
-👤 *Nome:* ${data.name}
-📧 *Email:* ${data.email}
-📱 *Telefone:* ${data.phone}
-🏠 *Tipo de Obra:* ${data.projectType === 'residential' ? 'Residencial' : 'Comercial'}
-🧱 *Quantidade:* ${data.quantity}
-💬 *Mensagem:* ${data.message}
-
-_Enviado pelo site da Prime Engenharia_`;
-
-      const whatsappLink = `https://wa.me/5598999999999?text=${encodeURIComponent(whatsappMessage)}`;
-
-      // Email template parameters
-      const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        phone: data.phone,
-        project_type: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
-        quantity: data.quantity,
-        message: data.message,
-        whatsapp_link: whatsappLink,
-        reply_to: data.email,
-      };
-
-      // Send email using EmailJS
-      await emailjs.send(
-        'YOUR_SERVICE_ID', // You'll need to replace this
-        'YOUR_TEMPLATE_ID', // You'll need to replace this
-        templateParams,
-        'YOUR_PUBLIC_KEY'   // You'll need to replace this
-      );
+      if (error) {
+        throw error;
+      }
 
       toast({
         title: "Mensagem enviada com sucesso!",
-        description: "Entraremos em contato em breve.",
+        description: "Seu orçamento foi registrado. Entraremos em contato em breve.",
       });
 
       reset();
     } catch (error) {
-      console.error('Error sending email:', error);
+      console.error('Error saving lead:', error);
       toast({
         title: "Erro ao enviar mensagem",
         description: "Tente novamente ou entre em contato pelo WhatsApp.",
