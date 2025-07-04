@@ -1,3 +1,4 @@
+import ContactForm from './ContactForm';
 
 const Contact = () => {
   return (
@@ -8,7 +9,7 @@ const Contact = () => {
             Entre em Contato
           </h2>
           <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
-            Entre em contato com nossa equipe pelo WhatsApp e tire todas as suas dúvidas!
+            Preencha o formulário ou entre em contato diretamente pelo WhatsApp!
           </p>
         </div>
 
@@ -60,42 +61,47 @@ const Contact = () => {
                 </svg>
               </a>
             </div>
+
+            {/* Informações de Contato */}
+            <div className="space-y-6 mt-8">
+              <div className="bg-gray-50 p-6 rounded-2xl">
+                <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
+                  📍 Endereço da Fábrica
+                </h3>
+                <p className="text-prime-concrete">
+                  Estrada da Raposa, 2002<br />
+                  Raposa - MA, 65138-000<br />
+                  Brasil
+                </p>
+              </div>
+
+              <div className="bg-gray-50 p-6 rounded-2xl">
+                <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
+                  ⏰ Horário de Funcionamento
+                </h3>
+                <p className="text-prime-concrete">
+                  Segunda a Sexta: 8h às 18h<br />
+                  Sábado: 8h às 12h<br />
+                  Domingo: Fechado
+                </p>
+              </div>
+
+              <div className="bg-gray-50 p-6 rounded-2xl">
+                <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
+                  📞 Outros Contatos
+                </h3>
+                <p className="text-prime-concrete">
+                  Telefone: (98) 3333-4444<br />
+                  Email: contato@primeengenharia.com.br<br />
+                  CNPJ: 12.345.678/0001-99
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Informações de Contato */}
-          <div className="space-y-6">
-            <div className="bg-gray-50 p-6 rounded-2xl">
-              <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
-                📍 Endereço da Fábrica
-              </h3>
-              <p className="text-prime-concrete">
-                Estrada da Raposa, 2002<br />
-                Raposa - MA, 65138-000<br />
-                Brasil
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-2xl">
-              <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
-                ⏰ Horário de Funcionamento
-              </h3>
-              <p className="text-prime-concrete">
-                Segunda a Sexta: 8h às 18h<br />
-                Sábado: 8h às 12h<br />
-                Domingo: Fechado
-              </p>
-            </div>
-
-            <div className="bg-gray-50 p-6 rounded-2xl">
-              <h3 className="text-xl font-bold text-prime-concrete-dark mb-4">
-                📞 Outros Contatos
-              </h3>
-              <p className="text-prime-concrete">
-                Telefone: (98) 3333-4444<br />
-                Email: contato@primeengenharia.com.br<br />
-                CNPJ: 12.345.678/0001-99
-              </p>
-            </div>
+          {/* Contact Form */}
+          <div>
+            <ContactForm />
           </div>
         </div>
       </div>
