@@ -1,43 +1,45 @@
 
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+
+type Product = {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  details: string;
+  category: string;
+  is_featured: boolean;
+  sort_order: number;
+};
+
 const Products = () => {
-  const otherProducts = [
-    { 
-      name: "Blocos de concreto", 
-      icon: "🧱",
-      description: "Blocos estruturais de alta resistência para construções sólidas e duráveis.",
-      details: "Ideais para alvenaria estrutural, oferecendo resistência mecânica superior e durabilidade comprovada."
-    },
-    { 
-      name: "Pisos intertravados", 
-      icon: "🔲",
-      description: "Pisos drenantes e antiderrapantes, ideais para calçadas e estacionamentos.",
-      details: "Sistema de pavimentação sustentável com alta resistência ao tráfego e fácil manutenção."
-    },
-    { 
-      name: "Meio-fio", 
-      icon: "🛤️",
-      description: "Peças padronizadas para delimitação de vias e organização urbana.",
-      details: "Produzidos conforme normas ABNT, garantindo qualidade e padronização em projetos urbanos."
-    },
-    { 
-      name: "Lajes e vigotas", 
-      icon: "🏗️",
-      description: "Sistema de lajes pré-moldadas para construções ágeis e econômicas.",
-      details: "Solução completa para coberturas e entre-pisos com rapidez na execução e economia de materiais."
-    },
-    { 
-      name: "Anéis", 
-      icon: "⭕",
-      description: "Anéis de concreto para poços, fossas e sistemas de drenagem.",
-      details: "Peças circulares pré-moldadas com encaixe perfeito para sistemas de saneamento e drenagem."
-    },
-    { 
-      name: "Pré-moldados", 
-      icon: "🏭",
-      description: "Diversas peças pré-moldadas sob medida para seu projeto específico.",
-      details: "Soluções personalizadas em concreto pré-moldado para atender às necessidades específicas de cada projeto."
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('is_active', true)
+        .order('sort_order', { ascending: true });
+
+      if (error) throw error;
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Erro ao carregar produtos:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  const featuredProduct = products.find(p => p.is_featured);
+  const otherProducts = products.filter(p => !p.is_featured);
 
   return (
     <section id="produtos" className="py-16 lg:py-24 bg-gray-50">
@@ -51,89 +53,102 @@ const Products = () => {
           </p>
         </div>
 
-        {/* Tijolo Ecológico - Destaque */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 mb-12 animate-slide-up">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <div className="inline-flex items-center bg-prime-green/10 text-prime-green px-3 py-1 rounded-full text-sm font-medium mb-4">
-                🌱 Produto Principal
+        {/* Produto em Destaque */}
+        {loading ? (
+          <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 mb-12 animate-pulse">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+                <div className="h-10 bg-gray-200 rounded w-48 mb-6"></div>
+                <div className="h-4 bg-gray-200 rounded w-full mb-6"></div>
               </div>
-              
-              <h3 className="text-3xl lg:text-4xl font-bold text-prime-green mb-6">
-                Tijolo Ecológico
-              </h3>
+              <div className="h-80 bg-gray-200 rounded-2xl"></div>
+            </div>
+          </div>
+        ) : featuredProduct ? (
+          <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 mb-12 animate-slide-up">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="inline-flex items-center bg-prime-green/10 text-prime-green px-3 py-1 rounded-full text-sm font-medium mb-4">
+                  {featuredProduct.icon} Produto Principal
+                </div>
+                
+                <h3 className="text-3xl lg:text-4xl font-bold text-prime-green mb-6">
+                  {featuredProduct.name}
+                </h3>
 
-              <p className="text-lg text-prime-concrete mb-6">
-                Nossos tijolos ecológicos são produzidos com materiais sustentáveis e tecnologia avançada, oferecendo resistência superior e impacto ambiental reduzido.
-              </p>
+                <p className="text-lg text-prime-concrete mb-6">
+                  {featuredProduct.description}
+                </p>
 
-              <div className="space-y-4 mb-8">
-                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Principais Benefícios:</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Encaixe perfeito e preciso</span>
+                <div className="space-y-4 mb-8">
+                  <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Principais Benefícios:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">Encaixe perfeito e preciso</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">Economia de até 30% no cimento</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">Resistência superior a 6 MPa</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">Redução de 50% no custo final</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">Isolamento térmico e acústico</span>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-prime-green rounded-full"></div>
+                      <span className="text-prime-concrete">100% sustentável e reciclável</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Economia de até 30% no cimento</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Resistência superior a 6 MPa</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Redução de 50% no custo final</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">Isolamento térmico e acústico</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-prime-green rounded-full"></div>
-                    <span className="text-prime-concrete">100% sustentável e reciclável</span>
-                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Aplicações Ideais:</h4>
+                  <p className="text-prime-concrete">
+                    {featuredProduct.details}
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a 
+                    href="#contato"
+                    className="inline-flex items-center justify-center bg-prime-green hover:bg-prime-green-light text-white px-6 py-3 rounded-full font-medium transition-colors"
+                  >
+                    Solicitar Orçamento
+                  </a>
+                  <a 
+                    href={`https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre ${featuredProduct.name.toLowerCase()}.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center border-2 border-prime-green text-prime-green hover:bg-prime-green hover:text-white px-6 py-3 rounded-full font-medium transition-colors"
+                  >
+                    Saiba Mais no WhatsApp
+                  </a>
                 </div>
               </div>
 
-              <div className="mb-8">
-                <h4 className="text-xl font-semibold text-prime-concrete-dark mb-4">Aplicações Ideais:</h4>
-                <p className="text-prime-concrete">
-                  Construção de casas, muros, fachadas, divisórias internas e projetos sustentáveis de todos os portes.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a 
-                  href="#contato"
-                  className="inline-flex items-center justify-center bg-prime-green hover:bg-prime-green-light text-white px-6 py-3 rounded-full font-medium transition-colors"
-                >
-                  Solicitar Orçamento
-                </a>
-                <a 
-                  href="https://wa.me/5598999999999?text=Olá! Gostaria de saber mais sobre os tijolos ecológicos."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center border-2 border-prime-green text-prime-green hover:bg-prime-green hover:text-white px-6 py-3 rounded-full font-medium transition-colors"
-                >
-                  Saiba Mais no WhatsApp
-                </a>
-              </div>
-            </div>
-
-            <div className="relative">
-              <img 
-                src="/lovable-uploads/d4ca7e0c-6a7c-473b-b733-44282b4c965e.png" 
-                alt="Tijolos Ecológicos PRIME ENGENHARIA"
-                className="w-full h-80 object-cover rounded-2xl shadow-lg"
-              />
-              <div className="absolute top-4 right-4 bg-prime-orange text-white px-3 py-1 rounded-full text-sm font-medium">
-                Pioneiros em MA
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/d4ca7e0c-6a7c-473b-b733-44282b4c965e.png" 
+                  alt={`${featuredProduct.name} PRIME ENGENHARIA`}
+                  className="w-full h-80 object-cover rounded-2xl shadow-lg"
+                />
+                <div className="absolute top-4 right-4 bg-prime-orange text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Pioneiros em MA
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         {/* Vantagens dos Tijolos Ecológicos */}
         <div className="text-center mb-16">
