@@ -35,11 +35,11 @@ const About = () => {
           </div>
 
           <div className="animate-slide-up">
-            <div className="relative flex items-center justify-center bg-gray-50 rounded-2xl shadow-2xl p-12">
+            <div className="relative flex items-center justify-center bg-gray-50 rounded-2xl shadow-2xl p-8">
               <img 
                 src="/lovable-uploads/df9db288-7bd8-4312-8e86-26edcecc6876.png" 
                 alt="PRIME ENGENHARIA Logo"
-                className="w-full max-w-md h-auto"
+                className="w-full h-auto"
               />
             </div>
           </div>
