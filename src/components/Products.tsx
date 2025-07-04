@@ -1,3 +1,4 @@
+
 const Products = () => {
   const otherProducts = [
     { 
@@ -130,6 +131,35 @@ const Products = () => {
               <div className="absolute top-4 right-4 bg-prime-orange text-white px-3 py-1 rounded-full text-sm font-medium">
                 Pioneiros em MA
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Vantagens dos Tijolos Ecológicos */}
+        <div className="text-center mb-16">
+          <h3 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+            Por que escolher o Tijolo Ecológico da PRIME ENGENHARIA?
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+            <div className="text-center p-6 bg-white rounded-2xl hover:bg-prime-green/5 transition-colors shadow-md">
+              <div className="text-5xl mb-4">♻️</div>
+              <h4 className="text-xl font-bold text-prime-concrete-dark mb-3">Sustentável</h4>
+              <p className="text-prime-concrete leading-relaxed">Reduz resíduos e uso de cimento, preservando o meio ambiente</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-2xl hover:bg-prime-green/5 transition-colors shadow-md">
+              <div className="text-5xl mb-4">🧱</div>
+              <h4 className="text-xl font-bold text-prime-concrete-dark mb-3">Modular</h4>
+              <p className="text-prime-concrete leading-relaxed">Fácil encaixe e agilidade na obra, economizando tempo</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-2xl hover:bg-prime-green/5 transition-colors shadow-md">
+              <div className="text-5xl mb-4">🏠</div>
+              <h4 className="text-xl font-bold text-prime-concrete-dark mb-3">Estético</h4>
+              <p className="text-prime-concrete leading-relaxed">Visual moderno e natural para suas construções</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-2xl hover:bg-prime-green/5 transition-colors shadow-md">
+              <div className="text-5xl mb-4">🚚</div>
+              <h4 className="text-xl font-bold text-prime-concrete-dark mb-3">Entrega rápida</h4>
+              <p className="text-prime-concrete leading-relaxed">Atendemos São Luís e região com agilidade</p>
             </div>
           </div>
         </div>

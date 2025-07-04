@@ -1,3 +1,4 @@
+
 const Advantages = () => {
   const advantages = [{
     icon: "♻️",
@@ -16,7 +17,9 @@ const Advantages = () => {
     title: "Entrega rápida",
     description: "Atendemos São Luís e região com agilidade"
   }];
-  return <section id="vantagens" className="py-16 lg:py-24 bg-white">
+  
+  return (
+    <section id="vantagens" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
@@ -26,9 +29,14 @@ const Advantages = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {advantages.map((advantage, index) => <div key={index} className="text-center p-6 bg-gray-50 rounded-2xl hover:bg-prime-green/5 transition-colors animate-slide-up group hover:transform hover:scale-105 transition-transform duration-300" style={{
-          animationDelay: `${index * 0.2}s`
-        }}>
+          {advantages.map((advantage, index) => (
+            <div 
+              key={index} 
+              className="text-center p-6 bg-gray-50 rounded-2xl hover:bg-prime-green/5 transition-colors animate-slide-up group hover:transform hover:scale-105 transition-transform duration-300" 
+              style={{
+                animationDelay: `${index * 0.2}s`
+              }}
+            >
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {advantage.icon}
               </div>
@@ -38,7 +46,8 @@ const Advantages = () => {
               <p className="text-prime-concrete leading-relaxed">
                 {advantage.description}
               </p>
-            </div>)}
+            </div>
+          ))}
         </div>
 
         {/* Call to Action */}
@@ -51,6 +60,8 @@ const Advantages = () => {
           </a>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Advantages;
