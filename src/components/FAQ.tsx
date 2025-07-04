@@ -80,7 +80,7 @@ const FAQ = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://wa.me/5598999999999?text=Olá! Tenho uma dúvida sobre os produtos da PRIME ENGENHARIA."
+              href="https://wa.me/559898708157?text=Olá! Tenho uma dúvida sobre os produtos da PRIME ENGENHARIA."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-medium transition-colors"
