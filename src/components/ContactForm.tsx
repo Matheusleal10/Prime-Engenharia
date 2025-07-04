@@ -40,7 +40,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Salvar lead no Supabase
+      // 1. Salvar lead no Supabase
       const { error } = await supabase
         .from('leads')
         .insert({
@@ -56,16 +56,38 @@ const ContactForm = () => {
         throw error;
       }
 
+      // 2. Enviar emails de notificação
+      try {
+        const { error: emailError } = await supabase.functions.invoke('send-lead-emails', {
+          body: {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            projectType: data.projectType,
+            quantity: data.quantity,
+            message: data.message
+          }
+        });
+
+        if (emailError) {
+          console.error('Error sending emails:', emailError);
+          // Não falha o processo principal se email falhar
+        }
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Continua mesmo se email falhar
+      }
+
       toast({
-        title: "Mensagem enviada com sucesso!",
-        description: "Seu orçamento foi registrado. Entraremos em contato em breve.",
+        title: "Orçamento solicitado com sucesso! ✅",
+        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h. Verifique seu email!",
       });
 
       reset();
     } catch (error) {
       console.error('Error saving lead:', error);
       toast({
-        title: "Erro ao enviar mensagem",
+        title: "Erro ao enviar solicitação",
         description: "Tente novamente ou entre em contato pelo WhatsApp.",
         variant: "destructive",
       });
