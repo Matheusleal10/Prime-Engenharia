@@ -36,7 +36,7 @@ const handler = async (req: Request): Promise<Response> => {
     // 1. Email de notificação para a empresa (você)
     const adminEmailResponse = await resend.emails.send({
       from: "PRIME ENGENHARIA <noreply@primeeng.com.br>",
-      to: ["contato@primeeng.com.br"], // Substitua pelo seu email
+      to: ["faleconosco@primeeng.com.br"],
       subject: `🚀 Novo Orçamento Solicitado - ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa;">
@@ -141,7 +141,7 @@ const handler = async (req: Request): Promise<Response> => {
             
             <p style="color: #64748b; font-size: 14px; text-align: center; margin-top: 30px;">
               Tem alguma dúvida? Entre em contato conosco:<br>
-              📞 (98) 99999-9999 | ✉️ contato@primeeng.com.br
+              📞 (98) 99999-9999 | ✉️ faleconosco@primeeng.com.br
             </p>
           </div>
           
