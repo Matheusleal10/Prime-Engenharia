@@ -1,3 +1,4 @@
+
 const Hero = () => {
   return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-prime-green to-prime-green-light">
       {/* Background Pattern */}
@@ -8,12 +9,12 @@ const Hero = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto animate-fade-in">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Construa com Inovação e{' '}
-            <span className="text-prime-orange-light text-slate-50">Sustentabilidade</span>
+            Inovação que{' '}
+            <span className="text-prime-orange-light text-slate-50">Constrói o Futuro</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
-            Tijolos Ecológicos de Alta Performance para sua Obra. Pioneiros em São Luís - MA com qualidade comprovada e compromisso ambiental.
+            Tijolos Ecológicos de Alta Performance para sua Obra. Pioneiros em São Luís - MA com qualidade comprovada e compromisso sustentável.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
