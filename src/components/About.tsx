@@ -1,15 +1,11 @@
+
 const About = () => {
   return (
     <section id="sobre" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-up">
-            <div className="flex items-center mb-6">
-              <img 
-                src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
-                alt="PRIME ENGENHARIA Logo"
-                className="h-16 w-auto mr-4"
-              />
+            <div className="mb-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-prime-green">
                 Sobre a PRIME ENGENHARIA
               </h2>
@@ -44,7 +40,13 @@ const About = () => {
                 alt="Escritório PRIME ENGENHARIA"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-prime-green/20 to-transparent rounded-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-prime-green/20 to-transparent rounded-2xl flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
+                  alt="PRIME ENGENHARIA Logo"
+                  className="h-24 w-auto opacity-90"
+                />
+              </div>
             </div>
           </div>
         </div>
