@@ -57,6 +57,12 @@ export default function Inventory() {
     }
   };
 
+  const getStockStatus = (current: number, min: number, max: number) => {
+    if (current <= min) return { status: 'low', label: 'Baixo', variant: 'destructive' as const };
+    if (current >= max) return { status: 'high', label: 'Alto', variant: 'secondary' as const };
+    return { status: 'normal', label: 'Normal', variant: 'default' as const };
+  };
+
   const filteredInventory = inventory.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,12 +76,6 @@ export default function Inventory() {
     
     return matchesSearch && matchesCategory && matchesStock;
   });
-
-  const getStockStatus = (current: number, min: number, max: number) => {
-    if (current <= min) return { status: 'low', label: 'Baixo', variant: 'destructive' as const };
-    if (current >= max) return { status: 'high', label: 'Alto', variant: 'secondary' as const };
-    return { status: 'normal', label: 'Normal', variant: 'default' as const };
-  };
 
   const lowStockCount = inventory.filter(item => item.stock_quantity <= item.min_stock).length;
   
