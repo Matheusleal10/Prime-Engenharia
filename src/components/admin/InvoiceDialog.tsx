@@ -443,7 +443,7 @@ export function InvoiceDialog({ open, onOpenChange, onSuccess, editInvoice }: In
                         updateItem(index, 'product_id', value);
                         if (product) {
                           updateItem(index, 'description', product.name);
-                          updateItem(index, 'unit_price', product.price);
+                          updateItem(index, 'unit_price', product.price || 0);
                         }
                       }}
                     >
