@@ -20,25 +20,13 @@ const Index = () => {
     <div className="min-h-screen font-montserrat">
       <Header />
       
-      {/* Admin Access Button */}
+      {/* Admin Access Button - Only for authenticated admins */}
       {isAdmin && (
         <div className="fixed bottom-24 right-6 z-50">
           <Button asChild className="shadow-lg">
             <Link to="/admin">
               <Settings className="h-4 w-4 mr-2" />
               Painel Admin
-            </Link>
-          </Button>
-        </div>
-      )}
-
-      {/* Login/Register Button for non-admin users */}
-      {!user && (
-        <div className="fixed bottom-24 left-6 z-50">
-          <Button variant="outline" asChild className="shadow-lg bg-white">
-            <Link to="/admin/login">
-              <Settings className="h-4 w-4 mr-2" />
-              Entrar
             </Link>
           </Button>
         </div>
