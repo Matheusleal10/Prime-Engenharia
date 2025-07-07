@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Package, AlertTriangle } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Plus, Search, Package, AlertTriangle, Filter, DollarSign, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { InventoryMovementDialog } from '@/components/admin/InventoryMovementDialog';
 
@@ -18,12 +19,16 @@ interface InventoryItem {
   min_stock: number;
   max_stock: number;
   location: string;
+  price: number;
+  cost_price: number;
 }
 
 export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [stockFilter, setStockFilter] = useState('all');
   const [movementDialogOpen, setMovementDialogOpen] = useState(false);
   const { toast } = useToast();
 
@@ -35,7 +40,7 @@ export default function Inventory() {
     try {
       const { data, error } = await supabase
         .from('products')
-        .select('id, name, sku, category, stock_quantity, min_stock, max_stock, location')
+        .select('id, name, sku, category, stock_quantity, min_stock, max_stock, location, price, cost_price')
         .eq('is_active', true)
         .order('name');
 
@@ -52,11 +57,19 @@ export default function Inventory() {
     }
   };
 
-  const filteredInventory = inventory.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (item.sku && item.sku.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const filteredInventory = inventory.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.sku && item.sku.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.location && item.location.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesCategory = categoryFilter === 'all' || item.category === categoryFilter;
+    
+    const stockStatus = getStockStatus(item.stock_quantity, item.min_stock, item.max_stock);
+    const matchesStock = stockFilter === 'all' || stockStatus.status === stockFilter;
+    
+    return matchesSearch && matchesCategory && matchesStock;
+  });
 
   const getStockStatus = (current: number, min: number, max: number) => {
     if (current <= min) return { status: 'low', label: 'Baixo', variant: 'destructive' as const };
@@ -65,6 +78,36 @@ export default function Inventory() {
   };
 
   const lowStockCount = inventory.filter(item => item.stock_quantity <= item.min_stock).length;
+  
+  const totalValue = inventory.reduce((sum, item) => {
+    const value = (item.cost_price || 0) * item.stock_quantity;
+    return sum + value;
+  }, 0);
+  
+  const uniqueLocations = new Set(inventory.filter(item => item.location).map(item => item.location)).size;
+  
+  const formatPrice = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  };
+  
+  const getCategoryLabel = (category: string) => {
+    const labels: { [key: string]: string } = {
+      'estruturas-metalicas': 'Estruturas Metálicas',
+      'blocos-tijolos': 'Blocos e Tijolos',
+      'soldas-eletrodos': 'Soldas e Eletrodos',
+      'parafusos-fixacao': 'Parafusos e Fixação',
+      'tintas-acabamentos': 'Tintas e Acabamentos',
+      'ferramentas-manuais': 'Ferramentas Manuais',
+      'ferramentas-eletricas': 'Ferramentas Elétricas',
+      'materiais-construcao': 'Materiais de Construção',
+      'equipamentos-seguranca': 'Equipamentos de Segurança',
+      'outros': 'Outros'
+    };
+    return labels[category] || category;
+  };
 
   return (
     <div className="space-y-6">
@@ -101,19 +144,19 @@ export default function Inventory() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Valor Total</CardTitle>
-            <Package className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R$ --</div>
+            <div className="text-2xl font-bold">{formatPrice(totalValue)}</div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Localizações</CardTitle>
-            <Package className="h-4 w-4 text-muted-foreground" />
+            <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">--</div>
+            <div className="text-2xl font-bold">{uniqueLocations}</div>
           </CardContent>
         </Card>
       </div>
@@ -124,7 +167,7 @@ export default function Inventory() {
           <CardDescription>
             Monitore os níveis de estoque de todos os produtos
           </CardDescription>
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1 max-w-sm">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
@@ -133,6 +176,39 @@ export default function Inventory() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
+            </div>
+            <div className="flex gap-2">
+              <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                <SelectTrigger className="w-[200px]">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Categoria" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas Categorias</SelectItem>
+                  <SelectItem value="estruturas-metalicas">Estruturas Metálicas</SelectItem>
+                  <SelectItem value="blocos-tijolos">Blocos e Tijolos</SelectItem>
+                  <SelectItem value="soldas-eletrodos">Soldas e Eletrodos</SelectItem>
+                  <SelectItem value="parafusos-fixacao">Parafusos e Fixação</SelectItem>
+                  <SelectItem value="tintas-acabamentos">Tintas e Acabamentos</SelectItem>
+                  <SelectItem value="ferramentas-manuais">Ferramentas Manuais</SelectItem>
+                  <SelectItem value="ferramentas-eletricas">Ferramentas Elétricas</SelectItem>
+                  <SelectItem value="materiais-construcao">Materiais de Construção</SelectItem>
+                  <SelectItem value="equipamentos-seguranca">Equipamentos de Segurança</SelectItem>
+                  <SelectItem value="outros">Outros</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={stockFilter} onValueChange={setStockFilter}>
+                <SelectTrigger className="w-[150px]">
+                  <AlertTriangle className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todos Status</SelectItem>
+                  <SelectItem value="low">Estoque Baixo</SelectItem>
+                  <SelectItem value="normal">Normal</SelectItem>
+                  <SelectItem value="high">Estoque Alto</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </CardHeader>
@@ -159,7 +235,7 @@ export default function Inventory() {
                     <TableRow key={item.id}>
                       <TableCell className="font-medium">{item.name}</TableCell>
                       <TableCell>{item.sku || '-'}</TableCell>
-                      <TableCell>{item.category}</TableCell>
+                      <TableCell>{getCategoryLabel(item.category)}</TableCell>
                       <TableCell>{item.location || '-'}</TableCell>
                       <TableCell>{item.stock_quantity}</TableCell>
                       <TableCell>{item.min_stock} / {item.max_stock}</TableCell>

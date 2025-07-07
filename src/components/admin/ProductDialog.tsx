@@ -182,10 +182,14 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="estruturas-metalicas">Estruturas Metálicas</SelectItem>
-                  <SelectItem value="soldas">Soldas</SelectItem>
-                  <SelectItem value="acabamentos">Acabamentos</SelectItem>
-                  <SelectItem value="ferramentas">Ferramentas</SelectItem>
-                  <SelectItem value="materiais">Materiais</SelectItem>
+                  <SelectItem value="blocos-tijolos">Blocos e Tijolos</SelectItem>
+                  <SelectItem value="soldas-eletrodos">Soldas e Eletrodos</SelectItem>
+                  <SelectItem value="parafusos-fixacao">Parafusos e Fixação</SelectItem>
+                  <SelectItem value="tintas-acabamentos">Tintas e Acabamentos</SelectItem>
+                  <SelectItem value="ferramentas-manuais">Ferramentas Manuais</SelectItem>
+                  <SelectItem value="ferramentas-eletricas">Ferramentas Elétricas</SelectItem>
+                  <SelectItem value="materiais-construcao">Materiais de Construção</SelectItem>
+                  <SelectItem value="equipamentos-seguranca">Equipamentos de Segurança</SelectItem>
                   <SelectItem value="outros">Outros</SelectItem>
                 </SelectContent>
               </Select>
