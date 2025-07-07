@@ -86,7 +86,7 @@ export function CategoryDialog({ open, onOpenChange, onSuccess, editCategory }: 
       onSuccess();
       onOpenChange(false);
     } catch (error: any) {
-      console.error('Error saving category:', error);
+      console.error('Erro ao salvar categoria:', error);
       toast({
         title: "Erro ao salvar categoria",
         description: error.message?.includes('duplicate') 

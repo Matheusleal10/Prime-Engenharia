@@ -108,7 +108,7 @@ export default function Dashboard() {
       setRecentActivities(activities);
 
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error('Erro ao carregar dados do dashboard:', error);
     }
   };
 

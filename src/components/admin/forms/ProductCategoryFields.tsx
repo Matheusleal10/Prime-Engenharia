@@ -37,7 +37,7 @@ export function ProductCategoryFields({ formData, onInputChange }: ProductCatego
       if (error) throw error;
       setCategories(data || []);
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error('Erro ao buscar categorias:', error);
     } finally {
       setLoading(false);
     }

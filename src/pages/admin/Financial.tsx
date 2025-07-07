@@ -50,7 +50,7 @@ export default function Financial() {
       if (error) throw error;
       setCustomers(data || []);
     } catch (error) {
-      console.error('Error fetching customers:', error);
+      console.error('Erro ao buscar clientes:', error);
     }
   };
 
@@ -64,7 +64,7 @@ export default function Financial() {
       if (error) throw error;
       setSuppliers(data || []);
     } catch (error) {
-      console.error('Error fetching suppliers:', error);
+      console.error('Erro ao buscar fornecedores:', error);
     }
   };
 

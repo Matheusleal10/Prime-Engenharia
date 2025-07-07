@@ -184,7 +184,7 @@ export function MarketingAnalytics() {
       });
 
     } catch (error) {
-      console.error('Error fetching analytics:', error);
+      console.error('Erro ao buscar análises:', error);
     } finally {
       setLoading(false);
     }
