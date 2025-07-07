@@ -69,6 +69,11 @@ const menuItems = [
     url: "/admin/reports",
     icon: BarChart3,
   },
+  {
+    title: "Configurações",
+    url: "/admin/settings",
+    icon: Settings,
+  },
 ];
 
 export function AdminSidebar() {

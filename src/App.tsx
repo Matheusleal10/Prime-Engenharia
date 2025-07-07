@@ -17,6 +17,7 @@ import Inventory from "./pages/admin/Inventory";
 import Financial from "./pages/admin/Financial";
 import Suppliers from "./pages/admin/Suppliers";
 import Reports from "./pages/admin/Reports";
+import Settings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="financial" element={<Financial />} />
               <Route path="suppliers" element={<Suppliers />} />
               <Route path="reports" element={<Reports />} />
+              <Route path="settings" element={<Settings />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
