@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface InvoiceData {
   id: string;
@@ -30,8 +31,18 @@ export interface InvoiceData {
 }
 
 export const generateInvoicePDF = async (invoice: InvoiceData): Promise<void> => {
+  // Fetch company settings
+  const { data: settings } = await supabase
+    .from('system_settings')
+    .select('key, value');
+    
+  const companySettings = settings?.reduce((acc, setting) => {
+    acc[setting.key] = setting.value || '';
+    return acc;
+  }, {} as Record<string, string>) || {};
+  
   // Create HTML template for invoice
-  const invoiceHTML = createInvoiceTemplate(invoice);
+  const invoiceHTML = createInvoiceTemplate(invoice, companySettings);
   
   // Create a temporary div to render the invoice
   const tempDiv = document.createElement('div');
@@ -69,7 +80,7 @@ export const generateInvoicePDF = async (invoice: InvoiceData): Promise<void> =>
   }
 };
 
-const createInvoiceTemplate = (invoice: InvoiceData): string => {
+const createInvoiceTemplate = (invoice: InvoiceData, settings: Record<string, string> = {}): string => {
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -85,17 +96,24 @@ const createInvoiceTemplate = (invoice: InvoiceData): string => {
     <div style="max-width: 800px; margin: 0 auto; padding: 0; font-family: Arial, sans-serif; background: white;">
       <!-- Header with company info -->
       <div style="background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%); color: white; padding: 30px; position: relative; overflow: hidden;">
-        <div style="position: absolute; top: 20px; right: 30px; width: 60px; height: 60px;">
-          <div style="width: 20px; height: 20px; background: #FF6B35; border-radius: 50%; position: absolute; top: 0; left: 0;"></div>
-          <div style="width: 20px; height: 20px; background: #4ECDC4; border-radius: 50%; position: absolute; top: 20px; left: 20px;"></div>
-          <div style="width: 20px; height: 20px; background: #45B7D1; border-radius: 50%; position: absolute; top: 40px; left: 10px;"></div>
-        </div>
+        ${settings.company_logo_url ? `
+          <div style="position: absolute; top: 20px; right: 30px; width: 80px; height: 60px;">
+            <img src="${settings.company_logo_url}" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+          </div>
+        ` : `
+          <div style="position: absolute; top: 20px; right: 30px; width: 60px; height: 60px;">
+            <div style="width: 20px; height: 20px; background: #FF6B35; border-radius: 50%; position: absolute; top: 0; left: 0;"></div>
+            <div style="width: 20px; height: 20px; background: #4ECDC4; border-radius: 50%; position: absolute; top: 20px; left: 20px;"></div>
+            <div style="width: 20px; height: 20px; background: #45B7D1; border-radius: 50%; position: absolute; top: 40px; left: 10px;"></div>
+          </div>
+        `}
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
           <div>
-            <h1 style="margin: 0; font-size: 32px; font-weight: bold;">PRIME ENGENHARIA</h1>
-            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">Telefone: (11) 99999-9999</p>
-            <p style="margin: 0; font-size: 14px; opacity: 0.9;">contato@primeengenharia.com.br</p>
-            <p style="margin: 0; font-size: 14px; opacity: 0.9;">São Paulo, SP - Brasil</p>
+            <h1 style="margin: 0; font-size: 32px; font-weight: bold;">${settings.company_name || 'PRIME ENGENHARIA'}</h1>
+            <p style="margin: 5px 0; font-size: 14px; opacity: 0.9;">Telefone: ${settings.company_phone || '(11) 99999-9999'}</p>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">${settings.company_email || 'contato@primeengenharia.com.br'}</p>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">${settings.company_address || 'São Paulo, SP - Brasil'}</p>
+            ${settings.company_cnpj ? `<p style="margin: 0; font-size: 14px; opacity: 0.9;">CNPJ: ${settings.company_cnpj}</p>` : ''}
           </div>
           <div style="text-align: right;">
             <div style="background: white; color: #4A90E2; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -153,10 +171,10 @@ const createInvoiceTemplate = (invoice: InvoiceData): string => {
       <div style="padding: 0 30px 30px 30px; display: flex; justify-content: space-between; align-items: flex-start;">
         <div style="flex: 1; margin-right: 30px;">
           <h3 style="color: #4A90E2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 2px solid #4A90E2; padding-bottom: 5px;">INFORMAÇÕES BANCÁRIAS</h3>
-          <p style="margin: 8px 0; color: #333;"><strong>Banco:</strong> Banco do Brasil</p>
-          <p style="margin: 8px 0; color: #333;"><strong>Agência:</strong> 1234-5</p>
-          <p style="margin: 8px 0; color: #333;"><strong>Conta:</strong> 12345-6</p>
-          <p style="margin: 8px 0; color: #333;"><strong>PIX:</strong> contato@primeengenharia.com.br</p>
+          <p style="margin: 8px 0; color: #333;"><strong>Banco:</strong> ${settings.company_bank_name || 'Banco do Brasil'}</p>
+          <p style="margin: 8px 0; color: #333;"><strong>Agência:</strong> ${settings.company_bank_agency || '1234-5'}</p>
+          <p style="margin: 8px 0; color: #333;"><strong>Conta:</strong> ${settings.company_bank_account || '12345-6'}</p>
+          <p style="margin: 8px 0; color: #333;"><strong>PIX:</strong> ${settings.company_bank_pix || settings.company_email || 'contato@primeengenharia.com.br'}</p>
         </div>
         <div style="width: 300px;">
           <div style="background: #f8f9fa; border: 2px solid #4A90E2; border-radius: 8px; padding: 20px;">

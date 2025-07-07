@@ -59,8 +59,9 @@ export function useSettings() {
     setSaving(true);
     try {
       const companySettings = [
-        'company_name', 'company_document', 'company_email', 
-        'company_phone', 'company_address'
+        'company_name', 'company_email', 'company_phone', 'company_address',
+        'company_logo_url', 'company_cnpj', 'company_ie', 'company_im',
+        'company_bank_name', 'company_bank_agency', 'company_bank_account', 'company_bank_pix'
       ];
 
       for (const key of companySettings) {
