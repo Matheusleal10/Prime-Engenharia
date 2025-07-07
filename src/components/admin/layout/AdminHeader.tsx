@@ -13,7 +13,18 @@ import { useAuth } from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export function AdminHeader() {
-  const { user, signOut } = useAuth();
+  const { user, userProfile, signOut } = useAuth();
+  
+  const getRoleLabel = (role: string) => {
+    const roleLabels: Record<string, string> = {
+      ceo: 'CEO',
+      office: 'Escritório',
+      marketing: 'Marketing',
+      financial: 'Financeiro',
+      operator: 'Operador'
+    };
+    return roleLabels[role] || role;
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -44,7 +55,14 @@ export function AdminHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                <div>
+                  <div className="font-medium">{userProfile?.full_name || user?.email}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {getRoleLabel(userProfile?.role || 'operator')}
+                  </div>
+                </div>
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild className="sm:hidden">
                 <Link to="/">
