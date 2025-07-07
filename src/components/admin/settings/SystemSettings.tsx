@@ -3,6 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { Save } from 'lucide-react';
 
 interface SystemSettingsProps {
@@ -117,6 +119,99 @@ export function SystemSettings({ settings, onSettingsChange, onSave, onToggleSet
             <Switch
               checked={settings.order_auto_numbering === 'true'}
               onCheckedChange={(checked) => onToggleSetting('order_auto_numbering', checked)}
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Configurações Fiscais</CardTitle>
+          <CardDescription>
+            Configure os dados fiscais da empresa
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4 p-4 md:p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="company_cnpj">CNPJ da Empresa</Label>
+              <Input
+                id="company_cnpj"
+                value={settings.company_cnpj || ''}
+                onChange={(e) => updateSetting('company_cnpj', e.target.value)}
+                placeholder="00.000.000/0000-00"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="company_ie">Inscrição Estadual</Label>
+              <Input
+                id="company_ie"
+                value={settings.company_ie || ''}
+                onChange={(e) => updateSetting('company_ie', e.target.value)}
+                placeholder="000.000.000.000"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="company_im">Inscrição Municipal</Label>
+              <Input
+                id="company_im"
+                value={settings.company_im || ''}
+                onChange={(e) => updateSetting('company_im', e.target.value)}
+                placeholder="000000"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="tax_regime">Regime Tributário</Label>
+              <Select
+                value={settings.tax_regime || 'simples'}
+                onValueChange={(value) => updateSetting('tax_regime', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="simples">Simples Nacional</SelectItem>
+                  <SelectItem value="presumido">Lucro Presumido</SelectItem>
+                  <SelectItem value="real">Lucro Real</SelectItem>
+                  <SelectItem value="mei">MEI</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="invoice_series">Série das Notas Fiscais</Label>
+              <Input
+                id="invoice_series"
+                value={settings.invoice_series || '001'}
+                onChange={(e) => updateSetting('invoice_series', e.target.value)}
+                placeholder="001"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="default_tax_rate">Alíquota Padrão de Impostos (%)</Label>
+              <Input
+                id="default_tax_rate"
+                type="number"
+                step="0.01"
+                value={settings.default_tax_rate || '0'}
+                onChange={(e) => updateSetting('default_tax_rate', e.target.value)}
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="invoice_observations">Observações Padrão das Notas Fiscais</Label>
+            <Textarea
+              id="invoice_observations"
+              value={settings.invoice_observations || ''}
+              onChange={(e) => updateSetting('invoice_observations', e.target.value)}
+              placeholder="Observações que aparecerão em todas as notas fiscais"
+              rows={3}
             />
           </div>
         </CardContent>

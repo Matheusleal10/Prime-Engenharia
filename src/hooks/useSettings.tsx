@@ -87,7 +87,9 @@ export function useSettings() {
     try {
       const systemSettings = [
         'default_currency', 'timezone', 'default_min_stock', 
-        'default_max_stock', 'notification_email'
+        'default_max_stock', 'notification_email', 'company_cnpj',
+        'company_ie', 'company_im', 'tax_regime', 'invoice_series',
+        'default_tax_rate', 'invoice_observations'
       ];
 
       for (const key of systemSettings) {

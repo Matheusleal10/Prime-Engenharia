@@ -8,7 +8,7 @@ interface DeleteDialogProps {
   onSuccess: () => void;
   itemId: string;
   itemName: string;
-  tableName: 'products' | 'customers' | 'suppliers' | 'orders' | 'financial_transactions';
+  tableName: 'products' | 'customers' | 'suppliers' | 'orders' | 'financial_transactions' | 'invoices';
   itemType: string;
 }
 

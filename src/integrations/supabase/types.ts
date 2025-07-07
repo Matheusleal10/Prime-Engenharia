@@ -317,6 +317,151 @@ export type Database = {
           },
         ]
       }
+      invoice_items: {
+        Row: {
+          created_at: string
+          description: string
+          discount: number | null
+          id: string
+          invoice_id: string
+          product_id: string
+          quantity: number
+          subtotal: number
+          tax_amount: number | null
+          tax_rate: number | null
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          discount?: number | null
+          id?: string
+          invoice_id: string
+          product_id: string
+          quantity: number
+          subtotal: number
+          tax_amount?: number | null
+          tax_rate?: number | null
+          unit_price: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          discount?: number | null
+          id?: string
+          invoice_id?: string
+          product_id?: string
+          quantity?: number
+          subtotal?: number
+          tax_amount?: number | null
+          tax_rate?: number | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoice_items_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoice_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoices: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          discount_amount: number
+          due_date: string | null
+          fiscal_key: string | null
+          id: string
+          invoice_number: string
+          invoice_series: string
+          issue_date: string
+          notes: string | null
+          order_id: string | null
+          pdf_url: string | null
+          status: string
+          subtotal: number
+          tax_amount: number
+          total_amount: number
+          updated_at: string
+          xml_content: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          discount_amount?: number
+          due_date?: string | null
+          fiscal_key?: string | null
+          id?: string
+          invoice_number: string
+          invoice_series?: string
+          issue_date?: string
+          notes?: string | null
+          order_id?: string | null
+          pdf_url?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+          xml_content?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          discount_amount?: number
+          due_date?: string | null
+          fiscal_key?: string | null
+          id?: string
+          invoice_number?: string
+          invoice_series?: string
+          issue_date?: string
+          notes?: string | null
+          order_id?: string | null
+          pdf_url?: string | null
+          status?: string
+          subtotal?: number
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+          xml_content?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           converted_to_customer: boolean | null
@@ -821,6 +966,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_invoice_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       generate_order_number: {
         Args: Record<PropertyKey, never>
         Returns: string

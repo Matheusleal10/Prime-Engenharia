@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
+import { Plus, Search, Eye, Edit, Trash2, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { OrderDialog } from '@/components/admin/OrderDialog';
 import { DeleteDialog } from '@/components/admin/DeleteDialog';
@@ -118,6 +118,55 @@ export default function Orders() {
     setEditingOrder(null);
   };
 
+  const handleGenerateInvoice = async (order: Order) => {
+    try {
+      // Check if invoice already exists for this order
+      const { data: existingInvoices, error: checkError } = await supabase
+        .from('invoices')
+        .select('id')
+        .eq('order_id', order.id);
+
+      if (checkError) throw checkError;
+
+      if (existingInvoices && existingInvoices.length > 0) {
+        toast({
+          title: "Nota fiscal já existe",
+          description: "Este pedido já possui uma nota fiscal associada.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Create invoice from order
+      const { data: invoice, error: invoiceError } = await supabase
+        .from('invoices')
+        .insert({
+          customer_id: order.customer_id,
+          order_id: order.id,
+          issue_date: new Date().toISOString().split('T')[0],
+          status: 'draft',
+          subtotal: order.total,
+          total_amount: order.total,
+          invoice_number: '' // Will be auto-generated
+        })
+        .select()
+        .single();
+
+      if (invoiceError) throw invoiceError;
+
+      toast({
+        title: "Nota fiscal criada",
+        description: `Nota fiscal ${invoice.invoice_number} criada com sucesso.`
+      });
+    } catch (error) {
+      toast({
+        title: "Erro ao gerar nota fiscal",
+        description: "Não foi possível gerar a nota fiscal para este pedido.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -179,12 +228,20 @@ export default function Orders() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="flex items-center justify-end space-x-2">
+                      <div className="flex items-center justify-end space-x-1">
                         <Button variant="ghost" size="sm">
                           <Eye className="h-4 w-4" />
                         </Button>
                         <Button variant="ghost" size="sm" onClick={() => handleEdit(order)}>
                           <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => handleGenerateInvoice(order)}
+                          title="Gerar Nota Fiscal"
+                        >
+                          <FileText className="h-4 w-4" />
                         </Button>
                         <Button variant="ghost" size="sm" onClick={() => handleDelete(order)}>
                           <Trash2 className="h-4 w-4" />

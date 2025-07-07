@@ -5,11 +5,11 @@ import {
   Users,
   Package,
   ShoppingCart,
+  FileText,
   BarChart3,
   Warehouse,
   DollarSign,
   Truck,
-  FileText,
   Settings,
   ChevronLeft,
   ChevronRight
@@ -50,6 +50,11 @@ const menuItems = [
     title: "Pedidos",
     url: "/admin/orders",
     icon: ShoppingCart,
+  },
+  {
+    title: "Notas Fiscais",
+    url: "/admin/invoices",
+    icon: FileText,
   },
   {
     title: "Estoque",

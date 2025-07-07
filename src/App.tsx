@@ -13,11 +13,13 @@ import Dashboard from "./pages/admin/Dashboard";
 import Customers from "./pages/admin/Customers";
 import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
+import Invoices from "./pages/admin/Invoices";
 import Inventory from "./pages/admin/Inventory";
 import Financial from "./pages/admin/Financial";
 import Suppliers from "./pages/admin/Suppliers";
 import Reports from "./pages/admin/Reports";
 import Settings from "./pages/admin/Settings";
+import CustomerPortal from "./pages/CustomerPortal";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/customer-portal" element={<CustomerPortal />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin" element={
               <ProtectedRoute>
@@ -40,6 +43,7 @@ const App = () => (
               <Route path="customers" element={<Customers />} />
               <Route path="products" element={<Products />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="invoices" element={<Invoices />} />
               <Route path="inventory" element={<Inventory />} />
               <Route path="financial" element={<Financial />} />
               <Route path="suppliers" element={<Suppliers />} />
