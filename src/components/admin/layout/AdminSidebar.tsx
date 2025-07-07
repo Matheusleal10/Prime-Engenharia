@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import {
   LayoutDashboard,
   Users,
@@ -106,6 +107,37 @@ export function AdminSidebar() {
   const location = useLocation();
   const isMobile = useIsMobile();
   const { setOpenMobile } = useSidebar();
+  const { userProfile, canAccessRoute } = useAuth();
+
+  // Definir quais itens cada role pode acessar
+  const getMenuItemsByRole = () => {
+    const role = userProfile?.role;
+    
+    switch (role) {
+      case 'ceo':
+        return menuItems; // CEO vê tudo
+      case 'office':
+        return menuItems.filter(item => 
+          ['Dashboard', 'Produtos', 'Categorias', 'Estoque', 'Configurações'].includes(item.title)
+        );
+      case 'marketing':
+        return menuItems.filter(item => 
+          ['Dashboard', 'Clientes', 'Marketing', 'Configurações'].includes(item.title)
+        );
+      case 'financial':
+        return menuItems.filter(item => 
+          ['Dashboard', 'Financeiro', 'Relatórios', 'Configurações'].includes(item.title)
+        );
+      case 'operator':
+        return menuItems.filter(item => 
+          ['Dashboard', 'Pedidos', 'Produtos', 'Configurações'].includes(item.title)
+        );
+      default:
+        return [menuItems[0]]; // Apenas Dashboard se role não definido
+    }
+  };
+
+  const visibleMenuItems = getMenuItemsByRole();
 
   const isActive = (path: string, end?: boolean) => {
     if (end) {
@@ -157,7 +189,7 @@ export function AdminSidebar() {
           <SidebarGroupLabel>{(!collapsed || isMobile) && "Navegação"}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
+              {visibleMenuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink 

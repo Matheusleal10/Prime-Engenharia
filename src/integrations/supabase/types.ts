@@ -999,7 +999,7 @@ export type Database = {
           full_name: string | null
           id: string
           is_active: boolean | null
-          role: string | null
+          role: Database["public"]["Enums"]["employee_role"] | null
           updated_at: string
         }
         Insert: {
@@ -1008,7 +1008,7 @@ export type Database = {
           full_name?: string | null
           id: string
           is_active?: boolean | null
-          role?: string | null
+          role?: Database["public"]["Enums"]["employee_role"] | null
           updated_at?: string
         }
         Update: {
@@ -1017,7 +1017,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           is_active?: boolean | null
-          role?: string | null
+          role?: Database["public"]["Enums"]["employee_role"] | null
           updated_at?: string
         }
         Relationships: []
@@ -1239,13 +1239,24 @@ export type Database = {
         Args: { product_category: string }
         Returns: string
       }
+      has_role: {
+        Args: {
+          _user_id: string
+          _role: Database["public"]["Enums"]["employee_role"]
+        }
+        Returns: boolean
+      }
+      is_admin: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       validate_sku_uniqueness: {
         Args: { sku_code: string; product_id?: string }
         Returns: boolean
       }
     }
     Enums: {
-      [_ in never]: never
+      employee_role: "ceo" | "office" | "marketing" | "financial" | "operator"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1372,6 +1383,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      employee_role: ["ceo", "office", "marketing", "financial", "operator"],
+    },
   },
 } as const

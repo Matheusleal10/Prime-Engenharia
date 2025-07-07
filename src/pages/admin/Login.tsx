@@ -4,6 +4,7 @@ import { Navigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader2, ArrowLeft } from 'lucide-react';
@@ -15,7 +16,16 @@ export default function Login() {
     email: '',
     password: '',
     fullName: '',
+    role: 'operator' as 'ceo' | 'office' | 'marketing' | 'financial' | 'operator',
   });
+
+  const roleOptions = {
+    ceo: 'CEO - Acesso Total',
+    office: 'Escritório - Produtos e Estoque', 
+    marketing: 'Marketing - Clientes e Leads',
+    financial: 'Financeiro - Relatórios',
+    operator: 'Operador - Básico'
+  };
 
   // Redirect if already authenticated
   if (user && !loading) {
@@ -50,7 +60,7 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     
-    await signUp(formData.email, formData.password, formData.fullName);
+    await signUp(formData.email, formData.password, formData.fullName, formData.role);
     
     setIsLoading(false);
   };
@@ -171,6 +181,19 @@ export default function Login() {
                       required
                       minLength={6}
                     />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-role">Tipo de Função</Label>
+                    <Select value={formData.role} onValueChange={(value) => setFormData({...formData, role: value as any})}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione sua função" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.entries(roleOptions).map(([key, label]) => (
+                          <SelectItem key={key} value={key}>{label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <Button
                     type="submit"

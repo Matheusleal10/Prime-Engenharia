@@ -8,9 +8,12 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, fullName?: string, role?: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   isAdmin: boolean;
+  hasRole: (role: string) => boolean;
+  canAccessRoute: (requiredRoles: string[]) => boolean;
+  userProfile: any;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -104,7 +107,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const signUp = async (email: string, password: string, fullName?: string) => {
+  const signUp = async (email: string, password: string, fullName?: string, role?: string) => {
     try {
       const redirectUrl = `${window.location.origin}/`;
       
@@ -115,6 +118,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           emailRedirectTo: redirectUrl,
           data: {
             full_name: fullName,
+            role: role || 'operator',
           },
         },
       });
@@ -166,7 +170,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const isAdmin = userProfile?.role === 'admin' || userProfile?.role === 'seller' || userProfile?.role === 'operator';
+  const isAdmin = userProfile?.role === 'ceo';
+  const hasRole = (role: string) => userProfile?.role === role;
+  const canAccessRoute = (requiredRoles: string[]) => userProfile?.role && requiredRoles.includes(userProfile.role);
 
   const value = {
     user,
@@ -176,6 +182,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     signUp,
     signOut,
     isAdmin,
+    hasRole,
+    canAccessRoute,
+    userProfile,
   };
 
   return (
