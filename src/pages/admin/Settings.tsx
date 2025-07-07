@@ -1,8 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Building, Settings as SettingsIcon, Shield } from 'lucide-react';
+import { Building, Settings as SettingsIcon, Shield, FileText } from 'lucide-react';
 import { CompanySettings } from '@/components/admin/settings/CompanySettings';
 import { SystemSettings } from '@/components/admin/settings/SystemSettings';
 import { SecuritySettings } from '@/components/admin/settings/SecuritySettings';
+import { FiscalSettings } from '@/components/admin/settings/FiscalSettings';
 import { useSettings } from '@/hooks/useSettings';
 
 export default function Settings() {
@@ -28,7 +29,7 @@ export default function Settings() {
       </div>
 
       <Tabs defaultValue="company" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="company" className="flex items-center justify-center space-x-1 md:space-x-2">
             <Building className="h-4 w-4" />
             <span className="text-xs md:text-sm">Empresa</span>
@@ -36,6 +37,10 @@ export default function Settings() {
           <TabsTrigger value="system" className="flex items-center justify-center space-x-1 md:space-x-2">
             <SettingsIcon className="h-4 w-4" />
             <span className="text-xs md:text-sm">Sistema</span>
+          </TabsTrigger>
+          <TabsTrigger value="fiscal" className="flex items-center justify-center space-x-1 md:space-x-2">
+            <FileText className="h-4 w-4" />
+            <span className="text-xs md:text-sm">Fiscal</span>
           </TabsTrigger>
           <TabsTrigger value="security" className="flex items-center justify-center space-x-1 md:space-x-2">
             <Shield className="h-4 w-4" />
@@ -60,6 +65,10 @@ export default function Settings() {
             onToggleSetting={toggleSetting}
             saving={saving}
           />
+        </TabsContent>
+
+        <TabsContent value="fiscal">
+          <FiscalSettings />
         </TabsContent>
 
         <TabsContent value="security">
