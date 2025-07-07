@@ -71,14 +71,14 @@ export default function Login() {
           <CardHeader className="text-center">
             <div className="mx-auto mb-4">
               <img 
-                src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
+                src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
                 alt="PRIME ENGENHARIA" 
-                className="h-16 w-auto mx-auto"
+                className="h-24 w-auto mx-auto"
               />
             </div>
-            <CardTitle className="text-2xl">Sistema ERP/CRM</CardTitle>
+            <CardTitle className="text-2xl">Painel Administrativo Prime</CardTitle>
             <CardDescription>
-              Acesse o painel administrativo da PRIME ENGENHARIA
+              Área de Login
             </CardDescription>
           </CardHeader>
           <CardContent>
