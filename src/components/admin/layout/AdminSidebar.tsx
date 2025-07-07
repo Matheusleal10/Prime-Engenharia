@@ -14,7 +14,8 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-  Megaphone
+  Megaphone,
+  BookOpen
 } from "lucide-react";
 
 import {
@@ -87,6 +88,11 @@ const menuItems = [
     title: "Relatórios",
     url: "/admin/reports",
     icon: BarChart3,
+  },
+  {
+    title: "Guia de Uso",
+    url: "/admin/guide",
+    icon: BookOpen,
   },
   {
     title: "Configurações",

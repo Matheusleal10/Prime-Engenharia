@@ -20,6 +20,7 @@ import Inventory from "./pages/admin/Inventory";
 import Financial from "./pages/admin/Financial";
 import Suppliers from "./pages/admin/Suppliers";
 import Reports from "./pages/admin/Reports";
+import Guide from "./pages/admin/Guide";
 import Settings from "./pages/admin/Settings";
 import CustomerPortal from "./pages/CustomerPortal";
 
@@ -52,6 +53,7 @@ const App = () => (
               <Route path="financial" element={<Financial />} />
               <Route path="suppliers" element={<Suppliers />} />
               <Route path="reports" element={<Reports />} />
+              <Route path="guide" element={<Guide />} />
               <Route path="settings" element={<Settings />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
