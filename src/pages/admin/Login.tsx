@@ -68,18 +68,20 @@ export default function Login() {
         </div>
 
         <Card className="w-full">
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4">
+          <CardHeader className="text-center space-y-6">
+            <div className="mx-auto">
               <img 
                 src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
                 alt="PRIME ENGENHARIA" 
                 className="h-40 w-auto mx-auto"
               />
             </div>
-            <CardTitle className="text-2xl">Painel Administrativo Prime</CardTitle>
-            <CardDescription>
-              Área de Login
-            </CardDescription>
+            <div className="space-y-2">
+              <CardTitle className="text-2xl">Painel Administrativo Prime</CardTitle>
+              <CardDescription>
+                Área de Login
+              </CardDescription>
+            </div>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
