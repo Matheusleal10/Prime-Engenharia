@@ -68,7 +68,7 @@ export default function Login() {
         </div>
 
         <Card className="w-full">
-          <CardHeader className="text-center space-y-3">
+          <CardHeader className="text-center space-y-1">
             <div className="mx-auto">
               <img 
                 src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
