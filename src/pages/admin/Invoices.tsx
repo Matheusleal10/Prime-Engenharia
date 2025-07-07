@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Eye, Edit, FileText, Download } from 'lucide-react';
+import { Plus, Search, Eye, Edit, FileText, Download, File, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { InvoiceDialog } from '@/components/admin/InvoiceDialog';
 import { DeleteDialog } from '@/components/admin/DeleteDialog';
@@ -126,9 +126,23 @@ export default function Invoices() {
     setEditingInvoice(null);
   };
 
-  const handleGeneratePDF = async (invoiceId: string) => {
+  const handleDownloadPDF = async (invoiceId: string) => {
     toast({
-      title: "Gerando PDF",
+      title: "Baixando PDF",
+      description: "Esta funcionalidade será implementada em breve."
+    });
+  };
+
+  const handleDownloadXML = async (invoiceId: string) => {
+    toast({
+      title: "Baixando XML",
+      description: "Esta funcionalidade será implementada em breve."
+    });
+  };
+
+  const handleExportExcel = async (invoiceId: string) => {
+    toast({
+      title: "Exportando para Excel",
       description: "Esta funcionalidade será implementada em breve."
     });
   };
@@ -204,8 +218,17 @@ export default function Invoices() {
                           <Button variant="ghost" size="sm" onClick={() => handleEdit(invoice)}>
                             <Edit className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleGeneratePDF(invoice.id)}>
+                          <Button variant="ghost" size="sm" onClick={() => handleDownloadPDF(invoice.id)}>
                             <Download className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleDownloadXML(invoice.id)}>
+                            <File className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleExportExcel(invoice.id)}>
+                            <FileText className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleDelete(invoice)}>
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </TableCell>
