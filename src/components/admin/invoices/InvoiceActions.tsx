@@ -22,6 +22,7 @@ interface Invoice {
 
 interface InvoiceActionsProps {
   invoice: Invoice;
+  onView: (invoice: Invoice) => void;
   onEdit: (invoice: Invoice) => void;
   onDelete: (invoice: Invoice) => void;
   onDownloadPDF: (invoiceId: string) => void;
@@ -31,6 +32,7 @@ interface InvoiceActionsProps {
 
 export function InvoiceActions({ 
   invoice, 
+  onView,
   onEdit, 
   onDelete, 
   onDownloadPDF, 
@@ -39,7 +41,7 @@ export function InvoiceActions({
 }: InvoiceActionsProps) {
   return (
     <div className="flex items-center justify-end space-x-1">
-      <Button variant="ghost" size="sm">
+      <Button variant="ghost" size="sm" onClick={() => onView(invoice)}>
         <Eye className="h-4 w-4" />
       </Button>
       <Button variant="ghost" size="sm" onClick={() => onEdit(invoice)}>

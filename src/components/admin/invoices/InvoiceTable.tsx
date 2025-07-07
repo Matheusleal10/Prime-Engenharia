@@ -24,6 +24,7 @@ interface Invoice {
 interface InvoiceTableProps {
   invoices: Invoice[];
   loading: boolean;
+  onView: (invoice: Invoice) => void;
   onEdit: (invoice: Invoice) => void;
   onDelete: (invoice: Invoice) => void;
   onDownloadPDF: (invoiceId: string) => void;
@@ -34,6 +35,7 @@ interface InvoiceTableProps {
 export function InvoiceTable({ 
   invoices, 
   loading, 
+  onView,
   onEdit, 
   onDelete, 
   onDownloadPDF, 
@@ -109,6 +111,7 @@ export function InvoiceTable({
               <TableCell className="text-right">
                 <InvoiceActions
                   invoice={invoice}
+                  onView={onView}
                   onEdit={onEdit}
                   onDelete={onDelete}
                   onDownloadPDF={onDownloadPDF}

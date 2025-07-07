@@ -6,6 +6,7 @@ import { Plus, Search } from 'lucide-react';
 import { InvoiceDialog } from '@/components/admin/InvoiceDialog';
 import { DeleteDialog } from '@/components/admin/DeleteDialog';
 import { InvoiceTable } from '@/components/admin/invoices/InvoiceTable';
+import { InvoiceViewDialog } from '@/components/admin/invoices/InvoiceViewDialog';
 import { useInvoices } from '@/hooks/useInvoices';
 
 interface Invoice {
@@ -17,6 +18,10 @@ interface Invoice {
   due_date: string;
   status: string;
   total_amount: number;
+  subtotal: number;
+  tax_amount: number;
+  discount_amount: number;
+  notes?: string;
   created_at: string;
   customers: {
     name: string;
@@ -25,6 +30,14 @@ interface Invoice {
   orders?: {
     order_number: string;
   };
+  invoice_items?: Array<{
+    description: string;
+    quantity: number;
+    unit_price: number;
+    discount: number;
+    tax_rate: number;
+    subtotal: number;
+  }>;
 }
 
 export default function Invoices() {
@@ -42,6 +55,8 @@ export default function Invoices() {
   const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletingInvoice, setDeletingInvoice] = useState<Invoice | null>(null);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
+  const [viewingInvoice, setViewingInvoice] = useState<Invoice | null>(null);
 
   const filteredInvoices = invoices.filter(invoice =>
     invoice.invoice_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -57,6 +72,11 @@ export default function Invoices() {
   const handleDelete = (invoice: Invoice) => {
     setDeletingInvoice(invoice);
     setDeleteDialogOpen(true);
+  };
+
+  const handleView = (invoice: Invoice) => {
+    setViewingInvoice(invoice);
+    setViewDialogOpen(true);
   };
 
   const handleDialogSuccess = () => {
@@ -99,6 +119,7 @@ export default function Invoices() {
           <InvoiceTable
             invoices={filteredInvoices}
             loading={loading}
+            onView={handleView}
             onEdit={handleEdit}
             onDelete={handleDelete}
             onDownloadPDF={handleDownloadPDF}
@@ -123,6 +144,12 @@ export default function Invoices() {
         itemName={deletingInvoice?.invoice_number || ''}
         tableName="invoices"
         itemType="Nota Fiscal"
+      />
+
+      <InvoiceViewDialog
+        open={viewDialogOpen}
+        onOpenChange={setViewDialogOpen}
+        invoice={viewingInvoice}
       />
     </div>
   );
