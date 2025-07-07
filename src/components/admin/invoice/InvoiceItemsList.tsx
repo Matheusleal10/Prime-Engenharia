@@ -41,9 +41,7 @@ export function InvoiceItemsList({ items, products, updateItem, addItem, removeI
                 }}
               >
                 <SelectTrigger className="h-8">
-                  <SelectValue placeholder="Produto">
-                    {item.product_id ? products.find(p => p.id === item.product_id)?.name : "Produto"}
-                  </SelectValue>
+                  <SelectValue placeholder="Produto" />
                 </SelectTrigger>
                 <SelectContent>
                   {products.map((product) => (
