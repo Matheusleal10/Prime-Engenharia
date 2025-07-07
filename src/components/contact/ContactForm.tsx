@@ -103,7 +103,7 @@ const ContactForm = () => {
           disabled={isSubmitting}
           className="w-full bg-prime-green hover:bg-prime-green-light text-white py-3 text-lg font-semibold"
         >
-          {isSubmitting ? "Enviando..." : "Solicitar Orçamento"}
+          {isSubmitting ? "Enviando..." : "Enviar via WhatsApp"}
         </Button>
       </form>
 

@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import emailjs from '@emailjs/browser';
 import { contactFormSchema, ContactFormData } from './contactFormSchema';
 
 export const useContactForm = () => {
@@ -13,6 +12,30 @@ export const useContactForm = () => {
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
+
+  const formatWhatsAppMessage = (data: ContactFormData) => {
+    const projectTypeText = data.projectType === 'residential' ? 'Residencial' : 'Comercial';
+    const date = new Date().toLocaleString('pt-BR');
+    
+    return `🏗️ *Nova Solicitação de Orçamento - Prime Engenharia*
+
+📋 *Dados do Cliente:*
+👤 Nome: ${data.name}
+📧 Email: ${data.email}
+📱 Telefone: ${data.phone}
+
+🏢 *Detalhes do Projeto:*
+🏠 Tipo de Obra: ${projectTypeText}
+🧱 Quantidade Estimada: ${data.quantity}
+
+💬 *Mensagem:*
+${data.message}
+
+⏰ *Data da Solicitação:* ${date}
+
+---
+*Solicitação enviada através do site da Prime Engenharia*`;
+  };
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -34,35 +57,17 @@ export const useContactForm = () => {
         throw error;
       }
 
-      // 2. Enviar emails via EmailJS + Gmail
-      try {
-        const templateParams = {
-          from_name: data.name,
-          from_email: data.email,
-          phone: data.phone,
-          project_type: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
-          quantity: data.quantity,
-          message: data.message,
-          date: new Date().toLocaleString('pt-BR'),
-          to_email: 'faleconosco@primeeng.com.br',
-        };
-
-        await emailjs.send(
-          'service_zmcuo68', // Service ID do EmailJS
-          'template_v5cw98k', // Template ID do EmailJS
-          templateParams,
-          'aTYdCtniLrHdldjd5' // Public Key do EmailJS
-        );
-
-        console.log('Email enviado com sucesso via EmailJS + Gmail');
-      } catch (emailError) {
-        console.error('EmailJS failed:', emailError);
-        // Continua mesmo se email falhar
-      }
+      // 2. Redirecionar para WhatsApp com mensagem formatada
+      const whatsappMessage = formatWhatsAppMessage(data);
+      const whatsappNumber = '5598970261392'; // Seu número sem símbolos
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Abrir WhatsApp em nova aba
+      window.open(whatsappUrl, '_blank');
 
       toast({
-        title: "Orçamento solicitado com sucesso! ✅",
-        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h no seu email!",
+        title: "Solicitação enviada! ✅",
+        description: "Você será redirecionado para o WhatsApp para continuar a conversa!",
       });
 
       form.reset();
