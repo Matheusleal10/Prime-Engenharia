@@ -272,23 +272,25 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="category">Categoria</Label>
-              <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="estruturas-metalicas">Estruturas Metálicas</SelectItem>
-                  <SelectItem value="blocos-tijolos">Blocos e Tijolos</SelectItem>
-                  <SelectItem value="soldas-eletrodos">Soldas e Eletrodos</SelectItem>
-                  <SelectItem value="parafusos-fixacao">Parafusos e Fixação</SelectItem>
-                  <SelectItem value="tintas-acabamentos">Tintas e Acabamentos</SelectItem>
-                  <SelectItem value="ferramentas-manuais">Ferramentas Manuais</SelectItem>
-                  <SelectItem value="ferramentas-eletricas">Ferramentas Elétricas</SelectItem>
-                  <SelectItem value="materiais-construcao">Materiais de Construção</SelectItem>
-                  <SelectItem value="equipamentos-seguranca">Equipamentos de Segurança</SelectItem>
-                  <SelectItem value="outros">Outros</SelectItem>
-                </SelectContent>
-              </Select>
+              <Input
+                id="category"
+                value={formData.category}
+                onChange={(e) => handleInputChange('category', e.target.value)}
+                placeholder="Digite ou selecione uma categoria"
+                list="categories-datalist"
+              />
+              <datalist id="categories-datalist">
+                <option value="estruturas-metalicas">Estruturas Metálicas</option>
+                <option value="blocos-tijolos">Blocos e Tijolos</option>
+                <option value="soldas-eletrodos">Soldas e Eletrodos</option>
+                <option value="parafusos-fixacao">Parafusos e Fixação</option>
+                <option value="tintas-acabamentos">Tintas e Acabamentos</option>
+                <option value="ferramentas-manuais">Ferramentas Manuais</option>
+                <option value="ferramentas-eletricas">Ferramentas Elétricas</option>
+                <option value="materiais-construcao">Materiais de Construção</option>
+                <option value="equipamentos-seguranca">Equipamentos de Segurança</option>
+                <option value="outros">Outros</option>
+              </datalist>
             </div>
             <div className="space-y-2">
               <Label htmlFor="unit">Unidade</Label>
