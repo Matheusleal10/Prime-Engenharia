@@ -448,7 +448,9 @@ export function InvoiceDialog({ open, onOpenChange, onSuccess, editInvoice }: In
                       }}
                     >
                       <SelectTrigger className="h-8">
-                        <SelectValue placeholder="Produto" />
+                        <SelectValue placeholder="Produto">
+                          {item.product_id ? products.find(p => p.id === item.product_id)?.name : "Produto"}
+                        </SelectValue>
                       </SelectTrigger>
                       <SelectContent>
                         {products.map((product) => (
