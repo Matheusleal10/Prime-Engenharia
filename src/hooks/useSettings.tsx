@@ -45,6 +45,8 @@ export function useSettings() {
           key,
           value,
           updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'key'
         });
 
       if (error) throw error;
