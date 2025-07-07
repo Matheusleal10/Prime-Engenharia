@@ -9,7 +9,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/bb951720-d4f1-4313-8431-53c3dd61f248.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto mb-4 brightness-0 invert"
+              className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto mb-2 brightness-0 invert"
             />
             <p className="text-gray-300 text-sm leading-relaxed">
               Inovação que Constrói o Futuro
