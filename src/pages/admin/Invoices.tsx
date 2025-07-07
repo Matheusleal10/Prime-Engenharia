@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Eye, Edit, FileText, Download, File, Trash2 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Plus, Search } from 'lucide-react';
 import { InvoiceDialog } from '@/components/admin/InvoiceDialog';
 import { DeleteDialog } from '@/components/admin/DeleteDialog';
+import { InvoiceTable } from '@/components/admin/invoices/InvoiceTable';
+import { useInvoices } from '@/hooks/useInvoices';
 
 interface Invoice {
   id: string;
@@ -30,86 +28,26 @@ interface Invoice {
 }
 
 export default function Invoices() {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { 
+    invoices, 
+    loading, 
+    fetchInvoices, 
+    handleDownloadPDF, 
+    handleDownloadXML, 
+    handleExportExcel 
+  } = useInvoices();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [invoiceDialogOpen, setInvoiceDialogOpen] = useState(false);
   const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletingInvoice, setDeletingInvoice] = useState<Invoice | null>(null);
-  const { toast } = useToast();
-
-  useEffect(() => {
-    fetchInvoices();
-  }, []);
-
-  const fetchInvoices = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('invoices')
-        .select(`
-          *,
-          customers (
-            name,
-            email
-          ),
-          orders (
-            order_number
-          )
-        `)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setInvoices(data || []);
-    } catch (error) {
-      toast({
-        title: "Erro ao carregar notas fiscais",
-        description: "Não foi possível carregar a lista de notas fiscais.",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const filteredInvoices = invoices.filter(invoice =>
     invoice.invoice_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
     invoice.customers?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     invoice.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price);
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR');
-  };
-
-  const getStatusVariant = (status: string) => {
-    switch (status) {
-      case 'draft': return 'secondary';
-      case 'issued': return 'default';
-      case 'sent': return 'outline';
-      case 'paid': return 'default';
-      case 'cancelled': return 'destructive';
-      default: return 'secondary';
-    }
-  };
-
-  const getStatusLabel = (status: string) => {
-    switch (status) {
-      case 'draft': return 'Rascunho';
-      case 'issued': return 'Emitida';
-      case 'sent': return 'Enviada';
-      case 'paid': return 'Paga';
-      case 'cancelled': return 'Cancelada';
-      default: return status;
-    }
-  };
 
   const handleEdit = (invoice: Invoice) => {
     setEditingInvoice(invoice);
@@ -124,27 +62,6 @@ export default function Invoices() {
   const handleDialogSuccess = () => {
     fetchInvoices();
     setEditingInvoice(null);
-  };
-
-  const handleDownloadPDF = async (invoiceId: string) => {
-    toast({
-      title: "Baixando PDF",
-      description: "Esta funcionalidade será implementada em breve."
-    });
-  };
-
-  const handleDownloadXML = async (invoiceId: string) => {
-    toast({
-      title: "Baixando XML",
-      description: "Esta funcionalidade será implementada em breve."
-    });
-  };
-
-  const handleExportExcel = async (invoiceId: string) => {
-    toast({
-      title: "Exportando para Excel",
-      description: "Esta funcionalidade será implementada em breve."
-    });
   };
 
   return (
@@ -179,65 +96,15 @@ export default function Invoices() {
           </div>
         </CardHeader>
         <CardContent className="p-0">
-          {loading ? (
-            <div className="text-center py-8">Carregando notas fiscais...</div>
-          ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Número</TableHead>
-                    <TableHead>Cliente</TableHead>
-                    <TableHead>Pedido</TableHead>
-                    <TableHead>Emissão</TableHead>
-                    <TableHead>Vencimento</TableHead>
-                    <TableHead>Total</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Ações</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredInvoices.map((invoice) => (
-                    <TableRow key={invoice.id}>
-                      <TableCell className="font-medium">{invoice.invoice_number}</TableCell>
-                      <TableCell>{invoice.customers?.name || 'Cliente não informado'}</TableCell>
-                      <TableCell>{invoice.orders?.order_number || '-'}</TableCell>
-                      <TableCell>{formatDate(invoice.issue_date)}</TableCell>
-                      <TableCell>{invoice.due_date ? formatDate(invoice.due_date) : '-'}</TableCell>
-                      <TableCell>{formatPrice(invoice.total_amount)}</TableCell>
-                      <TableCell>
-                        <Badge variant={getStatusVariant(invoice.status)}>
-                          {getStatusLabel(invoice.status)}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex items-center justify-end space-x-1">
-                          <Button variant="ghost" size="sm">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleEdit(invoice)}>
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleDownloadPDF(invoice.id)}>
-                            <Download className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleDownloadXML(invoice.id)}>
-                            <File className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleExportExcel(invoice.id)}>
-                            <FileText className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => handleDelete(invoice)}>
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          )}
+          <InvoiceTable
+            invoices={filteredInvoices}
+            loading={loading}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onDownloadPDF={handleDownloadPDF}
+            onDownloadXML={handleDownloadXML}
+            onExportExcel={handleExportExcel}
+          />
         </CardContent>
       </Card>
 
