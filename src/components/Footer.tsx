@@ -23,7 +23,6 @@ const Footer = () => {
             <nav className="space-y-2">
               <a href="#sobre" className="block text-gray-300 hover:text-prime-orange transition-colors">Sobre</a>
               <a href="#produtos" className="block text-gray-300 hover:text-prime-orange transition-colors">Produtos</a>
-              <a href="#vantagens" className="block text-gray-300 hover:text-prime-orange transition-colors">Vantagens</a>
               <a href="#como-comprar" className="block text-gray-300 hover:text-prime-orange transition-colors">Como Comprar</a>
               <a href="#contato" className="block text-gray-300 hover:text-prime-orange transition-colors">Contato</a>
             </nav>

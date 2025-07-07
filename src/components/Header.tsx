@@ -37,9 +37,6 @@ const Header = () => {
             <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
               Produtos
             </a>
-            <a href="#vantagens" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
-              Vantagens
-            </a>
             <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
               Como Comprar
             </a>
@@ -76,9 +73,6 @@ const Header = () => {
               </a>
               <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
                 Produtos
-              </a>
-              <a href="#vantagens" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
-                Vantagens
               </a>
               <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
                 Como Comprar
