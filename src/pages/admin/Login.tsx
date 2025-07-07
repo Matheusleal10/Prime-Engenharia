@@ -73,7 +73,7 @@ export default function Login() {
               <img 
                 src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
                 alt="PRIME ENGENHARIA" 
-                className="h-24 w-auto mx-auto"
+                className="h-40 w-auto mx-auto"
               />
             </div>
             <CardTitle className="text-2xl">Painel Administrativo Prime</CardTitle>
