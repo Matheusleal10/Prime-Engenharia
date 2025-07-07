@@ -56,31 +56,36 @@ const ContactForm = () => {
         throw error;
       }
 
-      // 2. Enviar emails de notificação
+      // 2. Enviar notificação via Zapier
       try {
-        const { error: emailError } = await supabase.functions.invoke('send-lead-emails', {
-          body: {
-            name: data.name,
+        // Substitua pela URL do seu webhook do Zapier
+        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_KEY/';
+        
+        await fetch(zapierWebhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "no-cors",
+          body: JSON.stringify({
+            nome: data.name,
             email: data.email,
-            phone: data.phone,
-            projectType: data.projectType,
-            quantity: data.quantity,
-            message: data.message
-          }
+            telefone: data.phone,
+            tipoObra: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
+            quantidade: data.quantity,
+            mensagem: data.message,
+            dataHora: new Date().toLocaleString('pt-BR'),
+            origem: 'Site PRIME ENGENHARIA'
+          }),
         });
-
-        if (emailError) {
-          console.error('Error sending emails:', emailError);
-          // Não falha o processo principal se email falhar
-        }
-      } catch (emailError) {
-        console.error('Email sending failed:', emailError);
-        // Continua mesmo se email falhar
+      } catch (zapierError) {
+        console.error('Zapier webhook failed:', zapierError);
+        // Continua mesmo se Zapier falhar
       }
 
       toast({
         title: "Orçamento solicitado com sucesso! ✅",
-        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h. Verifique seu email!",
+        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h!",
       });
 
       reset();
