@@ -1,107 +1,12 @@
-
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import emailjs from '@emailjs/browser';
-
-const formSchema = z.object({
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("Email inválido"),
-  phone: z.string().min(10, "Telefone deve ter pelo menos 10 dígitos"),
-  projectType: z.enum(["residential", "commercial"], {
-    required_error: "Selecione o tipo de obra",
-  }),
-  quantity: z.string().min(1, "Informe a quantidade estimada"),
-  message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
-});
-
-type FormData = z.infer<typeof formSchema>;
+import { useContactForm } from './useContactForm';
 
 const ContactForm = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
-
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    
-    try {
-      // 1. Salvar lead no Supabase
-      const { error } = await supabase
-        .from('leads')
-        .insert({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          project_type: data.projectType,
-          quantity: data.quantity,
-          message: data.message
-        });
-
-      if (error) {
-        throw error;
-      }
-
-      // 2. Enviar emails via EmailJS + Titan
-      try {
-        const templateParams = {
-          from_name: data.name,
-          from_email: data.email,
-          phone: data.phone,
-          project_type: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
-          quantity: data.quantity,
-          message: data.message,
-          date: new Date().toLocaleString('pt-BR'),
-          to_email: 'faleconosco@primeeng.com.br', // Seu email corporativo Titan
-        };
-
-        // Configurar suas credenciais do EmailJS aqui
-        // SERVICE_ID, TEMPLATE_ID e PUBLIC_KEY vêm do painel do EmailJS
-        await emailjs.send(
-          'service_zmcuo68', // Service ID do EmailJS
-          'template_v5cw98k', // Template ID do EmailJS
-          templateParams,
-          'aTYdCtniLrHdldjd5' // Public Key do EmailJS
-        );
-
-        console.log('Email enviado com sucesso via EmailJS + Titan');
-      } catch (emailError) {
-        console.error('EmailJS failed:', emailError);
-        // Continua mesmo se email falhar
-      }
-
-      toast({
-        title: "Orçamento solicitado com sucesso! ✅",
-        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h no seu email!",
-      });
-
-      reset();
-    } catch (error) {
-      console.error('Error saving lead:', error);
-      toast({
-        title: "Erro ao enviar solicitação",
-        description: "Tente novamente ou entre em contato pelo WhatsApp.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { form, isSubmitting, onSubmit } = useContactForm();
+  const { register, formState: { errors } } = form;
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-lg">
@@ -109,7 +14,7 @@ const ContactForm = () => {
         Solicite seu Orçamento
       </h3>
       
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={onSubmit} className="space-y-4">
         <div>
           <Label htmlFor="name">Nome Completo *</Label>
           <Input
