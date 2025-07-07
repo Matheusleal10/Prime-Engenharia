@@ -20,18 +20,19 @@ export function AdminHeader() {
   };
 
   return (
-    <header className="border-b bg-background px-6 py-3">
+    <header className="border-b bg-background px-3 md:px-6 py-3">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <SidebarTrigger />
-          <h1 className="text-xl font-semibold">SISTEMA PRIME</h1>
+          <h1 className="text-lg md:text-xl font-semibold truncate">SISTEMA PRIME</h1>
         </div>
         
-        <div className="flex items-center space-x-4">
-          <Button variant="outline" size="sm" asChild>
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <Button variant="outline" size="sm" asChild className="hidden sm:flex">
             <Link to="/">
               <Home className="h-4 w-4 mr-2" />
-              Site Principal
+              <span className="hidden md:inline">Site Principal</span>
+              <span className="md:hidden">Site</span>
             </Link>
           </Button>
 
@@ -39,12 +40,18 @@ export function AdminHeader() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="flex items-center space-x-2">
                 <User className="h-4 w-4" />
-                <span>{user?.email}</span>
+                <span className="hidden sm:inline truncate max-w-32">{user?.email}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="sm:hidden">
+                <Link to="/">
+                  <Home className="h-4 w-4 mr-2" />
+                  Site Principal
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={handleSignOut}>
                 <LogOut className="h-4 w-4 mr-2" />
                 Sair

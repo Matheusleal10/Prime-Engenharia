@@ -24,8 +24,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const menuItems = [
   {
@@ -79,6 +81,8 @@ const menuItems = [
 export function AdminSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
+  const { setOpenMobile } = useSidebar();
 
   const isActive = (path: string, end?: boolean) => {
     if (end) {
@@ -92,13 +96,19 @@ export function AdminSidebar() {
       ? "bg-primary text-primary-foreground hover:bg-primary/90" 
       : "hover:bg-accent hover:text-accent-foreground";
 
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  };
+
   return (
-    <Sidebar className={collapsed ? "w-14" : "w-64"}>
+    <Sidebar className={collapsed && !isMobile ? "w-14" : "w-64"}>
       <SidebarContent>
         {/* Logo & Toggle */}
         <div className="p-4 border-b">
           <div className="flex items-center justify-between">
-            {!collapsed ? (
+            {(!collapsed || isMobile) ? (
               <div className="flex items-center">
                 <span className="font-bold text-lg">PRIME ERP</span>
               </div>
@@ -107,19 +117,21 @@ export function AdminSidebar() {
                 <span className="font-bold text-sm">PE</span>
               </div>
             )}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setCollapsed(!collapsed)}
-              className="h-8 w-8 p-0"
-            >
-              {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-            </Button>
+            {!isMobile && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setCollapsed(!collapsed)}
+                className="h-8 w-8 p-0"
+              >
+                {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+              </Button>
+            )}
           </div>
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel>{!collapsed && "Navegação"}</SidebarGroupLabel>
+          <SidebarGroupLabel>{(!collapsed || isMobile) && "Navegação"}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -128,10 +140,11 @@ export function AdminSidebar() {
                     <NavLink 
                       to={item.url} 
                       end={item.end}
+                      onClick={handleNavClick}
                       className={({ isActive }) => getNavClasses(isActive)}
                     >
                       <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                      {(!collapsed || isMobile) && <span className="text-sm">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -144,25 +144,25 @@ export default function Settings() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Configurações</h1>
-        <p className="text-muted-foreground">Gerencie as configurações do sistema</p>
+    <div className="space-y-4 md:space-y-6 max-w-full">
+      <div className="space-y-1">
+        <h1 className="text-2xl md:text-3xl font-bold">Configurações</h1>
+        <p className="text-sm md:text-base text-muted-foreground">Gerencie as configurações do sistema</p>
       </div>
 
       <Tabs defaultValue="company" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="company">
-            <Building className="h-4 w-4 mr-2" />
-            Empresa
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="company" className="flex items-center justify-center space-x-1 md:space-x-2">
+            <Building className="h-4 w-4" />
+            <span className="text-xs md:text-sm">Empresa</span>
           </TabsTrigger>
-          <TabsTrigger value="system">
-            <SettingsIcon className="h-4 w-4 mr-2" />
-            Sistema
+          <TabsTrigger value="system" className="flex items-center justify-center space-x-1 md:space-x-2">
+            <SettingsIcon className="h-4 w-4" />
+            <span className="text-xs md:text-sm">Sistema</span>
           </TabsTrigger>
-          <TabsTrigger value="security">
-            <Shield className="h-4 w-4 mr-2" />
-            Segurança
+          <TabsTrigger value="security" className="flex items-center justify-center space-x-1 md:space-x-2">
+            <Shield className="h-4 w-4" />
+            <span className="text-xs md:text-sm">Segurança</span>
           </TabsTrigger>
         </TabsList>
 
@@ -174,8 +174,8 @@ export default function Settings() {
                 Configure os dados básicos da sua empresa
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="space-y-4 p-4 md:p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="company_name">Nome da Empresa</Label>
                   <Input
@@ -224,7 +224,7 @@ export default function Settings() {
                   rows={3}
                 />
               </div>
-              <Button onClick={handleSaveCompany} disabled={saving}>
+              <Button onClick={handleSaveCompany} disabled={saving} className="w-full sm:w-auto">
                 <Save className="h-4 w-4 mr-2" />
                 {saving ? 'Salvando...' : 'Salvar Informações'}
               </Button>
@@ -241,8 +241,8 @@ export default function Settings() {
                   Configure as preferências do sistema
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <CardContent className="space-y-4 p-4 md:p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="default_currency">Moeda Padrão</Label>
                     <Input
@@ -282,7 +282,7 @@ export default function Settings() {
                     />
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 lg:col-span-2">
                   <Label htmlFor="notification_email">Email para Notificações</Label>
                   <Input
                     id="notification_email"
@@ -292,10 +292,12 @@ export default function Settings() {
                     placeholder="notificacoes@empresa.com"
                   />
                 </div>
-                <Button onClick={handleSaveSystem} disabled={saving}>
-                  <Save className="h-4 w-4 mr-2" />
-                  {saving ? 'Salvando...' : 'Salvar Configurações'}
-                </Button>
+                <div className="lg:col-span-2">
+                  <Button onClick={handleSaveSystem} disabled={saving} className="w-full sm:w-auto">
+                    <Save className="h-4 w-4 mr-2" />
+                    {saving ? 'Salvando...' : 'Salvar Configurações'}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
@@ -344,31 +346,31 @@ export default function Settings() {
                 Monitore e configure a segurança do sistema
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="rounded-lg border p-4">
-                  <h4 className="font-medium">Sistema de Auditoria</h4>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    O sistema está registrando todas as ações importantes para auditoria e rastreabilidade.
-                  </p>
-                  <p className="text-sm text-green-600 mt-2">✓ Ativo</p>
+              <CardContent className="p-4 md:p-6">
+                <div className="space-y-4">
+                  <div className="rounded-lg border p-3 md:p-4">
+                    <h4 className="font-medium text-sm md:text-base">Sistema de Auditoria</h4>
+                    <p className="text-xs md:text-sm text-muted-foreground mt-1">
+                      O sistema está registrando todas as ações importantes para auditoria e rastreabilidade.
+                    </p>
+                    <p className="text-xs md:text-sm text-green-600 mt-2">✓ Ativo</p>
+                  </div>
+                  <div className="rounded-lg border p-3 md:p-4">
+                    <h4 className="font-medium text-sm md:text-base">Validação de Estoque</h4>
+                    <p className="text-xs md:text-sm text-muted-foreground mt-1">
+                      O sistema está validando automaticamente os níveis de estoque antes das movimentações.
+                    </p>
+                    <p className="text-xs md:text-sm text-green-600 mt-2">✓ Ativo</p>
+                  </div>
+                  <div className="rounded-lg border p-3 md:p-4">
+                    <h4 className="font-medium text-sm md:text-base">Controle de Acesso</h4>
+                    <p className="text-xs md:text-sm text-muted-foreground mt-1">
+                      Row Level Security (RLS) está ativo para proteger os dados do sistema.
+                    </p>
+                    <p className="text-xs md:text-sm text-green-600 mt-2">✓ Ativo</p>
+                  </div>
                 </div>
-                <div className="rounded-lg border p-4">
-                  <h4 className="font-medium">Validação de Estoque</h4>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    O sistema está validando automaticamente os níveis de estoque antes das movimentações.
-                  </p>
-                  <p className="text-sm text-green-600 mt-2">✓ Ativo</p>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <h4 className="font-medium">Controle de Acesso</h4>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Row Level Security (RLS) está ativo para proteger os dados do sistema.
-                  </p>
-                  <p className="text-sm text-green-600 mt-2">✓ Ativo</p>
-                </div>
-              </div>
-            </CardContent>
+              </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
