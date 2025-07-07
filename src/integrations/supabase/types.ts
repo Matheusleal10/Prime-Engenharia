@@ -974,6 +974,14 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      generate_sku: {
+        Args: { product_category: string }
+        Returns: string
+      }
+      validate_sku_uniqueness: {
+        Args: { sku_code: string; product_id?: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

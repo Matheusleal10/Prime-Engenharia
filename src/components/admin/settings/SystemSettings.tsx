@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { Separator } from '@/components/ui/separator';
 import { Save } from 'lucide-react';
 
 interface SystemSettingsProps {
@@ -119,6 +120,19 @@ export function SystemSettings({ settings, onSettingsChange, onSave, onToggleSet
             <Switch
               checked={settings.order_auto_numbering === 'true'}
               onCheckedChange={(checked) => onToggleSetting('order_auto_numbering', checked)}
+            />
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label>Geração Automática de SKU</Label>
+              <p className="text-sm text-muted-foreground">
+                Gerar códigos SKU automaticamente para novos produtos
+              </p>
+            </div>
+            <Switch
+              checked={settings.sku_auto_generate === 'true'}
+              onCheckedChange={(checked) => onToggleSetting('sku_auto_generate', checked)}
             />
           </div>
         </CardContent>

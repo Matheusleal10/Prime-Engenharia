@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { useSKU } from '@/hooks/useSKU';
+import { RefreshCw } from 'lucide-react';
 
 interface ProductFormData {
   name: string;
@@ -35,7 +37,10 @@ interface ProductDialogProps {
 
 export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: ProductDialogProps) {
   const { toast } = useToast();
+  const { generateSKU, validateSKU, getSKUSettings, loading: skuLoading } = useSKU();
   const [loading, setLoading] = useState(false);
+  const [skuError, setSkuError] = useState('');
+  const [autoGenerateSKU, setAutoGenerateSKU] = useState(true);
   const [formData, setFormData] = useState<ProductFormData>({
     name: editProduct?.name || '',
     description: editProduct?.description || '',
@@ -53,8 +58,64 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
     is_featured: editProduct?.is_featured ?? false,
   });
 
+  // Carregar configurações iniciais
+  useEffect(() => {
+    const loadSettings = async () => {
+      const settings = await getSKUSettings();
+      setAutoGenerateSKU(settings.sku_auto_generate === 'true');
+    };
+    loadSettings();
+  }, []);
+
+  // Gerar SKU automaticamente quando categoria mudar (apenas para novos produtos)
+  useEffect(() => {
+    if (!editProduct && autoGenerateSKU && formData.category && !formData.sku) {
+      handleGenerateSKU();
+    }
+  }, [formData.category, autoGenerateSKU]);
+
   const handleInputChange = (field: keyof ProductFormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Validar SKU em tempo real
+    if (field === 'sku' && typeof value === 'string') {
+      validateSKUField(value);
+    }
+  };
+
+  const validateSKUField = async (sku: string) => {
+    if (!sku.trim()) {
+      setSkuError('');
+      return;
+    }
+
+    const isValid = await validateSKU(sku, editProduct?.id);
+    if (!isValid) {
+      setSkuError('Este SKU já está em uso por outro produto');
+    } else {
+      setSkuError('');
+    }
+  };
+
+  const handleGenerateSKU = async () => {
+    if (!formData.category) {
+      toast({
+        title: "Selecione uma categoria",
+        description: "É necessário selecionar uma categoria para gerar o SKU.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const newSKU = await generateSKU(formData.category);
+    if (newSKU) {
+      setFormData(prev => ({ ...prev, sku: newSKU }));
+      setSkuError('');
+      toast({
+        title: "SKU gerado",
+        description: `Novo SKU: ${newSKU}`,
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,6 +127,19 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
         variant: "destructive"
       });
       return;
+    }
+
+    // Validar SKU se fornecido
+    if (formData.sku && formData.sku.trim()) {
+      const isSkuValid = await validateSKU(formData.sku, editProduct?.id);
+      if (!isSkuValid) {
+        toast({
+          title: "SKU inválido",
+          description: "Este SKU já está em uso por outro produto.",
+          variant: "destructive"
+        });
+        return;
+      }
     }
 
     setLoading(true);
@@ -141,13 +215,35 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="sku">SKU</Label>
+              <Label htmlFor="sku" className="flex items-center justify-between">
+                SKU
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleGenerateSKU}
+                  disabled={skuLoading || !formData.category}
+                  className="h-6 text-xs"
+                >
+                  <RefreshCw className={`h-3 w-3 mr-1 ${skuLoading ? 'animate-spin' : ''}`} />
+                  Gerar
+                </Button>
+              </Label>
               <Input
                 id="sku"
                 value={formData.sku}
                 onChange={(e) => handleInputChange('sku', e.target.value)}
-                placeholder="Código SKU"
+                placeholder="Código SKU será gerado automaticamente"
+                className={skuError ? 'border-destructive' : ''}
               />
+              {skuError && (
+                <p className="text-sm text-destructive">{skuError}</p>
+              )}
+              {autoGenerateSKU && !editProduct && (
+                <p className="text-xs text-muted-foreground">
+                  SKU será gerado automaticamente baseado na categoria
+                </p>
+              )}
             </div>
           </div>
 
