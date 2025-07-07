@@ -7,6 +7,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { ProductDialog } from '@/components/admin/ProductDialog';
+import { DeleteDialog } from '@/components/admin/DeleteDialog';
 
 interface Product {
   id: string;
@@ -23,6 +25,10 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [productDialogOpen, setProductDialogOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -62,6 +68,21 @@ export default function Products() {
     }).format(price);
   };
 
+  const handleEdit = (product: Product) => {
+    setEditingProduct(product);
+    setProductDialogOpen(true);
+  };
+
+  const handleDelete = (product: Product) => {
+    setDeletingProduct(product);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDialogSuccess = () => {
+    fetchProducts();
+    setEditingProduct(null);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -69,7 +90,7 @@ export default function Products() {
           <h1 className="text-3xl font-bold">Produtos</h1>
           <p className="text-muted-foreground">Gerencie o catálogo de produtos</p>
         </div>
-        <Button>
+        <Button onClick={() => setProductDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Produto
         </Button>
@@ -124,10 +145,10 @@ export default function Products() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end space-x-2">
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(product)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleDelete(product)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -139,6 +160,23 @@ export default function Products() {
           )}
         </CardContent>
       </Card>
+
+      <ProductDialog
+        open={productDialogOpen}
+        onOpenChange={setProductDialogOpen}
+        onSuccess={handleDialogSuccess}
+        editProduct={editingProduct}
+      />
+
+      <DeleteDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onSuccess={fetchProducts}
+        itemId={deletingProduct?.id || ''}
+        itemName={deletingProduct?.name || ''}
+        tableName="products"
+        itemType="Produto"
+      />
     </div>
   );
 }

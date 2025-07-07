@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, TrendingUp, TrendingDown, DollarSign } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { TransactionDialog } from '@/components/admin/TransactionDialog';
 
 interface FinancialTransaction {
   id: string;
@@ -26,13 +27,46 @@ interface FinancialTransaction {
 
 export default function Financial() {
   const [transactions, setTransactions] = useState<FinancialTransaction[]>([]);
+  const [customers, setCustomers] = useState<Array<{ id: string; name: string; }>>([]);
+  const [suppliers, setSuppliers] = useState<Array<{ id: string; name: string; }>>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [transactionDialogOpen, setTransactionDialogOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchTransactions();
+    fetchCustomers();
+    fetchSuppliers();
   }, []);
+
+  const fetchCustomers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('customers')
+        .select('id, name')
+        .eq('status', 'active');
+      
+      if (error) throw error;
+      setCustomers(data || []);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+    }
+  };
+
+  const fetchSuppliers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('suppliers')
+        .select('id, name')
+        .eq('status', 'active');
+      
+      if (error) throw error;
+      setSuppliers(data || []);
+    } catch (error) {
+      console.error('Error fetching suppliers:', error);
+    }
+  };
 
   const fetchTransactions = async () => {
     try {
@@ -117,7 +151,7 @@ export default function Financial() {
           <h1 className="text-3xl font-bold">Financeiro</h1>
           <p className="text-muted-foreground">Controle de receitas, despesas e fluxo de caixa</p>
         </div>
-        <Button>
+        <Button onClick={() => setTransactionDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Nova Transação
         </Button>
@@ -227,6 +261,14 @@ export default function Financial() {
           )}
         </CardContent>
       </Card>
+
+      <TransactionDialog
+        open={transactionDialogOpen}
+        onOpenChange={setTransactionDialogOpen}
+        onSuccess={fetchTransactions}
+        customers={customers}
+        suppliers={suppliers}
+      />
     </div>
   );
 }

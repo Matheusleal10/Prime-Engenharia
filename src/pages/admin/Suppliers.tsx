@@ -7,6 +7,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Edit, Trash2, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { SupplierDialog } from '@/components/admin/SupplierDialog';
+import { DeleteDialog } from '@/components/admin/DeleteDialog';
 
 interface Supplier {
   id: string;
@@ -26,6 +28,10 @@ export default function Suppliers() {
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [supplierDialogOpen, setSupplierDialogOpen] = useState(false);
+  const [editingSupplier, setEditingSupplier] = useState<Supplier | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deletingSupplier, setDeletingSupplier] = useState<Supplier | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -91,6 +97,21 @@ export default function Suppliers() {
     );
   };
 
+  const handleEdit = (supplier: Supplier) => {
+    setEditingSupplier(supplier);
+    setSupplierDialogOpen(true);
+  };
+
+  const handleDelete = (supplier: Supplier) => {
+    setDeletingSupplier(supplier);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDialogSuccess = () => {
+    fetchSuppliers();
+    setEditingSupplier(null);
+  };
+
   const activeSuppliers = suppliers.filter(s => s.status === 'active').length;
 
   return (
@@ -100,7 +121,7 @@ export default function Suppliers() {
           <h1 className="text-3xl font-bold">Fornecedores</h1>
           <p className="text-muted-foreground">Gerencie fornecedores e parceiros comerciais</p>
         </div>
-        <Button>
+        <Button onClick={() => setSupplierDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Fornecedor
         </Button>
@@ -216,10 +237,10 @@ export default function Suppliers() {
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end space-x-2">
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(supplier)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleDelete(supplier)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -231,6 +252,23 @@ export default function Suppliers() {
           )}
         </CardContent>
       </Card>
+
+      <SupplierDialog
+        open={supplierDialogOpen}
+        onOpenChange={setSupplierDialogOpen}
+        onSuccess={handleDialogSuccess}
+        editSupplier={editingSupplier}
+      />
+
+      <DeleteDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onSuccess={fetchSuppliers}
+        itemId={deletingSupplier?.id || ''}
+        itemName={deletingSupplier?.name || ''}
+        tableName="suppliers"
+        itemType="Fornecedor"
+      />
     </div>
   );
 }

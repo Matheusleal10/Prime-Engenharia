@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Package, AlertTriangle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { InventoryMovementDialog } from '@/components/admin/InventoryMovementDialog';
 
 interface InventoryItem {
   id: string;
@@ -23,6 +24,7 @@ export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [movementDialogOpen, setMovementDialogOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -71,7 +73,7 @@ export default function Inventory() {
           <h1 className="text-3xl font-bold">Estoque</h1>
           <p className="text-muted-foreground">Controle de inventário e movimentações</p>
         </div>
-        <Button>
+        <Button onClick={() => setMovementDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Nova Movimentação
         </Button>
@@ -174,6 +176,13 @@ export default function Inventory() {
           )}
         </CardContent>
       </Card>
+
+      <InventoryMovementDialog
+        open={movementDialogOpen}
+        onOpenChange={setMovementDialogOpen}
+        onSuccess={fetchInventory}
+        products={inventory.map(item => ({ id: item.id, name: item.name }))}
+      />
     </div>
   );
 }

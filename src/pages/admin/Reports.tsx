@@ -148,7 +148,12 @@ export default function Reports() {
               <SelectItem value="365">Último ano</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => {
+            toast({
+              title: "Funcionalidade em desenvolvimento",
+              description: "A exportação de relatórios será implementada em breve.",
+            });
+          }}>
             <Download className="h-4 w-4 mr-2" />
             Exportar
           </Button>
