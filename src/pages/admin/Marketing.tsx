@@ -6,9 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Search, Edit, Trash2, Send, Calendar, Users } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Send, Calendar, Users, BarChart3, Target } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { CampaignDialog } from '@/components/admin/CampaignDialog';
+import { LeadsManagement } from '@/components/admin/LeadsManagement';
+import { LoyaltyManagement } from '@/components/admin/LoyaltyManagement';
+import { MarketingAnalytics } from '@/components/admin/MarketingAnalytics';
 
 interface Campaign {
   id: string;
@@ -205,12 +208,18 @@ export default function Marketing() {
         </Button>
       </div>
 
-      <Tabs defaultValue="campaigns" className="space-y-4">
+      <Tabs defaultValue="leads" className="space-y-4">
         <TabsList>
+          <TabsTrigger value="leads">Gestão de Leads</TabsTrigger>
           <TabsTrigger value="campaigns">Campanhas</TabsTrigger>
           <TabsTrigger value="birthdays">Aniversários</TabsTrigger>
           <TabsTrigger value="loyalty">Loyalty Points</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="leads">
+          <LeadsManagement />
+        </TabsContent>
 
         <TabsContent value="campaigns">
           <Card>
@@ -340,22 +349,11 @@ export default function Marketing() {
         </TabsContent>
 
         <TabsContent value="loyalty">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5" />
-                Sistema de Loyalty Points
-              </CardTitle>
-              <CardDescription>
-                Gerencie pontos e recompensas dos clientes
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8 text-muted-foreground">
-                Funcionalidade em desenvolvimento
-              </div>
-            </CardContent>
-          </Card>
+          <LoyaltyManagement />
+        </TabsContent>
+
+        <TabsContent value="analytics">
+          <MarketingAnalytics />
         </TabsContent>
       </Tabs>
 

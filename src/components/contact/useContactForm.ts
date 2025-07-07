@@ -42,7 +42,7 @@ ${data.message}
     
     try {
       // 1. Salvar lead no Supabase
-      const { error } = await supabase
+      const { data: leadData, error } = await supabase
         .from('leads')
         .insert({
           name: data.name,
@@ -51,13 +51,33 @@ ${data.message}
           project_type: data.projectType,
           quantity: data.quantity,
           message: data.message
-        });
+        })
+        .select()
+        .single();
 
       if (error) {
         throw error;
       }
 
-      // 2. Redirecionar para WhatsApp com mensagem formatada
+      // 2. Enviar notificações por email
+      try {
+        await supabase.functions.invoke('send-lead-notifications', {
+          body: {
+            leadId: leadData.id,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            project_type: data.projectType,
+            quantity: data.quantity,
+            message: data.message
+          }
+        });
+      } catch (emailError) {
+        console.error('Error sending notifications:', emailError);
+        // Continue mesmo se o email falhar
+      }
+
+      // 3. Redirecionar para WhatsApp com mensagem formatada
       const whatsappMessage = formatWhatsAppMessage(data);
       const whatsappNumber = '5598970261392'; // Seu número sem símbolos
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
