@@ -59,13 +59,13 @@ const HowToBuy = () => {
         {/* CTA Button */}
         <div className="text-center">
           <a 
-            href="#contato" 
+            href="#vantagens" 
             className="inline-flex items-center bg-white hover:bg-gray-100 text-prime-green px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-2xl"
           >
             <svg className="mr-3 w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
             </svg>
-            Quero um orçamento agora
+            Ver as Vantagens
           </a>
         </div>
       </div>
