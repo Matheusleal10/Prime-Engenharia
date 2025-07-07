@@ -5,8 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Eye, Edit } from 'lucide-react';
+import { Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { OrderDialog } from '@/components/admin/OrderDialog';
+import { DeleteDialog } from '@/components/admin/DeleteDialog';
 
 interface Order {
   id: string;
@@ -16,6 +18,8 @@ interface Order {
   status: string;
   created_at: string;
   delivery_date: string;
+  delivery_address: string;
+  notes: string;
   customers: {
     name: string;
   };
@@ -25,6 +29,10 @@ export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
+  const [editingOrder, setEditingOrder] = useState<Order | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [deletingOrder, setDeletingOrder] = useState<Order | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -95,6 +103,21 @@ export default function Orders() {
     }
   };
 
+  const handleEdit = (order: Order) => {
+    setEditingOrder(order);
+    setOrderDialogOpen(true);
+  };
+
+  const handleDelete = (order: Order) => {
+    setDeletingOrder(order);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDialogSuccess = () => {
+    fetchOrders();
+    setEditingOrder(null);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -102,7 +125,7 @@ export default function Orders() {
           <h1 className="text-3xl font-bold">Pedidos</h1>
           <p className="text-muted-foreground">Gerencie todos os pedidos do sistema</p>
         </div>
-        <Button>
+        <Button onClick={() => setOrderDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Novo Pedido
         </Button>
@@ -160,8 +183,11 @@ export default function Orders() {
                         <Button variant="ghost" size="sm">
                           <Eye className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(order)}>
                           <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" onClick={() => handleDelete(order)}>
+                          <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </TableCell>
@@ -172,6 +198,23 @@ export default function Orders() {
           )}
         </CardContent>
       </Card>
+
+      <OrderDialog
+        open={orderDialogOpen}
+        onOpenChange={setOrderDialogOpen}
+        onSuccess={handleDialogSuccess}
+        editOrder={editingOrder}
+      />
+
+      <DeleteDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onSuccess={fetchOrders}
+        itemId={deletingOrder?.id || ''}
+        itemName={deletingOrder?.order_number || ''}
+        tableName="orders"
+        itemType="Pedido"
+      />
     </div>
   );
 }
