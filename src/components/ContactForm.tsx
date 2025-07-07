@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import emailjs from '@emailjs/browser';
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
@@ -56,36 +57,37 @@ const ContactForm = () => {
         throw error;
       }
 
-      // 2. Enviar notificação via Zapier
+      // 2. Enviar emails via EmailJS + Titan
       try {
-        // Substitua pela URL do seu webhook do Zapier
-        const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_KEY/';
-        
-        await fetch(zapierWebhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "no-cors",
-          body: JSON.stringify({
-            nome: data.name,
-            email: data.email,
-            telefone: data.phone,
-            tipoObra: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
-            quantidade: data.quantity,
-            mensagem: data.message,
-            dataHora: new Date().toLocaleString('pt-BR'),
-            origem: 'Site PRIME ENGENHARIA'
-          }),
-        });
-      } catch (zapierError) {
-        console.error('Zapier webhook failed:', zapierError);
-        // Continua mesmo se Zapier falhar
+        const templateParams = {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone,
+          project_type: data.projectType === 'residential' ? 'Residencial' : 'Comercial',
+          quantity: data.quantity,
+          message: data.message,
+          date: new Date().toLocaleString('pt-BR'),
+          to_email: 'faleconosco@primeeng.com.br', // Seu email corporativo Titan
+        };
+
+        // Configurar suas credenciais do EmailJS aqui
+        // SERVICE_ID, TEMPLATE_ID e PUBLIC_KEY vêm do painel do EmailJS
+        await emailjs.send(
+          'YOUR_SERVICE_ID', // Substitua pelo seu Service ID
+          'YOUR_TEMPLATE_ID', // Substitua pelo seu Template ID  
+          templateParams,
+          'YOUR_PUBLIC_KEY' // Substitua pela sua Public Key
+        );
+
+        console.log('Email enviado com sucesso via EmailJS + Titan');
+      } catch (emailError) {
+        console.error('EmailJS failed:', emailError);
+        // Continua mesmo se email falhar
       }
 
       toast({
         title: "Orçamento solicitado com sucesso! ✅",
-        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h!",
+        description: "Recebemos sua solicitação e enviaremos uma resposta em até 24h no seu email!",
       });
 
       reset();
