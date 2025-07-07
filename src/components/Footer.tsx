@@ -25,6 +25,7 @@ const Footer = () => {
               <a href="#produtos" className="block text-gray-300 hover:text-prime-orange transition-colors">Produtos</a>
               <a href="#como-comprar" className="block text-gray-300 hover:text-prime-orange transition-colors">Como Comprar</a>
               <a href="#contato" className="block text-gray-300 hover:text-prime-orange transition-colors">Contato</a>
+              <a href="/admin" className="block text-gray-300 hover:text-prime-orange transition-colors">Sistema ERP</a>
             </nav>
           </div>
 
