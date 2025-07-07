@@ -7,7 +7,7 @@ interface ProductFormData {
   name: string;
   description: string;
   details: string;
-  category: string;
+  category_id: string;
   price: string;
   cost_price: string;
   sku: string;
@@ -36,7 +36,7 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
     name: editProduct?.name || '',
     description: editProduct?.description || '',
     details: editProduct?.details || '',
-    category: editProduct?.category || 'outros',
+    category_id: editProduct?.category_id || '',
     price: editProduct?.price?.toString() || '',
     cost_price: editProduct?.cost_price?.toString() || '',
     sku: editProduct?.sku || '',
@@ -60,10 +60,10 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
 
   // Auto-generate SKU when category changes (only for new products)
   useEffect(() => {
-    if (!editProduct && autoGenerateSKU && formData.category && !formData.sku) {
+    if (!editProduct && autoGenerateSKU && formData.category_id && !formData.sku) {
       handleGenerateSKU();
     }
-  }, [formData.category, autoGenerateSKU]);
+  }, [formData.category_id, autoGenerateSKU]);
 
   const handleInputChange = (field: keyof ProductFormData, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -89,7 +89,7 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
   };
 
   const handleGenerateSKU = async () => {
-    if (!formData.category) {
+    if (!formData.category_id) {
       toast({
         title: "Selecione uma categoria",
         description: "É necessário selecionar uma categoria para gerar o SKU.",
@@ -98,7 +98,7 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
       return;
     }
 
-    const newSKU = await generateSKU(formData.category);
+    const newSKU = await generateSKU(formData.category_id);
     if (newSKU) {
       setFormData(prev => ({ ...prev, sku: newSKU }));
       setSkuError('');
@@ -139,7 +139,7 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
         name: formData.name,
         description: formData.description,
         details: formData.details,
-        category: formData.category,
+        category_id: formData.category_id || null,
         price: formData.price ? parseFloat(formData.price) : null,
         cost_price: formData.cost_price ? parseFloat(formData.cost_price) : null,
         sku: formData.sku || null,

@@ -12,6 +12,7 @@ import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Customers from "./pages/admin/Customers";
 import Products from "./pages/admin/Products";
+import Categories from "./pages/admin/Categories";
 import Orders from "./pages/admin/Orders";
 import Invoices from "./pages/admin/Invoices";
 import Inventory from "./pages/admin/Inventory";
@@ -42,6 +43,7 @@ const App = () => (
               <Route index element={<Dashboard />} />
               <Route path="customers" element={<Customers />} />
               <Route path="products" element={<Products />} />
+              <Route path="categories" element={<Categories />} />
               <Route path="orders" element={<Orders />} />
               <Route path="invoices" element={<Invoices />} />
               <Route path="inventory" element={<Inventory />} />

@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Users,
   Package,
+  Tags,
   ShoppingCart,
   FileText,
   BarChart3,
@@ -45,6 +46,11 @@ const menuItems = [
     title: "Produtos",
     url: "/admin/products",
     icon: Package,
+  },
+  {
+    title: "Categorias",
+    url: "/admin/categories",
+    icon: Tags,
   },
   {
     title: "Pedidos",
