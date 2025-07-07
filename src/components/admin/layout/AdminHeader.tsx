@@ -24,7 +24,7 @@ export function AdminHeader() {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <SidebarTrigger />
-          <h1 className="text-xl font-semibold">Sistema ERP/CRM</h1>
+          <h1 className="text-xl font-semibold">SISTEMA PRIME</h1>
         </div>
         
         <div className="flex items-center space-x-4">

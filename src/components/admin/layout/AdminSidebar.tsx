@@ -94,17 +94,21 @@ export function AdminSidebar() {
         <div className="p-4 border-b">
           <div className="flex items-center justify-between">
             {!collapsed ? (
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">PE</span>
-                </div>
+              <div className="flex items-center space-x-3">
+                <img 
+                  src="/lovable-uploads/227016a2-4897-4c75-bb4a-f659471659b2.png" 
+                  alt="Prime Engenharia Logo" 
+                  className="w-10 h-10 object-contain"
+                />
                 <span className="font-bold text-lg">PRIME ERP</span>
               </div>
             ) : (
               <div className="flex justify-center">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">PE</span>
-                </div>
+                <img 
+                  src="/lovable-uploads/227016a2-4897-4c75-bb4a-f659471659b2.png" 
+                  alt="Prime Engenharia Logo" 
+                  className="w-8 h-8 object-contain"
+                />
               </div>
             )}
             <Button
