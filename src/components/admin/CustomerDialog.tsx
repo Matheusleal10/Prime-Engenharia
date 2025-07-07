@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -20,6 +21,12 @@ interface CustomerFormData {
   city: string;
   state: string;
   zip_code: string;
+  birth_date: string;
+  communication_preferences: {
+    email: boolean;
+    sms: boolean;
+    whatsapp: boolean;
+  };
   notes: string;
 }
 
@@ -45,6 +52,12 @@ export function CustomerDialog({ open, onOpenChange, onSuccess, editCustomer }: 
     city: editCustomer?.city || '',
     state: editCustomer?.state || '',
     zip_code: editCustomer?.zip_code || '',
+    birth_date: editCustomer?.birth_date || '',
+    communication_preferences: editCustomer?.communication_preferences || {
+      email: true,
+      sms: false,
+      whatsapp: false
+    },
     notes: editCustomer?.notes || '',
   });
 
@@ -77,6 +90,8 @@ export function CustomerDialog({ open, onOpenChange, onSuccess, editCustomer }: 
         city: formData.city || null,
         state: formData.state || null,
         zip_code: formData.zip_code || null,
+        birth_date: formData.birth_date || null,
+        communication_preferences: formData.communication_preferences,
         notes: formData.notes || null,
       };
 
@@ -270,6 +285,70 @@ export function CustomerDialog({ open, onOpenChange, onSuccess, editCustomer }: 
                 onChange={(e) => handleInputChange('zip_code', e.target.value)}
                 placeholder="00000-000"
               />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="birth_date">Data de Nascimento</Label>
+            <Input
+              id="birth_date"
+              type="date"
+              value={formData.birth_date}
+              onChange={(e) => handleInputChange('birth_date', e.target.value)}
+            />
+          </div>
+
+          <div className="space-y-4">
+            <Label>Preferências de Comunicação</Label>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="email_pref">Email</Label>
+                <Switch
+                  id="email_pref"
+                  checked={formData.communication_preferences.email}
+                  onCheckedChange={(checked) => 
+                    setFormData(prev => ({
+                      ...prev,
+                      communication_preferences: {
+                        ...prev.communication_preferences,
+                        email: checked
+                      }
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="sms_pref">SMS</Label>
+                <Switch
+                  id="sms_pref"
+                  checked={formData.communication_preferences.sms}
+                  onCheckedChange={(checked) => 
+                    setFormData(prev => ({
+                      ...prev,
+                      communication_preferences: {
+                        ...prev.communication_preferences,
+                        sms: checked
+                      }
+                    }))
+                  }
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <Label htmlFor="whatsapp_pref">WhatsApp</Label>
+                <Switch
+                  id="whatsapp_pref"
+                  checked={formData.communication_preferences.whatsapp}
+                  onCheckedChange={(checked) => 
+                    setFormData(prev => ({
+                      ...prev,
+                      communication_preferences: {
+                        ...prev.communication_preferences,
+                        whatsapp: checked
+                      }
+                    }))
+                  }
+                />
+              </div>
             </div>
           </div>
 

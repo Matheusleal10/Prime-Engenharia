@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Customers from "./pages/admin/Customers";
+import Marketing from "./pages/admin/Marketing";
 import Products from "./pages/admin/Products";
 import Categories from "./pages/admin/Categories";
 import Orders from "./pages/admin/Orders";
@@ -42,6 +43,7 @@ const App = () => (
             }>
               <Route index element={<Dashboard />} />
               <Route path="customers" element={<Customers />} />
+              <Route path="marketing" element={<Marketing />} />
               <Route path="products" element={<Products />} />
               <Route path="categories" element={<Categories />} />
               <Route path="orders" element={<Orders />} />

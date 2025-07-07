@@ -13,7 +13,8 @@ import {
   Truck,
   Settings,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Megaphone
 } from "lucide-react";
 
 import {
@@ -41,6 +42,11 @@ const menuItems = [
     title: "Clientes",
     url: "/admin/customers",
     icon: Users,
+  },
+  {
+    title: "Marketing",
+    url: "/admin/marketing",
+    icon: Megaphone,
   },
   {
     title: "Produtos",

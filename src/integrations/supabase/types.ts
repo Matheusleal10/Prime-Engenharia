@@ -44,6 +44,54 @@ export type Database = {
         }
         Relationships: []
       }
+      campaign_sends: {
+        Row: {
+          campaign_id: string
+          customer_id: string
+          delivery_method: string
+          delivery_response: Json | null
+          id: string
+          message_content: string | null
+          sent_at: string
+          status: string
+        }
+        Insert: {
+          campaign_id: string
+          customer_id: string
+          delivery_method: string
+          delivery_response?: Json | null
+          id?: string
+          message_content?: string | null
+          sent_at?: string
+          status?: string
+        }
+        Update: {
+          campaign_id?: string
+          customer_id?: string
+          delivery_method?: string
+          delivery_response?: Json | null
+          id?: string
+          message_content?: string | null
+          sent_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaign_sends_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "marketing_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaign_sends_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       customer_contacts: {
         Row: {
           created_at: string
@@ -88,7 +136,9 @@ export type Database = {
       customers: {
         Row: {
           address: string | null
+          birth_date: string | null
           city: string | null
+          communication_preferences: Json | null
           company_name: string | null
           created_at: string
           created_by: string | null
@@ -97,6 +147,7 @@ export type Database = {
           document_type: string | null
           email: string | null
           id: string
+          loyalty_points: number | null
           name: string
           notes: string | null
           phone: string | null
@@ -107,7 +158,9 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          birth_date?: string | null
           city?: string | null
+          communication_preferences?: Json | null
           company_name?: string | null
           created_at?: string
           created_by?: string | null
@@ -116,6 +169,7 @@ export type Database = {
           document_type?: string | null
           email?: string | null
           id?: string
+          loyalty_points?: number | null
           name: string
           notes?: string | null
           phone?: string | null
@@ -126,7 +180,9 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          birth_date?: string | null
           city?: string | null
+          communication_preferences?: Json | null
           company_name?: string | null
           created_at?: string
           created_by?: string | null
@@ -135,6 +191,7 @@ export type Database = {
           document_type?: string | null
           email?: string | null
           id?: string
+          loyalty_points?: number | null
           name?: string
           notes?: string | null
           phone?: string | null
@@ -509,6 +566,104 @@ export type Database = {
           {
             foreignKeyName: "leads_customer_id_fkey"
             columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      loyalty_transactions: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          description: string | null
+          id: string
+          points: number
+          reference_id: string | null
+          reference_type: string | null
+          transaction_type: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          description?: string | null
+          id?: string
+          points: number
+          reference_id?: string | null
+          reference_type?: string | null
+          transaction_type: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          description?: string | null
+          id?: string
+          points?: number
+          reference_id?: string | null
+          reference_type?: string | null
+          transaction_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loyalty_transactions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "loyalty_transactions_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      marketing_campaigns: {
+        Row: {
+          campaign_type: string
+          created_at: string
+          created_by: string | null
+          id: string
+          message_template: string
+          name: string
+          scheduled_date: string | null
+          status: string
+          target_criteria: Json | null
+          updated_at: string
+        }
+        Insert: {
+          campaign_type: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          message_template: string
+          name: string
+          scheduled_date?: string | null
+          status?: string
+          target_criteria?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          campaign_type?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          message_template?: string
+          name?: string
+          scheduled_date?: string | null
+          status?: string
+          target_criteria?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_campaigns_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]

@@ -25,6 +25,9 @@ interface Customer {
   customer_type: string;
   status: string;
   notes: string;
+  birth_date: string;
+  loyalty_points: number;
+  communication_preferences: any;
   created_at: string;
 }
 
@@ -143,7 +146,8 @@ export default function Customers() {
                   <TableHead>Email</TableHead>
                   <TableHead>Telefone</TableHead>
                   <TableHead>Tipo</TableHead>
-                  <TableHead>Cidade</TableHead>
+                  <TableHead>Aniversário</TableHead>
+                  <TableHead>Pontos</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
@@ -166,7 +170,14 @@ export default function Customers() {
                         {getCustomerTypeLabel(customer.customer_type)}
                       </Badge>
                     </TableCell>
-                    <TableCell>{customer.city || '-'}</TableCell>
+                    <TableCell>
+                      {customer.birth_date ? new Date(customer.birth_date).toLocaleDateString('pt-BR') : '-'}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">
+                        {customer.loyalty_points || 0} pts
+                      </Badge>
+                    </TableCell>
                     <TableCell>
                       <Badge variant={getStatusVariant(customer.status)}>
                         {customer.status === 'active' ? 'Ativo' : 'Inativo'}
