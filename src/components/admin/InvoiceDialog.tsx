@@ -175,15 +175,62 @@ export function InvoiceDialog({ open, onOpenChange, onSuccess, editInvoice }: In
     return { subtotal, discountAmount, taxAmount, total };
   };
 
+  const sanitizeFormData = (data: any) => {
+    return {
+      ...data,
+      customer_id: data.customer_id || null,
+      order_id: data.order_id === '' ? null : data.order_id,
+      due_date: data.due_date === '' ? null : data.due_date
+    };
+  };
+
+  const validateForm = () => {
+    if (!formData.customer_id) {
+      toast({
+        title: "Cliente obrigatório",
+        description: "Selecione um cliente para continuar.",
+        variant: "destructive"
+      });
+      return false;
+    }
+
+    if (items.length === 0) {
+      toast({
+        title: "Itens obrigatórios",
+        description: "Adicione pelo menos um item à nota fiscal.",
+        variant: "destructive"
+      });
+      return false;
+    }
+
+    const invalidItems = items.filter(item => !item.product_id || item.quantity <= 0);
+    if (invalidItems.length > 0) {
+      toast({
+        title: "Itens inválidos",
+        description: "Todos os itens devem ter um produto selecionado e quantidade maior que zero.",
+        variant: "destructive"
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
 
     try {
       const { subtotal, discountAmount, taxAmount, total } = calculateTotals();
 
+      const sanitizedData = sanitizeFormData(formData);
       const invoiceData = {
-        ...formData,
+        ...sanitizedData,
         subtotal,
         discount_amount: discountAmount,
         tax_amount: taxAmount,
