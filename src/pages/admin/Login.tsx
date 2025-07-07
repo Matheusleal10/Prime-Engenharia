@@ -57,8 +57,8 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-prime-green to-prime-green-light p-4">
-      <div className="w-full max-w-md">
-        <div className="mb-6">
+      <div className="w-full max-w-sm">
+        <div className="mb-4">
           <Button variant="ghost" size="sm" asChild className="text-white hover:bg-white/20">
             <Link to="/">
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -68,30 +68,30 @@ export default function Login() {
         </div>
 
         <Card className="w-full">
-          <CardHeader className="text-center space-y-1">
+          <CardHeader className="text-center space-y-1 py-4">
             <div className="mx-auto">
               <img 
                 src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
                 alt="PRIME ENGENHARIA" 
-                className="h-52 w-auto mx-auto"
+                className="h-32 w-auto mx-auto"
               />
             </div>
-            <div className="space-y-2">
-              <CardTitle className="text-2xl">Painel Administrativo Prime</CardTitle>
-              <CardDescription>
+            <div className="space-y-1">
+              <CardTitle className="text-xl">Painel Administrativo Prime</CardTitle>
+              <CardDescription className="text-sm">
                 Área de Login
               </CardDescription>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Entrar</TabsTrigger>
                 <TabsTrigger value="signup">Cadastrar</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="signin" className="space-y-4">
-                <form onSubmit={handleSignIn} className="space-y-4">
+              <TabsContent value="signin" className="space-y-3">
+                <form onSubmit={handleSignIn} className="space-y-3">
                   <div className="space-y-2">
                     <Label htmlFor="signin-email">Email</Label>
                     <Input
@@ -133,8 +133,8 @@ export default function Login() {
                 </form>
               </TabsContent>
               
-              <TabsContent value="signup" className="space-y-4">
-                <form onSubmit={handleSignUp} className="space-y-4">
+              <TabsContent value="signup" className="space-y-3">
+                <form onSubmit={handleSignUp} className="space-y-3">
                   <div className="space-y-2">
                     <Label htmlFor="signup-name">Nome Completo</Label>
                     <Input
