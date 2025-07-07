@@ -73,7 +73,7 @@ export default function Login() {
               <img 
                 src="/lovable-uploads/4faef978-d6d0-4b1e-8aa0-d2428f013162.png" 
                 alt="PRIME ENGENHARIA" 
-                className="h-40 w-auto mx-auto"
+                className="h-52 w-auto mx-auto"
               />
             </div>
             <div className="space-y-2">
