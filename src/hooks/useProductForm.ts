@@ -18,6 +18,14 @@ interface ProductFormData {
   unit: string;
   is_active: boolean;
   is_featured: boolean;
+  // Campos fiscais
+  ncm: string;
+  cfop: string;
+  icms_cst: string;
+  icms_rate: number;
+  pis_rate: number;
+  cofins_rate: number;
+  origin: string;
 }
 
 interface UseProductFormProps {
@@ -47,6 +55,14 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
     unit: editProduct?.unit || 'unidade',
     is_active: editProduct?.is_active ?? true,
     is_featured: editProduct?.is_featured ?? false,
+    // Campos fiscais
+    ncm: editProduct?.ncm || '00000000',
+    cfop: editProduct?.cfop || '5102',
+    icms_cst: editProduct?.icms_cst || '00',
+    icms_rate: editProduct?.icms_rate || 0,
+    pis_rate: editProduct?.pis_rate || 0,
+    cofins_rate: editProduct?.cofins_rate || 0,
+    origin: editProduct?.origin || '0'
   });
 
   // Load initial settings
@@ -65,7 +81,7 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
     }
   }, [formData.category_id, autoGenerateSKU]);
 
-  const handleInputChange = (field: keyof ProductFormData, value: string | boolean) => {
+  const handleInputChange = (field: keyof ProductFormData, value: string | boolean | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     
     // Real-time SKU validation
@@ -151,6 +167,14 @@ export function useProductForm({ editProduct, onSuccess, onOpenChange }: UseProd
         is_active: formData.is_active,
         is_featured: formData.is_featured,
         icon: 'Package', // Default icon
+        // Campos fiscais
+        ncm: formData.ncm || '00000000',
+        cfop: formData.cfop || '5102',
+        icms_cst: formData.icms_cst || '00',
+        icms_rate: formData.icms_rate || 0,
+        pis_rate: formData.pis_rate || 0,
+        cofins_rate: formData.cofins_rate || 0,
+        origin: formData.origin || '0'
       };
 
       if (editProduct) {

@@ -136,19 +136,28 @@ export type Database = {
       customers: {
         Row: {
           address: string | null
+          address_complement: string | null
+          address_number: string | null
           birth_date: string | null
           city: string | null
+          city_code: string | null
           communication_preferences: Json | null
           company_name: string | null
+          country_code: string | null
+          cpf_cnpj: string | null
           created_at: string
           created_by: string | null
+          customer_class: string | null
           customer_type: string | null
           document: string | null
           document_type: string | null
           email: string | null
+          full_address: string | null
           id: string
+          ie: string | null
           loyalty_points: number | null
           name: string
+          neighborhood: string | null
           notes: string | null
           phone: string | null
           state: string | null
@@ -158,19 +167,28 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          address_complement?: string | null
+          address_number?: string | null
           birth_date?: string | null
           city?: string | null
+          city_code?: string | null
           communication_preferences?: Json | null
           company_name?: string | null
+          country_code?: string | null
+          cpf_cnpj?: string | null
           created_at?: string
           created_by?: string | null
+          customer_class?: string | null
           customer_type?: string | null
           document?: string | null
           document_type?: string | null
           email?: string | null
+          full_address?: string | null
           id?: string
+          ie?: string | null
           loyalty_points?: number | null
           name: string
+          neighborhood?: string | null
           notes?: string | null
           phone?: string | null
           state?: string | null
@@ -180,19 +198,28 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          address_complement?: string | null
+          address_number?: string | null
           birth_date?: string | null
           city?: string | null
+          city_code?: string | null
           communication_preferences?: Json | null
           company_name?: string | null
+          country_code?: string | null
+          cpf_cnpj?: string | null
           created_at?: string
           created_by?: string | null
+          customer_class?: string | null
           customer_type?: string | null
           document?: string | null
           document_type?: string | null
           email?: string | null
+          full_address?: string | null
           id?: string
+          ie?: string | null
           loyalty_points?: number | null
           name?: string
+          neighborhood?: string | null
           notes?: string | null
           phone?: string | null
           state?: string | null
@@ -433,11 +460,14 @@ export type Database = {
       }
       invoices: {
         Row: {
+          access_key: string | null
           created_at: string
           created_by: string | null
           customer_id: string
+          danfe_url: string | null
           discount_amount: number
           due_date: string | null
+          environment: string | null
           fiscal_key: string | null
           id: string
           invoice_number: string
@@ -446,6 +476,10 @@ export type Database = {
           notes: string | null
           order_id: string | null
           pdf_url: string | null
+          sefaz_authorization_date: string | null
+          sefaz_error_message: string | null
+          sefaz_protocol: string | null
+          sefaz_status: string | null
           status: string
           subtotal: number
           tax_amount: number
@@ -454,11 +488,14 @@ export type Database = {
           xml_content: string | null
         }
         Insert: {
+          access_key?: string | null
           created_at?: string
           created_by?: string | null
           customer_id: string
+          danfe_url?: string | null
           discount_amount?: number
           due_date?: string | null
+          environment?: string | null
           fiscal_key?: string | null
           id?: string
           invoice_number: string
@@ -467,6 +504,10 @@ export type Database = {
           notes?: string | null
           order_id?: string | null
           pdf_url?: string | null
+          sefaz_authorization_date?: string | null
+          sefaz_error_message?: string | null
+          sefaz_protocol?: string | null
+          sefaz_status?: string | null
           status?: string
           subtotal?: number
           tax_amount?: number
@@ -475,11 +516,14 @@ export type Database = {
           xml_content?: string | null
         }
         Update: {
+          access_key?: string | null
           created_at?: string
           created_by?: string | null
           customer_id?: string
+          danfe_url?: string | null
           discount_amount?: number
           due_date?: string | null
+          environment?: string | null
           fiscal_key?: string | null
           id?: string
           invoice_number?: string
@@ -488,6 +532,10 @@ export type Database = {
           notes?: string | null
           order_id?: string | null
           pdf_url?: string | null
+          sefaz_authorization_date?: string | null
+          sefaz_error_message?: string | null
+          sefaz_protocol?: string | null
+          sefaz_status?: string | null
           status?: string
           subtotal?: number
           tax_amount?: number
@@ -832,11 +880,15 @@ export type Database = {
           barcode: string | null
           category: string
           category_id: string | null
+          cfop: string | null
+          cofins_rate: number | null
           cost_price: number | null
           created_at: string
           description: string
           details: string
           dimensions: string | null
+          icms_cst: string | null
+          icms_rate: number | null
           icon: string
           id: string
           is_active: boolean | null
@@ -845,6 +897,9 @@ export type Database = {
           max_stock: number | null
           min_stock: number | null
           name: string
+          ncm: string | null
+          origin: string | null
+          pis_rate: number | null
           price: number | null
           sku: string | null
           sort_order: number | null
@@ -858,11 +913,15 @@ export type Database = {
           barcode?: string | null
           category?: string
           category_id?: string | null
+          cfop?: string | null
+          cofins_rate?: number | null
           cost_price?: number | null
           created_at?: string
           description: string
           details: string
           dimensions?: string | null
+          icms_cst?: string | null
+          icms_rate?: number | null
           icon: string
           id?: string
           is_active?: boolean | null
@@ -871,6 +930,9 @@ export type Database = {
           max_stock?: number | null
           min_stock?: number | null
           name: string
+          ncm?: string | null
+          origin?: string | null
+          pis_rate?: number | null
           price?: number | null
           sku?: string | null
           sort_order?: number | null
@@ -884,11 +946,15 @@ export type Database = {
           barcode?: string | null
           category?: string
           category_id?: string | null
+          cfop?: string | null
+          cofins_rate?: number | null
           cost_price?: number | null
           created_at?: string
           description?: string
           details?: string
           dimensions?: string | null
+          icms_cst?: string | null
+          icms_rate?: number | null
           icon?: string
           id?: string
           is_active?: boolean | null
@@ -897,6 +963,9 @@ export type Database = {
           max_stock?: number | null
           min_stock?: number | null
           name?: string
+          ncm?: string | null
+          origin?: string | null
+          pis_rate?: number | null
           price?: number | null
           sku?: string | null
           sort_order?: number | null

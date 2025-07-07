@@ -7,6 +7,7 @@ import { ProductCategoryFields } from './forms/ProductCategoryFields';
 import { ProductPricingFields } from './forms/ProductPricingFields';
 import { ProductStockFields } from './forms/ProductStockFields';
 import { ProductOptionsFields } from './forms/ProductOptionsFields';
+import { ProductFiscalFields } from './forms/ProductFiscalFields';
 
 interface ProductDialogProps {
   open: boolean;
@@ -67,10 +68,21 @@ export function ProductDialog({ open, onOpenChange, onSuccess, editProduct }: Pr
             formData={formData}
             onInputChange={handleInputChange}
           />
-
+          
           <ProductOptionsFields
             formData={formData}
             onInputChange={handleInputChange}
+          />
+
+          <ProductFiscalFields 
+            formData={formData} 
+            setFormData={(data) => {
+              Object.keys(data).forEach(key => {
+                if (key in formData) {
+                  handleInputChange(key as keyof typeof formData, data[key]);
+                }
+              });
+            }} 
           />
 
           <DialogFooter>
