@@ -73,10 +73,10 @@ const ContactForm = () => {
         // Configurar suas credenciais do EmailJS aqui
         // SERVICE_ID, TEMPLATE_ID e PUBLIC_KEY vêm do painel do EmailJS
         await emailjs.send(
-          'YOUR_SERVICE_ID', // Substitua pelo seu Service ID
-          'YOUR_TEMPLATE_ID', // Substitua pelo seu Template ID  
+          'service_zmcuo68', // Service ID do EmailJS
+          'template_v5cw98k', // Template ID do EmailJS
           templateParams,
-          'YOUR_PUBLIC_KEY' // Substitua pela sua Public Key
+          'aTYdCtniLrHdldjd5' // Public Key do EmailJS
         );
 
         console.log('Email enviado com sucesso via EmailJS + Titan');
