@@ -8,11 +8,42 @@ import HowToBuy from '@/components/HowToBuy';
 import FAQ from '@/components/FAQ';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { Settings } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
 const Index = () => {
+  const { user, isAdmin } = useAuth();
+
   return (
     <div className="min-h-screen font-montserrat">
       <Header />
+      
+      {/* Admin Access Button */}
+      {isAdmin && (
+        <div className="fixed bottom-24 right-6 z-50">
+          <Button asChild className="shadow-lg">
+            <Link to="/admin">
+              <Settings className="h-4 w-4 mr-2" />
+              Painel Admin
+            </Link>
+          </Button>
+        </div>
+      )}
+
+      {/* Login/Register Button for non-admin users */}
+      {!user && (
+        <div className="fixed bottom-24 left-6 z-50">
+          <Button variant="outline" asChild className="shadow-lg bg-white">
+            <Link to="/admin/login">
+              <Settings className="h-4 w-4 mr-2" />
+              Entrar
+            </Link>
+          </Button>
+        </div>
+      )}
+      
       <Hero />
       <About />
       <Products />
