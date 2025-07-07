@@ -1239,6 +1239,18 @@ export type Database = {
         Args: { product_category: string }
         Returns: string
       }
+      get_all_users: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          email: string
+          full_name: string
+          role: Database["public"]["Enums"]["employee_role"]
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _user_id: string
@@ -1248,6 +1260,13 @@ export type Database = {
       }
       is_admin: {
         Args: { _user_id: string }
+        Returns: boolean
+      }
+      update_user_role: {
+        Args: {
+          _target_user_id: string
+          _new_role: Database["public"]["Enums"]["employee_role"]
+        }
         Returns: boolean
       }
       validate_sku_uniqueness: {
