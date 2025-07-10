@@ -1,0 +1,72 @@
+{
+  "name": "Prime Engenharia - Sistema ERP",
+  "short_name": "Prime ERP",
+  "description": "Sistema completo de gestão empresarial da Prime Engenharia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Dashboard do Sistema ERP"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Acesso rápido ao dashboard",
+      "url": "/admin",
+      "icons": [{ "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Produtos",
+      "short_name": "Produtos",
+      "description": "Gerenciar produtos",
+      "url": "/admin/products",
+      "icons": [{ "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Pedidos",
+      "short_name": "Pedidos",
+      "description": "Gerenciar pedidos",
+      "url": "/admin/orders",
+      "icons": [{ "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Catálogo",
+      "short_name": "Catálogo",
+      "description": "Ver produtos disponíveis",
+      "url": "/#produtos",
+      "icons": [{ "src": "/lovable-uploads/b216e2c3-802a-4554-8699-511071d5a50c.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

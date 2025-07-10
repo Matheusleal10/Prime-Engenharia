@@ -8,6 +8,7 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { RoleProtectedRoute } from "@/components/admin/RoleProtectedRoute";
 import { AdminLayout } from "@/components/admin/layout/AdminLayout";
 import Index from "./pages/Index";
+import Demo from "./pages/Demo";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
@@ -36,6 +37,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/demo" element={<Demo />} />
             <Route path="/customer-portal" element={<CustomerPortal />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin" element={
