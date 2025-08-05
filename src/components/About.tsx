@@ -17,8 +17,8 @@ const About = () => {
             </p>
             
             <p className="text-lg text-prime-concrete leading-relaxed mb-8">
-              Fomos os primeiros a fabricar o <strong className="text-prime-green">Tijolo Ecológico</strong> em 
-              São Luís, promovendo construções eficientes, econômicas e responsáveis com o meio ambiente.
+              Fomos os primeiros a fabricar o <strong className="text-prime-green">Tijolo Ecológico</strong> no 
+              Maranhão, promovendo construções eficientes, econômicas e responsáveis com o meio ambiente.
             </p>
 
             <div className="grid grid-cols-2 gap-6">
