@@ -167,18 +167,9 @@ const EcoBrickConcepts = () => {
             <h4 className="text-xl font-bold text-prime-concrete-dark mb-4">
               Transforme seu projeto com sustentabilidade
             </h4>
-            <p className="text-prime-concrete mb-6">
+            <p className="text-prime-concrete">
               Descubra como o tijolo ecológico pode revolucionar sua construção
             </p>
-            <a 
-              href="#contato" 
-              className="inline-flex items-center bg-prime-green hover:bg-prime-green-light text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Solicitar Orçamento
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
           </div>
         </div>
       </div>

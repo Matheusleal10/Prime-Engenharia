@@ -1,6 +1,7 @@
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import ProductModal from './ProductModal';
 
 type Product = {
   id: string;
@@ -16,6 +17,72 @@ type Product = {
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Novos produtos estáticos
+  const newProducts = [
+    {
+      name: "Blocos",
+      description: "Blocos de concreto modulares para construção estrutural e de vedação.",
+      details: "Produzidos com cimento, areia e agregados selecionados. Dimensões padronizadas para facilitar o assentamento. Resistência compressiva superior a 4,5 MPa. Ideais para paredes estruturais e de vedação.",
+      image: "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=800&h=600&fit=crop",
+      benefits: [
+        "Alta resistência e durabilidade",
+        "Facilidade no assentamento",
+        "Excelente custo-benefício",
+        "Padronização dimensional",
+        "Versatilidade de uso"
+      ],
+      applications: [
+        "Construção de paredes estruturais",
+        "Paredes de vedação",
+        "Muros e cercas",
+        "Construções residenciais",
+        "Obras comerciais e industriais"
+      ]
+    },
+    {
+      name: "Sextavado",
+      description: "Peças hexagonais para pavimentação decorativa e funcional.",
+      details: "Peças pré-moldadas em formato hexagonal, oferecendo design moderno e funcionalidade. Produzidas com concreto de alta qualidade. Permitem drenagem e fácil manutenção. Disponíveis em diversas cores e acabamentos.",
+      image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?w=800&h=600&fit=crop",
+      benefits: [
+        "Design moderno e atrativo",
+        "Facilita drenagem",
+        "Resistente ao tráfego",
+        "Fácil instalação e manutenção",
+        "Variedade de cores disponíveis"
+      ],
+      applications: [
+        "Pavimentação de calçadas",
+        "Pátios e jardins",
+        "Estacionamentos residenciais",
+        "Áreas comerciais",
+        "Projetos paisagísticos"
+      ]
+    },
+    {
+      name: "Paver",
+      description: "Blocos intertravados para pavimentação de alta performance.",
+      details: "Blocos de concreto intertravados produzidos com tecnologia avançada. Alta resistência à compressão e baixa absorção de água. Sistema de encaixe que distribui cargas uniformemente. Ideal para áreas de tráfego intenso.",
+      image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&h=600&fit=crop",
+      benefits: [
+        "Alta resistência ao tráfego",
+        "Sistema de intertravamento",
+        "Baixa absorção de água",
+        "Facilita manutenção pontual",
+        "Sustentável e reutilizável"
+      ],
+      applications: [
+        "Ruas e avenidas",
+        "Estacionamentos comerciais",
+        "Pátios industriais",
+        "Calçadões e praças",
+        "Áreas portuárias"
+      ]
+    }
+  ];
 
   useEffect(() => {
     fetchProducts();
@@ -40,6 +107,16 @@ const Products = () => {
 
   const featuredProduct = products.find(p => p.is_featured);
   const otherProducts = products.filter(p => !p.is_featured);
+
+  const openModal = (product: any) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedProduct(null);
+    setIsModalOpen(false);
+  };
 
   return (
     <section id="produtos" className="py-16 lg:py-24 bg-gray-50">
@@ -185,40 +262,84 @@ const Products = () => {
             Outros Produtos Disponíveis
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherProducts.map((product, index) => (
+          {/* Novos Produtos com Modal */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {newProducts.map((product, index) => (
               <div 
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up"
+                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up cursor-pointer"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => openModal(product)}
               >
-                <div className="text-4xl mb-4 text-center">{product.icon}</div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                />
                 <h4 className="text-lg font-semibold text-prime-concrete-dark mb-3 text-center">
                   {product.name}
                 </h4>
-                <p className="text-sm text-prime-concrete text-center mb-3">
+                <p className="text-sm text-prime-concrete text-center mb-4">
                   {product.description}
                 </p>
-                <p className="text-xs text-prime-concrete/80 text-center mb-4">
-                  {product.details}
-                </p>
                 <div className="text-center">
-                  <a 
-                    href={`https://wa.me/559898708157?text=Olá! Gostaria de saber mais sobre ${product.name.toLowerCase()}.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center"
-                  >
-                    Saiba Mais
+                  <span className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center">
+                    Clique para ver mais
                     <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </span>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Produtos do Banco de Dados */}
+          {otherProducts.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {otherProducts.map((product, index) => (
+                <div 
+                  key={index}
+                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up"
+                  style={{ animationDelay: `${(index + newProducts.length) * 0.1}s` }}
+                >
+                  <div className="text-4xl mb-4 text-center">{product.icon}</div>
+                  <h4 className="text-lg font-semibold text-prime-concrete-dark mb-3 text-center">
+                    {product.name}
+                  </h4>
+                  <p className="text-sm text-prime-concrete text-center mb-3">
+                    {product.description}
+                  </p>
+                  <p className="text-xs text-prime-concrete/80 text-center mb-4">
+                    {product.details}
+                  </p>
+                  <div className="text-center">
+                    <a 
+                      href={`https://wa.me/559898708157?text=Olá! Gostaria de saber mais sobre ${product.name.toLowerCase()}.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center"
+                    >
+                      Saiba Mais
+                      <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Modal de Produto */}
+        {selectedProduct && (
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            product={selectedProduct}
+          />
+        )}
       </div>
     </section>
   );
