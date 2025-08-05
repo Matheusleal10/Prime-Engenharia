@@ -2,7 +2,6 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
-import Advantages from '@/components/Advantages';
 import EcoBrickConcepts from '@/components/EcoBrickConcepts';
 import Products from '@/components/Products';
 import Testimonials from '@/components/Testimonials';
@@ -38,7 +37,6 @@ const Index = () => {
       
       <Hero />
       <About />
-      <Advantages />
       <EcoBrickConcepts />
       <Products />
       <Testimonials />
