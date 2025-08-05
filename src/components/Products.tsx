@@ -121,14 +121,6 @@ const Products = () => {
   return (
     <section id="produtos" className="py-16 lg:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
-            Nossos Produtos
-          </h2>
-          <p className="text-lg text-prime-concrete max-w-2xl mx-auto">
-            Soluções completas em pré-moldados sustentáveis para sua construção
-          </p>
-        </div>
 
         {/* Produto em Destaque */}
         {loading ? (
