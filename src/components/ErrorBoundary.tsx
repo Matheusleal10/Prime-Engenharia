@@ -27,11 +27,15 @@ export class ErrorBoundary extends Component<Props, State> {
     console.error('[ErrorBoundary] Uncaught error:', error, errorInfo);
     
     // Log to monitoring service if available
-    if (window.gtag) {
-      window.gtag('event', 'exception', {
-        description: error.toString(),
-        fatal: false
-      });
+    try {
+      if ('gtag' in window && typeof (window as any).gtag === 'function') {
+        (window as any).gtag('event', 'exception', {
+          description: error.toString(),
+          fatal: false
+        });
+      }
+    } catch {
+      // Ignore analytics errors
     }
   }
 
