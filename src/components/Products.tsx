@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import ProductModal from './ProductModal';
 
@@ -90,16 +90,23 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .eq('is_active', true)
         .order('sort_order', { ascending: true });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
       setProducts(data || []);
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
+      // Fallback gracefully with empty array
+      setProducts([]);
     } finally {
       setLoading(false);
     }
