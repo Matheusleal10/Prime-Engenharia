@@ -25,22 +25,22 @@ const Header = () => {
             <img 
               src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto"
+              className="h-24 sm:h-28 md:h-32 lg:h-36 xl:h-40 w-auto"
             />
           </div>
 
           {/* Menu Desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#sobre" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
+          <nav className="hidden md:flex items-center space-x-12">
+            <a href="#sobre" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg transition-colors">
               Sobre
             </a>
-            <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
+            <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg transition-colors">
               Produtos
             </a>
-            <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
+            <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg transition-colors">
               Como Comprar
             </a>
-            <a href="#contato" className="text-prime-concrete-dark hover:text-prime-green font-medium transition-colors">
+            <a href="#contato" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg transition-colors">
               Contato
             </a>
           </nav>
@@ -67,17 +67,17 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">
-            <nav className="flex flex-col py-4 space-y-4">
-              <a href="#sobre" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
+            <nav className="flex flex-col py-4 space-y-6">
+              <a href="#sobre" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Sobre
               </a>
-              <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
+              <a href="#produtos" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Produtos
               </a>
-              <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
+              <a href="#como-comprar" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Como Comprar
               </a>
-              <a href="#contato" className="text-prime-concrete-dark hover:text-prime-green font-medium px-4" onClick={() => setIsMenuOpen(false)}>
+              <a href="#contato" className="text-prime-concrete-dark hover:text-prime-green font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Contato
               </a>
               <a 
