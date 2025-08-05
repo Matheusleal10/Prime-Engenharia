@@ -1,6 +1,7 @@
-const CACHE_NAME = 'prime-erp-v1.0.0';
-const STATIC_CACHE = 'prime-static-v1.0.0';
-const DYNAMIC_CACHE = 'prime-dynamic-v1.0.0';
+const VERSION = Date.now(); // Force cache invalidation
+const CACHE_NAME = `prime-erp-v${VERSION}`;
+const STATIC_CACHE = `prime-static-v${VERSION}`;
+const DYNAMIC_CACHE = `prime-dynamic-v${VERSION}`;
 
 // Recursos estáticos essenciais
 const STATIC_ASSETS = [
