@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, ContactFormData } from './contactFormSchema';
+import { sanitizeInput, isValidEmail, createAuditLog } from '@/utils/securityUtils';
 
 export const useContactForm = () => {
   const { toast } = useToast();
@@ -17,19 +18,28 @@ export const useContactForm = () => {
     const projectTypeText = data.projectType === 'residential' ? 'Residencial' : 'Comercial';
     const date = new Date().toLocaleString('pt-BR');
     
+    // Sanitize all data for WhatsApp message
+    const sanitizedData = {
+      name: sanitizeInput(data.name),
+      email: sanitizeInput(data.email),
+      phone: sanitizeInput(data.phone),
+      quantity: sanitizeInput(data.quantity),
+      message: sanitizeInput(data.message)
+    };
+    
     return `🏗️ *Nova Solicitação de Orçamento - Prime Engenharia*
 
 📋 *Dados do Cliente:*
-👤 Nome: ${data.name}
-📧 Email: ${data.email}
-📱 Telefone: ${data.phone}
+👤 Nome: ${sanitizedData.name}
+📧 Email: ${sanitizedData.email}
+📱 Telefone: ${sanitizedData.phone}
 
 🏢 *Detalhes do Projeto:*
 🏠 Tipo de Obra: ${projectTypeText}
-🧱 Quantidade Estimada: ${data.quantity}
+🧱 Quantidade Estimada: ${sanitizedData.quantity}
 
 💬 *Mensagem:*
-${data.message}
+${sanitizedData.message}
 
 ⏰ *Data da Solicitação:* ${date}
 
@@ -41,17 +51,34 @@ ${data.message}
     setIsSubmitting(true);
     
     try {
+      // Validate email format
+      if (!isValidEmail(data.email)) {
+        throw new Error('Formato de email inválido');
+      }
+
+      // Sanitize all inputs with length limits
+      const sanitizedData = {
+        name: sanitizeInput(data.name).substring(0, 100),
+        email: sanitizeInput(data.email).substring(0, 100),
+        phone: sanitizeInput(data.phone).substring(0, 20),
+        project_type: data.projectType, // This is from a select, so it's safe
+        quantity: sanitizeInput(data.quantity).substring(0, 50),
+        message: sanitizeInput(data.message).substring(0, 1000)
+      };
+
+      // Create audit log
+      createAuditLog({
+        action: 'lead_form_submission',
+        details: {
+          email: sanitizedData.email,
+          projectType: sanitizedData.project_type
+        }
+      });
+
       // 1. Salvar lead no Supabase
       const { data: leadData, error } = await supabase
         .from('leads')
-        .insert({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          project_type: data.projectType,
-          quantity: data.quantity,
-          message: data.message
-        })
+        .insert(sanitizedData)
         .select()
         .single();
 
@@ -64,12 +91,7 @@ ${data.message}
         await supabase.functions.invoke('send-lead-notifications', {
           body: {
             leadId: leadData.id,
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            project_type: data.projectType,
-            quantity: data.quantity,
-            message: data.message
+            ...sanitizedData
           }
         });
       } catch (emailError) {
@@ -91,11 +113,21 @@ ${data.message}
       });
 
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving lead:', error);
+      
+      // Create audit log for errors
+      createAuditLog({
+        action: 'lead_form_error',
+        details: {
+          error: error.message,
+          email: data.email
+        }
+      });
+
       toast({
         title: "Erro ao enviar solicitação",
-        description: "Tente novamente ou entre em contato pelo WhatsApp.",
+        description: sanitizeInput(error.message || "Tente novamente ou entre em contato pelo WhatsApp."),
         variant: "destructive",
       });
     } finally {

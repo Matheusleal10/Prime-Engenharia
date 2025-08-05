@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Download, FileText, LogOut } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
+import DOMPurify from 'dompurify';
 
 interface Invoice {
   id: string;
@@ -31,7 +33,9 @@ export default function CustomerPortal() {
   const [loading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(0);
   const { toast } = useToast();
+  const { signIn } = useAuth();
 
   useEffect(() => {
     // Check if customer is already logged in via localStorage
@@ -46,41 +50,59 @@ export default function CustomerPortal() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Rate limiting - max 5 attempts per session
+    if (loginAttempts >= 5) {
+      toast({
+        title: "Muitas tentativas",
+        description: "Aguarde alguns minutos antes de tentar novamente.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     setLoading(true);
 
     try {
+      // Sanitize input
+      const sanitizedEmail = DOMPurify.sanitize(loginData.email.trim().toLowerCase());
+      
+      // Use proper authentication via Supabase
+      const { error } = await signIn(sanitizedEmail, loginData.password);
+      
+      if (error) {
+        setLoginAttempts(prev => prev + 1);
+        throw new Error('Email ou senha incorretos');
+      }
+
       // Find customer by email
       const { data: customerData, error: customerError } = await supabase
         .from('customers')
         .select('id, name, email')
-        .eq('email', loginData.email)
+        .eq('email', sanitizedEmail)
         .eq('status', 'active')
         .single();
 
       if (customerError || !customerData) {
-        throw new Error('Cliente não encontrado ou email incorreto');
-      }
-
-      // For simplicity, we're using a basic password check
-      // In production, you should implement proper authentication
-      if (loginData.password !== 'cliente123') {
-        throw new Error('Senha incorreta');
+        throw new Error('Cliente não encontrado');
       }
 
       setCustomer(customerData);
       setIsLoggedIn(true);
+      setLoginAttempts(0); // Reset attempts on success
       localStorage.setItem('customer', JSON.stringify(customerData));
       
       await fetchInvoices(customerData.id);
 
       toast({
         title: "Login realizado",
-        description: `Bem-vindo, ${customerData.name}!`
+        description: `Bem-vindo, ${DOMPurify.sanitize(customerData.name)}!`
       });
     } catch (error: any) {
+      setLoginAttempts(prev => prev + 1);
       toast({
         title: "Erro no login",
-        description: error.message,
+        description: DOMPurify.sanitize(error.message),
         variant: "destructive"
       });
     } finally {
@@ -173,8 +195,9 @@ export default function CustomerPortal() {
                   id="email"
                   type="email"
                   value={loginData.email}
-                  onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+                  onChange={(e) => setLoginData({ ...loginData, email: DOMPurify.sanitize(e.target.value) })}
                   placeholder="seu@email.com"
+                  maxLength={100}
                   required
                 />
               </div>
@@ -186,14 +209,20 @@ export default function CustomerPortal() {
                   value={loginData.password}
                   onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                   placeholder="Digite sua senha"
+                  maxLength={50}
                   required
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full" disabled={loading || loginAttempts >= 5}>
                 {loading ? 'Entrando...' : 'Entrar'}
               </Button>
+              {loginAttempts > 0 && (
+                <p className="text-xs text-destructive text-center">
+                  Tentativas restantes: {5 - loginAttempts}
+                </p>
+              )}
               <p className="text-xs text-muted-foreground text-center">
-                Para demonstração, use a senha: cliente123
+                Use suas credenciais de acesso
               </p>
             </form>
           </CardContent>
@@ -212,7 +241,7 @@ export default function CustomerPortal() {
           </div>
           <div className="flex items-center space-x-4">
             <span className="text-sm text-muted-foreground">
-              Olá, {customer?.name}
+              Olá, {customer?.name ? DOMPurify.sanitize(customer.name) : 'Cliente'}
             </span>
             <Button variant="outline" size="sm" onClick={handleLogout}>
               <LogOut className="h-4 w-4 mr-2" />
