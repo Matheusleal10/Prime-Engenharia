@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
 
           <div style="text-align: center; margin: 30px 0;">
             <p style="color: #374151; margin-bottom: 15px;">Tem alguma dúvida? Fale conosco:</p>
-            <a href="https://wa.me/5598970261392" 
+            <a href="https://wa.me/5598883500011" 
                style="background-color: #25d366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
               💬 WhatsApp Direto
             </a>
@@ -148,7 +148,7 @@ const handler = async (req: Request): Promise<Response> => {
             <p style="color: #6b7280; font-size: 14px;">
               <strong>Prime Engenharia</strong><br>
               Qualidade e confiança em cada projeto<br>
-              📱 (98) 9 9999-9999 | 📧 contato@primeengenharia.com
+              📱 Atendimento: (98) 98235-0016 | Comercial: (98) 98835-0011 | 📧 contato@primeengenharia.com
             </p>
           </div>
         </div>

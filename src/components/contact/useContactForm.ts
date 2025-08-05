@@ -79,7 +79,7 @@ ${data.message}
 
       // 3. Redirecionar para WhatsApp com mensagem formatada
       const whatsappMessage = formatWhatsAppMessage(data);
-      const whatsappNumber = '5598970261392'; // Seu número sem símbolos
+      const whatsappNumber = '5598883500011'; // Número comercial para orçamentos
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
       
       // Abrir WhatsApp em nova aba

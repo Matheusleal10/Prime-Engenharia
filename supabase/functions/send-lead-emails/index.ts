@@ -133,7 +133,7 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://wa.me/559898708157?text=Olá! Acabei de solicitar um orçamento pelo site e gostaria de conversar." 
+              <a href="https://wa.me/5598883500011?text=Olá! Acabei de solicitar um orçamento pelo site e gostaria de conversar." 
                  style="background-color: #25d366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
                 💬 Conversar no WhatsApp
               </a>
@@ -141,7 +141,7 @@ const handler = async (req: Request): Promise<Response> => {
             
             <p style="color: #64748b; font-size: 14px; text-align: center; margin-top: 30px;">
               Tem alguma dúvida? Entre em contato conosco:<br>
-              📞 (98) 98710-8157 | ✉️ faleconosco@primeeng.com.br
+              📞 Atendimento: (98) 98235-0016 | Comercial: (98) 98835-0011 | ✉️ faleconosco@primeeng.com.br
             </p>
           </div>
           

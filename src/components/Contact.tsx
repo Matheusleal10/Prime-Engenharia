@@ -29,12 +29,12 @@ const Contact = () => {
               </p>
               
               <a 
-                href="https://wa.me/559898708157" 
+                href="https://wa.me/5598982350016"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
               >
-                (98) 98710-8157
+                (98) 98235-0016
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -91,7 +91,8 @@ const Contact = () => {
                   📞 Outros Contatos
                 </h3>
                 <p className="text-prime-concrete">
-                  WhatsApp: (98) 98710-8157<br />
+                  Atendimento: (98) 98235-0016<br />
+                  Comercial: (98) 98835-0011<br />
                   Email: faleconosco@primeeng.com.br<br />
                   CNPJ: 26.745.343/0001-79
                 </p>
