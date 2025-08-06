@@ -29,34 +29,54 @@ const EcoBrickConcepts = () => {
 
   const carouselImages = [
     {
-      src: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&h=600&fit=crop",
-      alt: "Construção com tijolo ecológico - Estrutura moderna",
-      caption: "Estruturas modernas e sustentáveis"
+      src: "/lovable-uploads/a89c1d2b-5407-44df-9749-ee55768fbccf.png",
+      alt: "Sala de estar moderna com parede de tijolo ecológico",
+      caption: "Elegância em ambientes residenciais"
     },
     {
-      src: "https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=800&h=600&fit=crop",
-      alt: "Obra em andamento com tijolo ecológico",
-      caption: "Agilidade na construção"
+      src: "/lovable-uploads/cc5947e6-c7e4-453d-94c2-57ef43ec269a.png",
+      alt: "Ambiente aconchegante com tijolo ecológico",
+      caption: "Conforto e estilo sustentável"
     },
     {
-      src: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?w=800&h=600&fit=crop",
-      alt: "Arquitetura sustentável com tijolo ecológico",
-      caption: "Design arquitetônico inovador"
+      src: "/lovable-uploads/61be12da-ae64-4a1d-b54e-7c2eec53a435.png",
+      alt: "Decoração sofisticada com tijolo ecológico",
+      caption: "Sofisticação natural"
     },
     {
-      src: "https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&h=600&fit=crop",
-      alt: "Detalhes construtivos do tijolo ecológico",
-      caption: "Precisão nos detalhes"
+      src: "/lovable-uploads/3047a7fc-98f9-4987-899b-ffbbcecdf326.png",
+      alt: "Design minimalista com tijolo ecológico",
+      caption: "Minimalismo sustentável"
     },
     {
-      src: "https://images.unsplash.com/photo-1486718448742-163732cd1544?w=800&h=600&fit=crop",
-      alt: "Acabamento com tijolo ecológico",
-      caption: "Acabamento natural elegante"
+      src: "/lovable-uploads/7ee50644-397b-40a4-ab8c-1bed6915814f.png",
+      alt: "Integração arquitetônica com tijolo ecológico",
+      caption: "Integração perfeita dos ambientes"
     },
     {
-      src: "https://images.unsplash.com/photo-1433832597046-4f10e10ac764?w=800&h=600&fit=crop",
-      alt: "Construção sustentável completa",
-      caption: "Resultado final sustentável"
+      src: "/lovable-uploads/c507cb86-0946-46e9-b115-ee267cd6d8d9.png",
+      alt: "Parede externa decorativa com tijolo ecológico",
+      caption: "Versatilidade em fachadas"
+    },
+    {
+      src: "/lovable-uploads/fe05a24a-6270-4e9c-b40c-9158052689ca.png",
+      alt: "Arquitetura contemporânea com tijolo ecológico",
+      caption: "Modernidade sustentável"
+    },
+    {
+      src: "/lovable-uploads/86e6ec1b-79e0-4cb7-884a-3469f2ad7313.png",
+      alt: "Banheiro moderno com tijolo ecológico",
+      caption: "Aplicação em ambientes úmidos"
+    },
+    {
+      src: "/lovable-uploads/eda99da4-871e-4b25-a4b1-200606578589.png",
+      alt: "Sala de estar com tijolo ecológico",
+      caption: "Ambientes acolhedores"
+    },
+    {
+      src: "/lovable-uploads/f1c6e620-d537-4655-b783-a2b2635ebaa9.png",
+      alt: "Quarto moderno com tijolo ecológico",
+      caption: "Conforto e design industrial"
     }
   ];
 
@@ -138,10 +158,10 @@ const EcoBrickConcepts = () => {
                     <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
                       <CardContent className="p-0">
                         <div className="relative">
-                          <img
+                           <img
                             src={image.src}
                             alt={image.alt}
-                            className="w-full h-64 object-cover transition-transform duration-500 hover:scale-110"
+                            className="w-full h-64 object-contain bg-gray-50 transition-transform duration-500 hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                           <div className="absolute bottom-4 left-4 right-4">
