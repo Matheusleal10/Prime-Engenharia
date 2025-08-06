@@ -20,14 +20,8 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-prime-green flex items-center justify-between">
+          <DialogTitle className="text-2xl font-bold text-prime-green">
             {product.name}
-            <button
-              onClick={onClose}
-              className="text-prime-concrete hover:text-prime-green transition-colors"
-            >
-              <X className="h-6 w-6" />
-            </button>
           </DialogTitle>
         </DialogHeader>
         
