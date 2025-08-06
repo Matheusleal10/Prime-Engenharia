@@ -26,7 +26,7 @@ const Products = () => {
       name: "Blocos",
       description: "Blocos de concreto modulares para construção estrutural e de vedação.",
       details: "Produzidos com cimento, areia e agregados selecionados. Dimensões padronizadas para facilitar o assentamento. Resistência compressiva superior a 4,5 MPa. Ideais para paredes estruturais e de vedação.",
-      image: "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?w=800&h=600&fit=crop",
+      image: "/lovable-uploads/a1726bce-fcff-4b72-9b38-cb9c22b573ec.png",
       benefits: [
         "Alta resistência e durabilidade",
         "Facilidade no assentamento",
@@ -46,7 +46,7 @@ const Products = () => {
       name: "Sextavado",
       description: "Peças hexagonais para pavimentação decorativa e funcional.",
       details: "Peças pré-moldadas em formato hexagonal, oferecendo design moderno e funcionalidade. Produzidas com concreto de alta qualidade. Permitem drenagem e fácil manutenção. Disponíveis em diversas cores e acabamentos.",
-      image: "https://images.unsplash.com/photo-1486718448742-163732cd1544?w=800&h=600&fit=crop",
+      image: "/lovable-uploads/2e912668-8e38-4d6d-960b-f96cbf058721.png",
       benefits: [
         "Design moderno e atrativo",
         "Facilita drenagem",
@@ -66,7 +66,7 @@ const Products = () => {
       name: "Paver",
       description: "Blocos intertravados para pavimentação de alta performance.",
       details: "Blocos de concreto intertravados produzidos com tecnologia avançada. Alta resistência à compressão e baixa absorção de água. Sistema de encaixe que distribui cargas uniformemente. Ideal para áreas de tráfego intenso.",
-      image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&h=600&fit=crop",
+      image: "/lovable-uploads/b58b4b3d-75ef-4a8c-9748-3fb872f8025a.png",
       benefits: [
         "Alta resistência ao tráfego",
         "Sistema de intertravamento",
