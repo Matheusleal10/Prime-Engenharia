@@ -79,7 +79,7 @@ const EcoBrickConcepts = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Imagem do Tijolo Ecológico */}
           <div className="animate-slide-up">
-            <div className="relative bg-white rounded-2xl shadow-2xl p-8 h-96 flex items-center justify-center overflow-hidden">
+            <div className="relative rounded-2xl shadow-2xl h-96 overflow-hidden">
               <img 
                 src="/lovable-uploads/53e1bebf-da3f-4251-9235-b8d02d67f457.png" 
                 alt="Tijolo Ecológico PRIME ENGENHARIA"
