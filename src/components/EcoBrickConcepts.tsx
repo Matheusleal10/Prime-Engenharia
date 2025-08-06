@@ -155,23 +155,21 @@ const EcoBrickConcepts = () => {
               {carouselImages.map((image, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                      <CardContent className="p-0">
-                        <div className="relative">
-                           <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="w-full h-64 object-contain bg-gray-50 transition-transform duration-500 hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                          <div className="absolute bottom-4 left-4 right-4">
-                            <p className="text-white font-semibold text-sm">
-                              {image.caption}
-                            </p>
-                          </div>
+                    <div className="relative overflow-hidden rounded-lg group cursor-pointer">
+                      <div className="aspect-square w-full">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white font-semibold text-sm drop-shadow-lg">
+                            {image.caption}
+                          </p>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   </div>
                 </CarouselItem>
               ))}
