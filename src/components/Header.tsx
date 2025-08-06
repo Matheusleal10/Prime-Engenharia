@@ -19,13 +19,13 @@ const Header = () => {
       isScrolled ? 'bg-prime-green/95 shadow-lg' : 'bg-prime-green'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-28 lg:h-36">
+        <div className="flex items-center justify-between h-32 lg:h-48">
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/lovable-uploads/0b5e2834-14f7-48ac-9d10-1496398c9096.png" 
+              src="/lovable-uploads/1d08b74a-820f-476b-a2bd-f5169deaa281.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-28 sm:h-32 md:h-36 lg:h-40 xl:h-44 w-auto"
+              className="h-32 sm:h-36 md:h-40 lg:h-48 xl:h-52 w-auto"
             />
           </div>
 
