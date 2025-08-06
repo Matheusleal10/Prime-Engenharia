@@ -19,28 +19,40 @@ const Header = () => {
       isScrolled ? 'bg-prime-green/95 shadow-lg' : 'bg-prime-green'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-32 lg:h-48">
+        <div className={`flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? 'h-20 lg:h-24' : 'h-32 lg:h-48'
+        }`}>
           {/* Logo */}
           <div className="flex items-center">
             <img 
               src="/lovable-uploads/1d08b74a-820f-476b-a2bd-f5169deaa281.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-32 sm:h-36 md:h-40 lg:h-48 xl:h-52 w-auto"
+              className={`w-auto transition-all duration-300 ${
+                isScrolled ? 'h-16 sm:h-18 md:h-20 lg:h-22' : 'h-32 sm:h-36 md:h-40 lg:h-48 xl:h-52'
+              }`}
             />
           </div>
 
           {/* Menu Desktop */}
-          <nav className="hidden md:flex items-center space-x-12">
-            <a href="#sobre" className="text-white hover:text-prime-concrete font-bold text-lg transition-colors">
+          <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
+            <a href="#sobre" className={`text-white hover:text-prime-concrete font-bold transition-all ${
+              isScrolled ? 'text-base' : 'text-lg'
+            }`}>
               Sobre
             </a>
-            <a href="#produtos" className="text-white hover:text-prime-concrete font-bold text-lg transition-colors">
+            <a href="#produtos" className={`text-white hover:text-prime-concrete font-bold transition-all ${
+              isScrolled ? 'text-base' : 'text-lg'
+            }`}>
               Produtos
             </a>
-            <a href="#como-comprar" className="text-white hover:text-prime-concrete font-bold text-lg transition-colors">
+            <a href="#como-comprar" className={`text-white hover:text-prime-concrete font-bold transition-all ${
+              isScrolled ? 'text-base' : 'text-lg'
+            }`}>
               Como Comprar
             </a>
-            <a href="#contato" className="text-white hover:text-prime-concrete font-bold text-lg transition-colors">
+            <a href="#contato" className={`text-white hover:text-prime-concrete font-bold transition-all ${
+              isScrolled ? 'text-base' : 'text-lg'
+            }`}>
               Contato
             </a>
           </nav>
@@ -50,7 +62,9 @@ const Header = () => {
             href="https://wa.me/5598982350016"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-medium transition-colors"
+            className={`hidden md:flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full font-medium transition-all ${
+              isScrolled ? 'px-3 py-1.5 text-sm' : 'px-4 py-2 text-base'
+            }`}
           >
             Fale conosco
           </a>
