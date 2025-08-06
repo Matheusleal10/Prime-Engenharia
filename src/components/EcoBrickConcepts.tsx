@@ -81,9 +81,9 @@ const EcoBrickConcepts = () => {
           <div className="animate-slide-up">
             <div className="relative bg-white rounded-2xl shadow-2xl p-8 h-96 flex items-center justify-center overflow-hidden">
               <img 
-                src="/lovable-uploads/baa55910-9e15-4c81-9d3c-a4a309711581.png" 
+                src="/lovable-uploads/53e1bebf-da3f-4251-9235-b8d02d67f457.png" 
                 alt="Tijolo Ecológico PRIME ENGENHARIA"
-                className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-prime-green/10 to-transparent rounded-2xl"></div>
             </div>
@@ -161,17 +161,6 @@ const EcoBrickConcepts = () => {
           </Carousel>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16 animate-fade-in">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto shadow-lg">
-            <h4 className="text-xl font-bold text-prime-concrete-dark mb-4">
-              Transforme seu projeto com sustentabilidade
-            </h4>
-            <p className="text-prime-concrete">
-              Descubra como o tijolo ecológico pode revolucionar sua construção
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
