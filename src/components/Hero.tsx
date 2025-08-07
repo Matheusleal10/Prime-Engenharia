@@ -1,6 +1,6 @@
 
 const Hero = () => {
-  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-prime-green to-prime-green-light pt-20 lg:pt-24">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-prime-green to-prime-green-light pt-24 lg:pt-32">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"></div>
