@@ -5,19 +5,32 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      
+      setIsScrolled(currentScrollY > 20);
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-prime-green/95 shadow-lg' : 'bg-prime-green'
-    }`}>
+    } ${isHidden ? '-translate-y-full' : 'translate-y-0'}`}>
       <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${
           isScrolled ? 'h-24 lg:h-28' : 'h-32 lg:h-44'
@@ -27,9 +40,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
-              className={`w-auto transition-all duration-300 ${
-                isScrolled ? 'h-20 sm:h-22 md:h-24 lg:h-26' : 'h-28 sm:h-32 md:h-36 lg:h-40'
-              }`}
+              className="w-12 h-auto"
             />
           </div>
 
