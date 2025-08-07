@@ -36,7 +36,7 @@ const About = () => {
           <div className="animate-slide-up">
             <div className="relative bg-gray-50 rounded-2xl shadow-2xl h-96 overflow-hidden">
               <img 
-                src="/lovable-uploads/f2c71910-3c12-4f27-95ad-af066f1ebfc3.png" 
+                src="/lovable-uploads/ad28b3ed-dcb6-4427-9fda-75df7ebdb8f5.png" 
                 alt="PRIME ENGENHARIA Escritório"
                 className="w-full h-full object-cover"
               />
