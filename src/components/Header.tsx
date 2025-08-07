@@ -20,7 +20,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? 'h-20 lg:h-24' : 'h-32 lg:h-48'
+          isScrolled ? 'h-16 lg:h-18' : 'h-20 lg:h-24'
         }`}>
           {/* Logo */}
           <div className="flex items-center">
@@ -28,7 +28,7 @@ const Header = () => {
               src="/lovable-uploads/1d08b74a-820f-476b-a2bd-f5169deaa281.png" 
               alt="PRIME ENGENHARIA" 
               className={`w-auto transition-all duration-300 ${
-                isScrolled ? 'h-16 sm:h-18 md:h-20 lg:h-22' : 'h-32 sm:h-36 md:h-40 lg:h-48 xl:h-52'
+                isScrolled ? 'h-12 sm:h-14 md:h-16 lg:h-18' : 'h-16 sm:h-18 md:h-20 lg:h-22'
               }`}
             />
           </div>
@@ -81,7 +81,7 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-prime-green border-t border-white/20">
-            <nav className="flex flex-col py-4 space-y-6">
+            <nav className="flex flex-col py-3 space-y-4">
               <a href="#sobre" className="text-white hover:text-prime-concrete font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Sobre
               </a>
