@@ -17,19 +17,19 @@ const EcoBrickConcepts = () => {
   const concepts = [
     {
       title: "Composição Sustentável",
-      description: "Feito com cimento, areia e água, sem queima, reduzindo a emissão de gases poluentes em até 70%."
+      description: "É um material de construção fabricado com uma mistura de solo, cimento (em pequena proporção) e água, sem a necessidade de queima. Essa característica o diferencia dos tijolos convencionais, reduzindo o impacto ambiental através da diminuição da emissão de gases poluentes e do consumo de energia."
     },
     {
-      title: "Eficiência Térmica",
-      description: "Oferece excelente isolamento térmico, mantendo o ambiente mais fresco no verão e aquecido no inverno."
+      title: "Eficiência térmica e acústica",
+      description: "Por sua densidade e composição, o tijolo ecológico proporciona maior isolamento térmico, mantendo ambientes mais frescos no verão e aquecidos no inverno, o que reduz custos com energia elétrica. Também apresenta bom isolamento acústico, tornando o espaço mais silencioso e confortável."
     },
     {
       title: "Economia de Material",
-      description: "Sistema de encaixe dispensa o uso de massa de assentamento, economizando até 50% de materiais."
+      description: "Tijolo ecológico é um sistema de construção que dispensa o uso de alguns produtos da construção tradicional e a diminuição de outros como: ferro, areia, cimento, brita e outros, economizando em até 30% de material."
     },
     {
-      title: "Rapidez na Construção",
-      description: "Montagem simplificada acelera a obra em até 40%, reduzindo custos de mão de obra."
+      title: "Rapidez e Eficiência",
+      description: "Com o tijolo ecológico, sua construção avança até 40% mais rápido. Os blocos se encaixam com precisão, dispensam reboco pesado e agilizam toda a parte elétrica e hidráulica. Menos retrabalho, menos desperdício e mais obra entregue no prazo!"
     }
   ];
 
