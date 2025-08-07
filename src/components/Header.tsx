@@ -20,7 +20,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? 'h-16 lg:h-18' : 'h-24 lg:h-32'
+          isScrolled ? 'h-24 lg:h-28' : 'h-32 lg:h-44'
         }`}>
           {/* Logo */}
           <div className="flex items-center">
@@ -28,7 +28,7 @@ const Header = () => {
               src="/lovable-uploads/1d08b74a-820f-476b-a2bd-f5169deaa281.png" 
               alt="PRIME ENGENHARIA" 
               className={`w-auto transition-all duration-300 ${
-                isScrolled ? 'h-14 sm:h-16 md:h-18 lg:h-20' : 'h-20 sm:h-22 md:h-24 lg:h-28'
+                isScrolled ? 'h-20 sm:h-22 md:h-24 lg:h-26' : 'h-28 sm:h-32 md:h-36 lg:h-40'
               }`}
             />
           </div>
