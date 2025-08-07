@@ -40,7 +40,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
-              className="w-12 h-auto"
+              className="w-30 h-auto"
             />
           </div>
 
