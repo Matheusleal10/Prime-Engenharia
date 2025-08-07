@@ -25,7 +25,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/lovable-uploads/1d08b74a-820f-476b-a2bd-f5169deaa281.png" 
+              src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
               className={`w-auto transition-all duration-300 ${
                 isScrolled ? 'h-20 sm:h-22 md:h-24 lg:h-26' : 'h-28 sm:h-32 md:h-36 lg:h-40'

@@ -22,7 +22,7 @@ const Advantages = () => {
     <section id="vantagens" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4 text-center">
             Por que escolher o Tijolo Ecológico da PRIME ENGENHARIA?
           </h2>
           <p className="text-lg text-prime-concrete max-w-3xl mx-auto"></p>

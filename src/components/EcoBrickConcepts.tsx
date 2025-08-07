@@ -35,69 +35,49 @@ const EcoBrickConcepts = () => {
 
   const carouselImages = [
     {
-      src: "/lovable-uploads/27732a31-4255-434c-9f37-42d77049b0b2.png",
+      src: "/lovable-uploads/bc848687-2925-40da-9cfb-63c672d8eb3b.png",
+      alt: "Muro construído com tijolo ecológico",
+      caption: "Construção sólida e durável"
+    },
+    {
+      src: "/lovable-uploads/44b95eb4-9bdc-43c5-b92e-4030d4d4cdaa.png",
+      alt: "Interior moderno com parede de tijolo ecológico",
+      caption: "Design contemporâneo e aconchegante"
+    },
+    {
+      src: "/lovable-uploads/f1798e79-056b-492b-838c-94fe4a7cdf91.png",
+      alt: "Casa moderna com tijolo ecológico",
+      caption: "Arquitetura moderna e sustentável"
+    },
+    {
+      src: "/lovable-uploads/80a92efe-cd0b-4f57-bfa6-bcd88b4137dc.png",
       alt: "Construção em andamento com tijolo ecológico",
       caption: "Eficiência na construção"
     },
     {
-      src: "/lovable-uploads/a89c1d2b-5407-44df-9749-ee55768fbccf.png",
-      alt: "Sala de estar moderna com parede de tijolo ecológico",
-      caption: "Elegância em ambientes residenciais"
+      src: "/lovable-uploads/c3af6a9a-8693-4032-952a-184e0c672624.png",
+      alt: "Cozinha moderna com tijolo ecológico",
+      caption: "Sofisticação em ambientes internos"
     },
     {
-      src: "/lovable-uploads/23cfa301-6b01-4461-b5cc-3b73186f0e36.png",
-      alt: "Estrutura em construção com tijolo ecológico",
-      caption: "Precisão no acabamento"
+      src: "/lovable-uploads/42add67d-29f2-49c8-a270-585dc2684c70.png",
+      alt: "Casa contemporânea com tijolo ecológico",
+      caption: "Design arquitetônico avançado"
     },
     {
-      src: "/lovable-uploads/cc5947e6-c7e4-453d-94c2-57ef43ec269a.png",
-      alt: "Ambiente aconchegante com tijolo ecológico",
-      caption: "Conforto e estilo sustentável"
+      src: "/lovable-uploads/0eb0163a-e0d1-4b85-a4c3-93c5bdcad767.png",
+      alt: "Fundação residencial com tijolo ecológico",
+      caption: "Base sólida para construção"
     },
     {
-      src: "/lovable-uploads/4d9dcfca-38b0-4939-b755-c6cdd4f1b6d8.png",
-      alt: "Construção residencial com tijolo ecológico",
-      caption: "Estrutura sólida e eficiente"
+      src: "/lovable-uploads/bcab7693-7f71-4037-931e-59f96e17d70c.png",
+      alt: "Escritório moderno com tijolo ecológico",
+      caption: "Ambiente profissional e elegante"
     },
     {
-      src: "/lovable-uploads/61be12da-ae64-4a1d-b54e-7c2eec53a435.png",
-      alt: "Decoração sofisticada com tijolo ecológico",
-      caption: "Sofisticação natural"
-    },
-    {
-      src: "/lovable-uploads/b7411e99-7a1f-4103-b6ed-2fd1c93d10d5.png",
-      alt: "Ambiente decorativo com tijolo ecológico",
-      caption: "Decoração sofisticada e acolhedora"
-    },
-    {
-      src: "/lovable-uploads/329aa2c5-fbed-4b44-b7e4-376a7c7189cf.png",
-      alt: "Construção estrutural com tijolo ecológico",
-      caption: "Construção sólida e durável"
-    },
-    {
-      src: "/lovable-uploads/0da55251-b81f-4e23-8516-c20323877559.png",
-      alt: "Casa moderna pronta com tijolo ecológico",
-      caption: "Casa pronta com design contemporâneo"
-    },
-    {
-      src: "/lovable-uploads/327ac52d-a7e3-4322-8795-fb5f3c34e28a.png",
-      alt: "Escada decorativa com tijolo ecológico",
-      caption: "Decoração elegante e funcional"
-    },
-    {
-      src: "/lovable-uploads/3f9b2f9f-9ab3-427c-96fd-adb96230e710.png",
-      alt: "Muro em construção com tijolo ecológico",
-      caption: "Construção precisa e eficiente"
-    },
-    {
-      src: "/lovable-uploads/087c2736-d128-4e63-b978-1630813f20fb.png",
-      alt: "Residência finalizada com tijolo ecológico",
-      caption: "Casa pronta com arquitetura moderna"
-    },
-    {
-      src: "/lovable-uploads/f1c6e620-d537-4655-b783-a2b2635ebaa9.png",
-      alt: "Quarto moderno com tijolo ecológico",
-      caption: "Conforto e design industrial"
+      src: "/lovable-uploads/8f25d509-e90e-49df-81df-4579727d2dc4.png",
+      alt: "Casa ecológica completa",
+      caption: "Projeto finalizado com sustentabilidade"
     }
   ];
 
@@ -106,7 +86,7 @@ const EcoBrickConcepts = () => {
       <div className="container mx-auto px-4">
         {/* Título da Seção */}
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-6">
+          <h2 className="text-3xl lg:text-5xl font-bold text-prime-green mb-6 text-center">
             Conheça o Tijolo Ecológico
           </h2>
           <p className="text-lg text-prime-concrete max-w-4xl mx-auto leading-relaxed">

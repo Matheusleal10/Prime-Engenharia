@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Logo e Descrição */}
           <div>
             <img 
-              src="/lovable-uploads/bb951720-d4f1-4313-8431-53c3dd61f248.png" 
+              src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
               className="h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 w-auto mb-4 brightness-0 invert"
             />
@@ -57,9 +57,10 @@ const Footer = () => {
         {/* Linha divisória */}
         <div className="border-t border-gray-600 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 PRIME ENGENHARIA - Todos os direitos reservados.
-            </p>
+            <div className="text-gray-400 text-sm mb-4 md:mb-0">
+              <p>© 2024 PRIME ENGENHARIA - Todos os direitos reservados.</p>
+              <p>CNPJ: 26.745.343/0001-79</p>
+            </div>
             
             <div className="flex space-x-4">
               {/* Facebook */}

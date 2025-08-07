@@ -149,7 +149,7 @@ const Products = () => {
                   {featuredProduct.icon} Produto Principal
                 </div>
                 
-                <h3 className="text-3xl lg:text-4xl font-bold text-prime-green mb-6">
+                <h3 className="text-3xl lg:text-4xl font-bold text-prime-green mb-6 text-center lg:text-left">
                   {featuredProduct.name}
                 </h3>
 
@@ -228,7 +228,7 @@ const Products = () => {
 
         {/* Vantagens dos Tijolos Ecológicos */}
         <div className="text-center mb-16">
-          <h3 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4">
+          <h3 className="text-3xl lg:text-5xl font-bold text-prime-green mb-4 text-center">
             Por que escolher o Tijolo Ecológico da PRIME ENGENHARIA?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
