@@ -29,14 +29,29 @@ const EcoBrickConcepts = () => {
 
   const carouselImages = [
     {
+      src: "/lovable-uploads/27732a31-4255-434c-9f37-42d77049b0b2.png",
+      alt: "Construção em andamento com tijolo ecológico",
+      caption: "Eficiência na construção"
+    },
+    {
       src: "/lovable-uploads/a89c1d2b-5407-44df-9749-ee55768fbccf.png",
       alt: "Sala de estar moderna com parede de tijolo ecológico",
       caption: "Elegância em ambientes residenciais"
     },
     {
+      src: "/lovable-uploads/23cfa301-6b01-4461-b5cc-3b73186f0e36.png",
+      alt: "Estrutura em construção com tijolo ecológico",
+      caption: "Precisão no acabamento"
+    },
+    {
       src: "/lovable-uploads/cc5947e6-c7e4-453d-94c2-57ef43ec269a.png",
       alt: "Ambiente aconchegante com tijolo ecológico",
       caption: "Conforto e estilo sustentável"
+    },
+    {
+      src: "/lovable-uploads/f4a78286-236b-435d-a0da-a32c42a1f118.png",
+      alt: "Obra em desenvolvimento com tijolo ecológico",
+      caption: "Rapidez na execução"
     },
     {
       src: "/lovable-uploads/61be12da-ae64-4a1d-b54e-7c2eec53a435.png",
