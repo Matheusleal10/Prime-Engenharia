@@ -11,7 +11,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-10 md:h-[70px] w-auto mb-4 brightness-0 invert"
+              className="h-10 lg:h-[70px] w-auto mb-4 brightness-0 invert"
             />
           </div>
 

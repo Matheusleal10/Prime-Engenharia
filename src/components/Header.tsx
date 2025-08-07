@@ -40,12 +40,12 @@ const Header = () => {
             <img 
               src="/lovable-uploads/99364a38-8664-4454-9977-176085566d0d.png" 
               alt="PRIME ENGENHARIA" 
-              className="h-10 md:h-[70px] w-auto"
+              className="h-10 lg:h-[70px] w-auto"
             />
           </div>
 
           {/* Menu Desktop */}
-          <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
+          <nav className="hidden lg:flex items-center space-x-8 lg:space-x-12">
             <a href="#sobre" className={`text-white hover:text-prime-concrete font-bold transition-all ${
               isScrolled ? 'text-base' : 'text-lg'
             }`}>
@@ -73,7 +73,7 @@ const Header = () => {
             href="https://wa.me/5598982350016"
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden md:flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full font-medium transition-all ${
+            className={`hidden lg:flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full font-medium transition-all ${
               isScrolled ? 'px-3 py-1.5 text-sm' : 'px-4 py-2 text-base'
             }`}
           >
@@ -82,7 +82,7 @@ const Header = () => {
 
           {/* Menu Mobile Button */}
           <button
-            className="md:hidden p-2 text-white"
+            className="lg:hidden p-2 text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -91,7 +91,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-prime-green border-t border-white/20">
+          <div className="lg:hidden bg-prime-green border-t border-white/20">
             <nav className="flex flex-col py-3 space-y-4">
               <a href="#sobre" className="text-white hover:text-prime-concrete font-bold text-lg px-4" onClick={() => setIsMenuOpen(false)}>
                 Sobre
