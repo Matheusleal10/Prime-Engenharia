@@ -36,8 +36,8 @@ const Index = () => {
       )}
       
       <Hero />
-      <About />
       <EcoBrickConcepts />
+      <About />
       <Products />
       <Testimonials />
       <HowToBuy />
