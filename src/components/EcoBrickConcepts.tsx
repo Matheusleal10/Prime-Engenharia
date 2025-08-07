@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
@@ -8,6 +10,10 @@ import {
 } from '@/components/ui/carousel';
 
 const EcoBrickConcepts = () => {
+  const plugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  );
+
   const concepts = [
     {
       title: "Composição Sustentável",
@@ -165,7 +171,14 @@ const EcoBrickConcepts = () => {
             </p>
           </div>
 
-          <Carousel className="w-full max-w-6xl mx-auto">
+          <Carousel 
+            plugins={[plugin.current]}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-6xl mx-auto"
+          >
             <CarouselContent>
               {carouselImages.map((image, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
