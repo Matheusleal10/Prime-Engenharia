@@ -59,34 +59,34 @@ const EcoBrickConcepts = () => {
       caption: "Sofisticação natural"
     },
     {
-      src: "/lovable-uploads/3047a7fc-98f9-4987-899b-ffbbcecdf326.png",
-      alt: "Design minimalista com tijolo ecológico",
-      caption: "Minimalismo sustentável"
+      src: "/lovable-uploads/b7411e99-7a1f-4103-b6ed-2fd1c93d10d5.png",
+      alt: "Ambiente decorativo com tijolo ecológico",
+      caption: "Decoração sofisticada e acolhedora"
     },
     {
-      src: "/lovable-uploads/7ee50644-397b-40a4-ab8c-1bed6915814f.png",
-      alt: "Integração arquitetônica com tijolo ecológico",
-      caption: "Integração perfeita dos ambientes"
+      src: "/lovable-uploads/329aa2c5-fbed-4b44-b7e4-376a7c7189cf.png",
+      alt: "Construção estrutural com tijolo ecológico",
+      caption: "Construção sólida e durável"
     },
     {
-      src: "/lovable-uploads/c507cb86-0946-46e9-b115-ee267cd6d8d9.png",
-      alt: "Parede externa decorativa com tijolo ecológico",
-      caption: "Versatilidade em fachadas"
+      src: "/lovable-uploads/0da55251-b81f-4e23-8516-c20323877559.png",
+      alt: "Casa moderna pronta com tijolo ecológico",
+      caption: "Casa pronta com design contemporâneo"
     },
     {
-      src: "/lovable-uploads/fe05a24a-6270-4e9c-b40c-9158052689ca.png",
-      alt: "Arquitetura contemporânea com tijolo ecológico",
-      caption: "Modernidade sustentável"
+      src: "/lovable-uploads/327ac52d-a7e3-4322-8795-fb5f3c34e28a.png",
+      alt: "Escada decorativa com tijolo ecológico",
+      caption: "Decoração elegante e funcional"
     },
     {
-      src: "/lovable-uploads/86e6ec1b-79e0-4cb7-884a-3469f2ad7313.png",
-      alt: "Banheiro moderno com tijolo ecológico",
-      caption: "Aplicação em ambientes úmidos"
+      src: "/lovable-uploads/3f9b2f9f-9ab3-427c-96fd-adb96230e710.png",
+      alt: "Muro em construção com tijolo ecológico",
+      caption: "Construção precisa e eficiente"
     },
     {
-      src: "/lovable-uploads/eda99da4-871e-4b25-a4b1-200606578589.png",
-      alt: "Sala de estar com tijolo ecológico",
-      caption: "Ambientes acolhedores"
+      src: "/lovable-uploads/087c2736-d128-4e63-b978-1630813f20fb.png",
+      alt: "Residência finalizada com tijolo ecológico",
+      caption: "Casa pronta com arquitetura moderna"
     },
     {
       src: "/lovable-uploads/f1c6e620-d537-4655-b783-a2b2635ebaa9.png",
