@@ -49,9 +49,9 @@ const EcoBrickConcepts = () => {
       caption: "Conforto e estilo sustentável"
     },
     {
-      src: "/lovable-uploads/f4a78286-236b-435d-a0da-a32c42a1f118.png",
-      alt: "Obra em desenvolvimento com tijolo ecológico",
-      caption: "Rapidez na execução"
+      src: "/lovable-uploads/4d9dcfca-38b0-4939-b755-c6cdd4f1b6d8.png",
+      alt: "Construção residencial com tijolo ecológico",
+      caption: "Estrutura sólida e eficiente"
     },
     {
       src: "/lovable-uploads/61be12da-ae64-4a1d-b54e-7c2eec53a435.png",
