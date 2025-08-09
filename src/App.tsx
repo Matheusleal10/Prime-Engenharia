@@ -9,8 +9,8 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { RoleProtectedRoute } from "@/components/admin/RoleProtectedRoute";
 import { AdminLayout } from "@/components/admin/layout/AdminLayout";
 import { DebugLogs } from "@/components/DebugLogs";
-import { SystemHealthMonitor } from "@/components/SystemHealthMonitor";
-import { CacheManager } from "@/components/CacheManager";
+
+
 import { usePerformanceMonitor } from "@/hooks/usePerformanceMonitor";
 import Index from "./pages/Index";
 import Demo from "./pages/Demo";
@@ -113,12 +113,6 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-        {process.env.NODE_ENV === 'development' && (
-          <div className="fixed bottom-4 right-4 z-50 space-y-2">
-            <SystemHealthMonitor />
-            <CacheManager />
-          </div>
-        )}
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
