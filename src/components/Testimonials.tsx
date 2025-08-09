@@ -1,3 +1,5 @@
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
 const Testimonials = () => {
   const testimonials = [
     {
@@ -5,28 +7,32 @@ const Testimonials = () => {
       role: "Engenheiro Civil",
       project: "Residencial Vila Verde",
       quote: "Os tijolos ecológicos da PRIME ENGENHARIA superaram nossas expectativas. A qualidade é excepcional e o encaixe perfeito facilitou muito nossa obra.",
-      rating: 5
+      rating: 5,
+      image: "/lovable-uploads/c35ac7f3-44b8-4d7b-8695-7ebacddf34e0.png",
     },
     {
       name: "Maria Santos",
       role: "Arquiteta",
       project: "Casa Sustentável",
       quote: "Trabalhar com os produtos da PRIME foi uma experiência incrível. Além da qualidade, o atendimento é diferenciado e sempre pontual nas entregas.",
-      rating: 5
+      rating: 5,
+      image: "/lovable-uploads/8e7cfcf3-274a-4ca9-9a5b-dba1632dd410.png",
     },
     {
       name: "João Silva",
       role: "Construtor",
       project: "Muro Residencial",
       quote: "Economizei muito material e tempo usando os tijolos ecológicos. A resistência é comprovada e a aparência final ficou perfeita.",
-      rating: 5
+      rating: 5,
+      image: "/lovable-uploads/6ed934bc-5ba1-4c7f-94a0-dd2de538b478.png",
     },
     {
       name: "Ana Oliveira",
       role: "Proprietária",
       project: "Reforma Residencial",
       quote: "Escolhi a PRIME pela sustentabilidade, mas me surpreendi com a economia. Reduzi em 40% o custo da minha obra mantendo a qualidade.",
-      rating: 5
+      rating: 5,
+      image: "/lovable-uploads/ab39d25b-06df-415a-8cd9-8dc729016d9d.png",
     }
   ];
 
@@ -69,10 +75,13 @@ const Testimonials = () => {
 
               {/* Author Info */}
               <div className="text-center">
-                <div className="w-12 h-12 bg-prime-green/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-prime-green font-bold text-lg">
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
-                  </span>
+                <div className="mx-auto mb-3">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src={testimonial.image} alt={`Foto do cliente ${testimonial.name} - Depoimentos PRIME ENGENHARIA`} loading="lazy" />
+                    <AvatarFallback>
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
                 <h4 className="font-semibold text-prime-concrete-dark">
                   {testimonial.name}

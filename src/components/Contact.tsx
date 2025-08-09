@@ -109,8 +109,8 @@ const Contact = () => {
                   📞 Outros Contatos
                 </h3>
                 <p className="text-prime-concrete">
-                  Atendimento: (98) 98235-0016<br />
-                  Comercial: (98) 98235-0011<br />
+                  Comercial: (98) 98235-0016<br />
+                  Atendimento: (98) 98235-0011<br />
                   Email: faleconosco@primeeng.com.br<br />
                   CNPJ: 26.745.343/0001-79
                 </p>
