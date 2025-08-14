@@ -53,7 +53,9 @@ const Contact = () => {
               </a>
               
               <a 
-                href="#" 
+                href="https://instagram.com/primeeng_ma" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full flex items-center justify-center transition-colors"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -87,9 +89,9 @@ const Contact = () => {
                   📍 Endereço da Fábrica
                 </h3>
                 <p className="text-prime-concrete">
-                  Estrada da Raposa, 2002<br />
-                  Raposa - MA, 65138-000<br />
-                  Brasil
+                  RD MA 203, 42, Quadra 3<br />
+                  Loteamento sol, alto do farol<br />
+                  CEP 65138-000, Raposa - MA
                 </p>
               </div>
 
