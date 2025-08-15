@@ -11,7 +11,7 @@ const corsHeaders = {
 };
 
 interface LeadNotificationRequest {
-  leadId: string;
+  leadId?: string;
   name: string;
   email: string;
   phone: string;
@@ -92,7 +92,7 @@ const handler = async (req: Request): Promise<Response> => {
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
           
           <p style="color: #6b7280; font-size: 14px; text-align: center;">
-            Lead ID: ${leadId}<br>
+            Lead ID: ${leadId ?? 'N/A'}<br>
             Recebido em: ${new Date().toLocaleString('pt-BR')}
           </p>
         </div>
@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
 
           <div style="text-align: center; margin: 30px 0;">
             <p style="color: #374151; margin-bottom: 15px;">Tem alguma dúvida? Fale conosco:</p>
-            <a href="https://wa.me/5598883500011" 
+            <a href="https://wa.me/5598982350011" 
                style="background-color: #25d366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
               💬 WhatsApp Direto
             </a>

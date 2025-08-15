@@ -2,3 +2,6 @@ project_id = "qdaxssasxgjdznzzucbr"
 
 [functions.send-lead-emails]
 verify_jwt = false
+
+[functions.send-lead-notifications]
+verify_jwt = false

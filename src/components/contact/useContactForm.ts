@@ -76,12 +76,9 @@ ${sanitizedData.message}
       });
 
       // 1. Salvar lead no Supabase
-      const { data: leadData, error } = await supabase
+      const { error } = await supabase
         .from('leads')
-        .insert(sanitizedData)
-        .select()
-        .single();
-
+        .insert([sanitizedData] as any, { returning: 'minimal' } as any);
       if (error) {
         throw error;
       }
@@ -90,7 +87,6 @@ ${sanitizedData.message}
       try {
         await supabase.functions.invoke('send-lead-notifications', {
           body: {
-            leadId: leadData.id,
             ...sanitizedData
           }
         });
