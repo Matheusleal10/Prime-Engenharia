@@ -45,19 +45,9 @@ const EcoBrickConcepts = () => {
       caption: "Design contemporâneo e aconchegante"
     },
     {
-      src: "/lovable-uploads/f1798e79-056b-492b-838c-94fe4a7cdf91.png",
-      alt: "Casa moderna com tijolo ecológico",
-      caption: "Arquitetura moderna e sustentável"
-    },
-    {
       src: "/lovable-uploads/80a92efe-cd0b-4f57-bfa6-bcd88b4137dc.png",
       alt: "Construção em andamento com tijolo ecológico",
       caption: "Eficiência na construção"
-    },
-    {
-      src: "/lovable-uploads/c3af6a9a-8693-4032-952a-184e0c672624.png",
-      alt: "Cozinha moderna com tijolo ecológico",
-      caption: "Sofisticação em ambientes internos"
     },
     {
       src: "/lovable-uploads/42add67d-29f2-49c8-a270-585dc2684c70.png",
@@ -75,11 +65,6 @@ const EcoBrickConcepts = () => {
       caption: "Ambiente profissional e elegante"
     },
     {
-      src: "/lovable-uploads/8f25d509-e90e-49df-81df-4579727d2dc4.png",
-      alt: "Casa ecológica completa",
-      caption: "Projeto finalizado com sustentabilidade"
-    },
-    {
       src: "/lovable-uploads/2dde7755-66f3-4094-b20c-bfb75d41d6d0.png",
       alt: "Construção estrutural com tijolo ecológico",
       caption: "Solidez e durabilidade comprovadas"
@@ -88,11 +73,6 @@ const EcoBrickConcepts = () => {
       src: "/lovable-uploads/f23577cf-9792-4984-90a0-6ff330e90756.png",
       alt: "Banheiro moderno com tijolo ecológico",
       caption: "Elegância em ambientes íntimos"
-    },
-    {
-      src: "/lovable-uploads/f1700b83-a438-4b2d-bf16-3ed30edd2239.png",
-      alt: "Residência contemporânea com tijolo ecológico",
-      caption: "Arquitetura sustentável e moderna"
     }
   ];
 
