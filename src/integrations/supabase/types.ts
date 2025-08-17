@@ -399,6 +399,13 @@ export type Database = {
             referencedRelation: "products"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "inventory_movements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       invoice_items: {
@@ -454,6 +461,13 @@ export type Database = {
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoice_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products_public"
             referencedColumns: ["id"]
           },
         ]
@@ -764,6 +778,13 @@ export type Database = {
             referencedRelation: "products"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       orders: {
@@ -1062,6 +1083,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "receiving_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "receiving_items_receiving_id_fkey"
             columns: ["receiving_id"]
             isOneToOne: false
@@ -1224,7 +1252,48 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      products_public: {
+        Row: {
+          category: string | null
+          description: string | null
+          details: string | null
+          icon: string | null
+          id: string | null
+          is_active: boolean | null
+          is_featured: boolean | null
+          name: string | null
+          price: number | null
+          sort_order: number | null
+          unit: string | null
+        }
+        Insert: {
+          category?: string | null
+          description?: string | null
+          details?: string | null
+          icon?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          name?: string | null
+          price?: number | null
+          sort_order?: number | null
+          unit?: string | null
+        }
+        Update: {
+          category?: string | null
+          description?: string | null
+          details?: string | null
+          icon?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          is_featured?: boolean | null
+          name?: string | null
+          price?: number | null
+          sort_order?: number | null
+          unit?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       generate_invoice_number: {
