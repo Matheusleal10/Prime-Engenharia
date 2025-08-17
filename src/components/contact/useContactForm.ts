@@ -75,24 +75,13 @@ ${sanitizedData.message}
         }
       });
 
-      // 1. Salvar lead no Supabase
-      const { error } = await supabase
-        .from('leads')
-        .insert([sanitizedData] as any, { returning: 'minimal' } as any);
+      // Save lead and send notifications via edge function (uses service role for security)
+      const { error } = await supabase.functions.invoke('send-lead-notifications', {
+        body: sanitizedData
+      });
+      
       if (error) {
         throw error;
-      }
-
-      // 2. Enviar notificações por email
-      try {
-        await supabase.functions.invoke('send-lead-notifications', {
-          body: {
-            ...sanitizedData
-          }
-        });
-      } catch (emailError) {
-        console.error('Error sending notifications:', emailError);
-        // Continue mesmo se o email falhar
       }
 
       // 3. Redirecionar para WhatsApp com mensagem formatada

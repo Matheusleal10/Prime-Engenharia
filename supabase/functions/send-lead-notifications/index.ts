@@ -27,11 +27,28 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    // Get request data
+    const data: LeadNotificationRequest = await req.json();
+    
+    // Initialize Supabase client with service role key for database operations
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { leadId, name, email, phone, project_type, quantity, message }: LeadNotificationRequest = await req.json();
+    // First save the lead to database using service role (bypasses RLS)
+    const { error: dbError } = await supabase
+      .from('leads')
+      .insert([data]);
+      
+    if (dbError) {
+      console.error('Error saving lead to database:', dbError);
+      return new Response(
+        JSON.stringify({ error: 'Failed to save lead data' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { leadId, name, email, phone, project_type, quantity, message } = data;
 
     // Send notification email to admin team
     const adminEmailResponse = await resend.emails.send({

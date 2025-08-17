@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -1242,19 +1242,19 @@ export type Database = {
       get_all_users: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
+          created_at: string
           email: string
           full_name: string
-          role: Database["public"]["Enums"]["employee_role"]
+          id: string
           is_active: boolean
-          created_at: string
+          role: Database["public"]["Enums"]["employee_role"]
           updated_at: string
         }[]
       }
       has_role: {
         Args: {
-          _user_id: string
           _role: Database["public"]["Enums"]["employee_role"]
+          _user_id: string
         }
         Returns: boolean
       }
@@ -1264,13 +1264,13 @@ export type Database = {
       }
       update_user_role: {
         Args: {
-          _target_user_id: string
           _new_role: Database["public"]["Enums"]["employee_role"]
+          _target_user_id: string
         }
         Returns: boolean
       }
       validate_sku_uniqueness: {
-        Args: { sku_code: string; product_id?: string }
+        Args: { product_id?: string; sku_code: string }
         Returns: boolean
       }
     }
