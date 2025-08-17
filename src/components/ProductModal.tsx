@@ -31,7 +31,7 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-80 object-contain rounded-xl shadow-lg bg-white"
+              className="w-full h-80 object-cover rounded-xl shadow-lg"
             />
             <div className="bg-prime-green/5 p-4 rounded-xl">
               <h4 className="font-semibold text-prime-concrete-dark mb-2">Descrição</h4>
