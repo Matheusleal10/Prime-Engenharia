@@ -12,10 +12,25 @@ export const useGoogleMaps = () => {
 
   useEffect(() => {
     setIsClient(true);
-    // Usar a nova chave da API fornecida pelo usuário
-    const userApiKey = 'AIzaSyDLTuhGIDHV7vjpKVsLf3qRgI-4baOWGkA';
-    setApiKey(userApiKey);
-    localStorage.setItem('google-maps-api-key', userApiKey);
+    
+    // Try to get API key from environment variable first
+    const envApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    
+    // Fallback to localStorage if env var is not available
+    const storedApiKey = localStorage.getItem('google-maps-api-key');
+    
+    if (envApiKey) {
+      console.log('Using Google Maps API key from environment variables');
+      setApiKey(envApiKey);
+      setShowApiInput(false);
+    } else if (storedApiKey) {
+      console.log('Using Google Maps API key from localStorage');
+      setApiKey(storedApiKey);
+      setShowApiInput(false);
+    } else {
+      console.log('No Google Maps API key found, showing input form');
+      setShowApiInput(true);
+    }
   }, []);
 
   useEffect(() => {
