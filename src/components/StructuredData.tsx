@@ -54,8 +54,20 @@ const StructuredData = () => {
       },
       "openingHours": "Mo-Fr 08:00-18:00",
       "priceRange": "$$",
-      "servesCuisine": null,
-      "acceptsReservations": false
+      "acceptsReservations": false,
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Produtos de Construção Sustentável",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Tijolo Ecológico"
+            }
+          }
+        ]
+      }
     };
 
     const productData = {
