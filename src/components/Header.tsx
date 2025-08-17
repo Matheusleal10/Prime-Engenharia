@@ -33,7 +33,7 @@ const Header = () => {
     } ${isHidden ? '-translate-y-full' : 'translate-y-0'}`}>
       <div className="container mx-auto px-4">
         <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? 'h-24 lg:h-28' : 'h-32 lg:h-44'
+          isScrolled ? 'h-14 lg:h-16' : 'h-16 lg:h-20'
         }`}>
           {/* Logo */}
           <div className="flex items-center">
