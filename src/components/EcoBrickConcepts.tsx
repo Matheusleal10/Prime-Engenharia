@@ -24,12 +24,8 @@ const EcoBrickConcepts = () => {
       description: "Por sua densidade e composição, o tijolo ecológico proporciona maior isolamento térmico, mantendo ambientes mais frescos no verão e aquecidos no inverno, o que reduz custos com energia elétrica. Também apresenta bom isolamento acústico, tornando o espaço mais silencioso e confortável."
     },
     {
-      title: "Economia de Material",
-      description: "Tijolo ecológico é um sistema de construção que dispensa o uso de alguns produtos da construção tradicional e a diminuição de outros como: ferro, areia, cimento, brita e outros, economizando em até 30% de material."
-    },
-    {
-      title: "Rapidez e Eficiência",
-      description: "Com o tijolo ecológico, sua construção avança até 40% mais rápido. Os blocos se encaixam com precisão, dispensam reboco pesado e agilizam toda a parte elétrica e hidráulica. Menos retrabalho, menos desperdício e mais obra entregue no prazo!"
+      title: "Economia e Eficiência na Construção",
+      description: "O tijolo ecológico reduz o uso de materiais como ferro, areia, cimento e brita, além de permitir uma obra mais rápida graças ao encaixe preciso, menor necessidade de reboco e agilidade na instalação elétrica e hidráulica, garantindo menos desperdício e mais eficiência, gerando uma economia de até 40% na sua obra."
     }
   ];
 
@@ -94,8 +90,8 @@ const EcoBrickConcepts = () => {
         {/* Imagem e Conceitos */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           {/* Imagem do Tijolo Ecológico */}
-          <div className="animate-slide-up">
-            <div className="relative rounded-2xl shadow-2xl h-96 overflow-hidden">
+          <div className="animate-slide-up flex items-stretch">
+            <div className="relative rounded-2xl shadow-2xl w-full min-h-[500px] overflow-hidden">
               <img 
                 src="/lovable-uploads/53e1bebf-da3f-4251-9235-b8d02d67f457.png" 
                 alt="Tijolo Ecológico PRIME ENGENHARIA"
