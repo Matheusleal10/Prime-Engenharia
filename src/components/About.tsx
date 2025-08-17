@@ -37,8 +37,10 @@ const About = () => {
             <div className="relative bg-gray-50 rounded-2xl shadow-2xl h-96 overflow-hidden">
               <img 
                 src="/lovable-uploads/ad28b3ed-dcb6-4427-9fda-75df7ebdb8f5.png" 
-                alt="PRIME ENGENHARIA Escritório"
+                alt="PRIME ENGENHARIA São Luís MA - Escritório da empresa pioneira em tijolos ecológicos no Maranhão"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

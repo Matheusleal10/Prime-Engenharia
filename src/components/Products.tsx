@@ -215,8 +215,9 @@ const Products = () => {
               <div className="relative">
                 <img 
                   src="/lovable-uploads/d4ca7e0c-6a7c-473b-b733-44282b4c965e.png" 
-                  alt={`${featuredProduct.name} PRIME ENGENHARIA`}
+                  alt={`Tijolo Ecológico ${featuredProduct.name} - PRIME ENGENHARIA São Luís MA - Sustentável e resistente`}
                   className="w-full h-80 object-cover rounded-2xl shadow-lg"
+                  loading="eager"
                 />
                 <div className="absolute top-4 right-4 bg-prime-orange text-white px-3 py-1 rounded-full text-sm font-medium">
                   Pioneiros em MA
@@ -272,8 +273,10 @@ const Products = () => {
               >
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={`${product.name} PRIME ENGENHARIA - Produtos pré-moldados em São Luís MA`}
                   className="w-full h-40 object-cover rounded-lg mb-4"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <h4 className="text-lg font-semibold text-prime-concrete-dark mb-3 text-center">
                   {product.name}

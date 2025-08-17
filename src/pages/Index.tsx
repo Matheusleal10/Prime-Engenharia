@@ -15,12 +15,16 @@ import { Settings } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { PWAInstallButton } from '@/components/PWAInstallButton';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
+import SEOHead from '@/components/SEOHead';
+import StructuredData from '@/components/StructuredData';
 
 const Index = () => {
   const { user, isAdmin } = useAuth();
 
   return (
     <div className="min-h-screen font-montserrat">
+      <SEOHead />
+      <StructuredData />
       <Header />
       
       {/* Admin Access Button - Only for authenticated admins */}

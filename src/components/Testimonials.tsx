@@ -77,7 +77,7 @@ const Testimonials = () => {
               <div className="text-center">
                 <div className="mx-auto mb-3">
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src={testimonial.image} alt={`Foto do cliente ${testimonial.name} - Depoimentos PRIME ENGENHARIA`} loading="lazy" />
+                    <AvatarImage src={testimonial.image} alt={`${testimonial.name} - Cliente satisfeito PRIME ENGENHARIA São Luís MA - Depoimento sobre tijolos ecológicos`} loading="lazy" />
                     <AvatarFallback>
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
