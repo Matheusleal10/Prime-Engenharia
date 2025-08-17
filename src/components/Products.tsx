@@ -152,9 +152,8 @@ const Products = () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('products')
+        .from('products_public')
         .select('*')
-        .eq('is_active', true)
         .order('sort_order', { ascending: true });
 
       if (error) {
