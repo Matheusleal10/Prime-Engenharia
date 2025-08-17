@@ -81,6 +81,66 @@ const Products = () => {
         "Calçadões e praças",
         "Áreas portuárias"
       ]
+    },
+    {
+      name: "Hidrofugante Acqua100",
+      description: "Produto anticorrosivo e hidrofugante para proteção de superfícies.",
+      details: "Solução avançada que oferece proteção contra corrosão e umidade. Forma uma barreira impermeável sem alterar a aparência original do material. Resistente aos raios UV e intempéries, ideal para ambientes agressivos.",
+      image: "/lovable-uploads/c69c4e20-fe9b-4264-8cc7-d8ecdfe67c8d.png",
+      benefits: [
+        "Proteção anticorrosiva eficaz",
+        "Mantém respirabilidade dos materiais",
+        "Resistente aos raios UV",
+        "Não altera aparência original",
+        "Proteção duradoura contra umidade"
+      ],
+      applications: [
+        "Proteção de tijolos e blocos",
+        "Revestimentos cerâmicos",
+        "Fachadas e muros externos",
+        "Estruturas expostas às intempéries",
+        "Materiais porosos em geral"
+      ]
+    },
+    {
+      name: "Tijofix",
+      description: "Fixador definitivo especial para tijolos ecológicos de solo-cimento.",
+      details: "Adesivo de alta performance especificamente desenvolvido para tijolos ecológicos. Proporciona aderência superior e maior resistência estrutural. Formulação que potencializa as características sustentáveis dos tijolos ecológicos.",
+      image: "/lovable-uploads/c9377e05-d17f-4eed-b2fa-7321f238357c.png",
+      benefits: [
+        "Aderência superior garantida",
+        "Específico para tijolos ecológicos",
+        "Aumenta resistência estrutural",
+        "Fácil aplicação e uso",
+        "Complementa sustentabilidade"
+      ],
+      applications: [
+        "Assentamento de tijolos ecológicos",
+        "Estruturas de solo-cimento",
+        "Construções sustentáveis",
+        "Obras residenciais ecológicas",
+        "Projetos de construção verde"
+      ]
+    },
+    {
+      name: "Impermeabilizante Ecolojit",
+      description: "Impermeabilizante super concentrado premium com acabamento incolor.",
+      details: "Produto de alta tecnologia para impermeabilização com tripla proteção contra bactérias, fungos e algas. Resistente aos raios solares e UV. Oferece proteção duradoura mantendo a transpiração natural dos materiais.",
+      image: "/lovable-uploads/59b2c4ac-1d05-4d59-a320-403b45ef8a12.png",
+      benefits: [
+        "Tripla proteção contra microrganismos",
+        "Super concentrado - maior rendimento",
+        "Acabamento incolor preserva estética",
+        "Resistência UV e intempéries",
+        "Mantém respirabilidade natural"
+      ],
+      applications: [
+        "Impermeabilização de lajes",
+        "Proteção de fachadas",
+        "Tratamento de superfícies porosas",
+        "Áreas sujeitas à umidade",
+        "Proteção profissional de estruturas"
+      ]
     }
   ];
 
