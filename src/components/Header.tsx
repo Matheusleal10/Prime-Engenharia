@@ -71,7 +71,7 @@ const Header = () => {
 
           {/* WhatsApp Button */}
           <a 
-            href="https://wa.me/5598982350016"
+            href="https://wa.me/5598982350011"
             target="_blank"
             rel="noopener noreferrer"
             className={`hidden lg:flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full font-medium transition-all ${
@@ -107,7 +107,7 @@ const Header = () => {
                 Contato
               </a>
               <a 
-                href="https://wa.me/5598982350016"
+                href="https://wa.me/5598982350011"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mx-4 bg-white hover:bg-white/90 text-prime-green px-4 py-2 rounded-full font-medium text-center transition-colors"
