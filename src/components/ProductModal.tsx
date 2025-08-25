@@ -91,7 +91,7 @@ const ProductModal = ({ isOpen, onClose, product }: ProductModalProps) => {
                 Solicitar Orçamento
               </a>
               <a 
-                href={`https://wa.me/5598982350016?text=Olá! Gostaria de saber mais sobre ${product.name.toLowerCase()}.`}
+                href={`https://wa.me/5598982350011?text=Olá! Gostaria de saber mais sobre ${product.name.toLowerCase()}.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center border-2 border-prime-green text-prime-green hover:bg-prime-green hover:text-white px-6 py-3 rounded-full font-medium transition-colors"

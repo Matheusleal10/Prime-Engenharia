@@ -11,7 +11,7 @@ const StructuredData = () => {
       "logo": "https://primeengenharia.lovable.app/lovable-uploads/78ee719a-012e-4248-9651-263c2ae10be1.png",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+55-98-98235-0016",
+        "telephone": "+55-98-98235-0011",
         "contactType": "customer service",
         "availableLanguage": "Portuguese"
       },
@@ -22,7 +22,7 @@ const StructuredData = () => {
         "addressCountry": "BR"
       },
       "sameAs": [
-        "https://wa.me/5598982350016"
+        "https://wa.me/5598982350011"
       ],
       "foundingDate": "2009",
       "numberOfEmployees": "15+",
@@ -40,7 +40,7 @@ const StructuredData = () => {
       "description": "Pioneira na produção de tijolos ecológicos em São Luís - MA",
       "image": "https://primeengenharia.lovable.app/lovable-uploads/78ee719a-012e-4248-9651-263c2ae10be1.png",
       "url": "https://primeengenharia.lovable.app",
-      "telephone": "+55-98-98235-0016",
+      "telephone": "+55-98-98235-0011",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "São Luís",

@@ -59,7 +59,7 @@ const HowToBuy = () => {
         {/* CTA Button */}
         <div className="text-center">
           <a 
-            href="https://wa.me/5598982350016"
+            href="https://wa.me/5598982350011"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-white hover:bg-gray-100 text-prime-green px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-2xl"
