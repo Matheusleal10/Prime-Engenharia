@@ -1320,6 +1320,22 @@ export type Database = {
           updated_at: string
         }[]
       }
+      get_public_products: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          category: string
+          description: string
+          details: string
+          icon: string
+          id: string
+          is_active: boolean
+          is_featured: boolean
+          name: string
+          price: number
+          sort_order: number
+          unit: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["employee_role"]
