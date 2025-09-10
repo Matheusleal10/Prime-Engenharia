@@ -23,7 +23,7 @@ const About = () => {
 
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center p-4 bg-prime-green/5 rounded-lg">
-                <h3 className="text-2xl font-bold text-prime-green mb-2">15+</h3>
+                <h3 className="text-2xl font-bold text-prime-green mb-2">5+</h3>
                 <p className="text-sm text-prime-concrete">Anos de experiência</p>
               </div>
               <div className="text-center p-4 bg-prime-orange/5 rounded-lg">
