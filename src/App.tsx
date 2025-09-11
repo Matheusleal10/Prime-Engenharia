@@ -15,6 +15,7 @@ import { usePerformanceMonitor } from "@/hooks/usePerformanceMonitor";
 import Index from "./pages/Index";
 import Demo from "./pages/Demo";
 import NotFound from "./pages/NotFound";
+import ProductPage from "./pages/ProductPage";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 import Customers from "./pages/admin/Customers";
@@ -49,6 +50,16 @@ const App = () => {
             <Route path="/" element={<Index />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/customer-portal" element={<CustomerPortal />} />
+            
+            {/* Product Pages */}
+            <Route path="/blocos-de-concreto" element={<ProductPage />} />
+            <Route path="/piso-sextavado" element={<ProductPage />} />
+            <Route path="/tijolo-ecologico" element={<ProductPage />} />
+            <Route path="/paver" element={<ProductPage />} />
+            <Route path="/hidrofugante-aqua100" element={<ProductPage />} />
+            <Route path="/tijofix" element={<ProductPage />} />
+            <Route path="/impermeabilizante-ecolojit" element={<ProductPage />} />
+            
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin" element={
               <ProtectedRoute>

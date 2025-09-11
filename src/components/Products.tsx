@@ -24,6 +24,8 @@ const Products = () => {
   const newProducts = [
     {
       name: "Blocos",
+      slug: "blocos-de-concreto",
+      title: "Blocos de Concreto Estrutural",
       description: "Blocos de concreto modulares para construção estrutural e de vedação.",
       details: "Produzidos com cimento, areia e agregados selecionados. Dimensões padronizadas para facilitar o assentamento. Resistência compressiva superior a 4,5 MPa. Ideais para paredes estruturais e de vedação.",
       image: "/lovable-uploads/a1726bce-fcff-4b72-9b38-cb9c22b573ec.png",
@@ -44,6 +46,8 @@ const Products = () => {
     },
     {
       name: "Sextavado",
+      slug: "piso-sextavado",
+      title: "Piso Sextavado de Concreto",
       description: "Peças hexagonais para pavimentação decorativa e funcional.",
       details: "Peças pré-moldadas em formato hexagonal, oferecendo design moderno e funcionalidade. Produzidas com concreto de alta qualidade. Permitem drenagem e fácil manutenção. Disponíveis em diversas cores e acabamentos.",
       image: "/lovable-uploads/2e912668-8e38-4d6d-960b-f96cbf058721.png",
@@ -64,6 +68,8 @@ const Products = () => {
     },
     {
       name: "Paver",
+      slug: "paver",
+      title: "Paver Intertravado de Concreto",
       description: "Blocos intertravados para pavimentação de alta performance.",
       details: "Blocos de concreto intertravados produzidos com tecnologia avançada. Alta resistência à compressão e baixa absorção de água. Sistema de encaixe que distribui cargas uniformemente. Ideal para áreas de tráfego intenso.",
       image: "/lovable-uploads/b58b4b3d-75ef-4a8c-9748-3fb872f8025a.png",
@@ -84,6 +90,8 @@ const Products = () => {
     },
     {
       name: "Hidrofugante Acqua100",
+      slug: "hidrofugante-aqua100",
+      title: "Hidrofugante Aqua100",
       description: "Produto anticorrosivo e hidrofugante para proteção de superfícies.",
       details: "Solução avançada que oferece proteção contra corrosão e umidade. Forma uma barreira impermeável sem alterar a aparência original do material. Resistente aos raios UV e intempéries, ideal para ambientes agressivos.",
       image: "/lovable-uploads/c69c4e20-fe9b-4264-8cc7-d8ecdfe67c8d.png",
@@ -104,6 +112,8 @@ const Products = () => {
     },
     {
       name: "Tijofix",
+      slug: "tijofix",
+      title: "Tijofix - Argamassa para Tijolo Ecológico",
       description: "Fixador definitivo especial para tijolos ecológicos de solo-cimento.",
       details: "Adesivo de alta performance especificamente desenvolvido para tijolos ecológicos. Proporciona aderência superior e maior resistência estrutural. Formulação que potencializa as características sustentáveis dos tijolos ecológicos.",
       image: "/lovable-uploads/c9377e05-d17f-4eed-b2fa-7321f238357c.png",
@@ -124,6 +134,8 @@ const Products = () => {
     },
     {
       name: "Impermeabilizante Ecolojit",
+      slug: "impermeabilizante-ecolojit",
+      title: "Impermeabilizante Ecolojit",
       description: "Impermeabilizante super concentrado premium com acabamento incolor.",
       details: "Produto de alta tecnologia para impermeabilização com tripla proteção contra bactérias, fungos e algas. Resistente aos raios solares e UV. Oferece proteção duradoura mantendo a transpiração natural dos materiais.",
       image: "/lovable-uploads/59b2c4ac-1d05-4d59-a320-403b45ef8a12.png",
@@ -326,9 +338,8 @@ const Products = () => {
             {newProducts.map((product, index) => (
               <div 
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up cursor-pointer"
+                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105 animate-slide-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => openModal(product)}
               >
                 <img
                   src={product.image}
@@ -343,13 +354,23 @@ const Products = () => {
                 <p className="text-sm text-prime-concrete text-center mb-4">
                   {product.description}
                 </p>
-                <div className="text-center">
-                  <span className="text-prime-green hover:text-prime-green-light font-medium text-sm inline-flex items-center">
-                    Clique para ver mais
-                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
+                <div className="space-y-2">
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openModal(product);
+                    }}
+                    className="w-full bg-prime-green text-white py-2 px-4 rounded hover:bg-prime-green/90 transition-colors text-sm"
+                  >
+                    Ver Detalhes
+                  </button>
+                  <a 
+                    href={`/${product.slug}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="block w-full bg-prime-orange text-white py-2 px-4 rounded hover:bg-prime-orange/90 transition-colors text-center text-sm"
+                  >
+                    Página Completa
+                  </a>
                 </div>
               </div>
             ))}
